@@ -1,4 +1,7 @@
+using AirWaterStore.Business.Interfaces;
+using AirWaterStore.Business.Services;
 using AirWaterStore.Data;
+using AirWaterStore.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace AirWaterStore.Web
@@ -17,6 +20,19 @@ namespace AirWaterStore.Web
             builder.Services.AddDbContext<AirWaterStoreContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            // Register repositories	
+            builder.Services.AddScoped<IGameRepository, GameRepository>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+            builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+            builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+            // Register services	
+            builder.Services.AddScoped<IGameService, GameService>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
+            builder.Services.AddScoped<IReviewService, ReviewService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             var app = builder.Build();
 
@@ -30,13 +46,11 @@ namespace AirWaterStore.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
-
             app.MapRazorPages();
-
+            //app.MapGet("/", context => Task.Factory.StartNew(() => context.Response.Redirect("/Login")));
             app.Run();
         }
     }

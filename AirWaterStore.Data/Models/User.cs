@@ -15,6 +15,8 @@ public partial class User
 
     public int Role { get; set; }
 
+    public bool Isban { get; set; }
+
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();

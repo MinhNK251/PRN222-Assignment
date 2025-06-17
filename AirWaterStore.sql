@@ -14,7 +14,8 @@ CREATE TABLE Users (
     Username NVARCHAR(50) NOT NULL UNIQUE,
     Email NVARCHAR(100) NOT NULL UNIQUE,
     Password NVARCHAR(MAX) NOT NULL,
-    Role INT NOT NULL -- '1 - Customer' or '2 - Staff'
+    Role INT NOT NULL, -- '1 - Customer' or '2 - Staff'
+	IsBan BIT Default 0
 );
 GO
 
