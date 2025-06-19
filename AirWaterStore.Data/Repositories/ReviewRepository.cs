@@ -24,6 +24,11 @@ namespace AirWaterStore.Data.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Review> GetByIdAsync(int reviewId)
+        {
+            return await _context.Reviews
+                .FirstOrDefaultAsync(m => m.ReviewId == reviewId);
+        }
         public async Task AddAsync(Review review)
         {
             _context.Reviews.Add(review);
