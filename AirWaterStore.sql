@@ -70,6 +70,26 @@ CREATE TABLE Reviews (
 );
 GO
 
+CREATE TABLE ChatRooms (
+    ChatRoomId INT IDENTITY(1,1) PRIMARY KEY,
+    CustomerId INT NOT NULL,
+    StaffId INT NULL,
+    CONSTRAINT FK_Conversations_Customer FOREIGN KEY (CustomerId) REFERENCES Users(UserId),
+    CONSTRAINT FK_Conversations_Staff FOREIGN KEY (StaffId) REFERENCES Users(UserId)
+);
+GO
+
+CREATE TABLE Messages (
+    MessageId INT IDENTITY(1,1) PRIMARY KEY,
+    ChatRoomId INT NOT NULL,
+    UserId INT NOT NULL,
+    Content NVARCHAR(MAX) NOT NULL,
+    SentAt DATETIME DEFAULT GETDATE(),
+    CONSTRAINT FK_Messages_Conversation FOREIGN KEY (ChatRoomId) REFERENCES ChatRooms(ChatRoomId),
+    CONSTRAINT FK_Messages_Sender FOREIGN KEY (UserId) REFERENCES Users(UserId)
+);
+GO
+
 -- Insert Users
 INSERT INTO Users (Username, Email, Password, Role) VALUES 
 ('Alice Wonder', 'alice@gmail.com', '123456', 1),
@@ -111,7 +131,7 @@ INSERT INTO Reviews (UserId, GameId, Rating, Comment) VALUES
 (1, 1, 5, 'Absolutely incredible game!'),
 (2, 1, 4, 'I was never ever interested in souls like games until I opened my eyes and played Elden Ring.'),
 (3, 1, 5, 'This game had turned me into a little boy with no mommy into a single father raising 4 kids in a crappy apartment. 10/10 would recommend to any little boy needing to evolve to man hood.'),
-(1, 2, 5, 'A labyrinth of joy that I don’t want to escape!'),
+(1, 2, 5, 'A labyrinth of joy that I donï¿½t want to escape!'),
 (4, 2, 5, 'Genuinely one of the best games Ive ever played in my life, and Ive been gaming for 25 years. The attention to detail that SGG put into this game is absolutely phenomenal.'),
 (6, 2, 5, 'Great game couldnt put it down I played this on steam deck and runs really well, looking forward to playing hades 2 when im not so broke to buy it'),
 (2, 3, 5, 'This game itches that city builder, colony sim scratch so well while being so DAM cute. I love it'),
@@ -123,6 +143,6 @@ INSERT INTO Reviews (UserId, GameId, Rating, Comment) VALUES
 (6, 5, 5, 'The coziest of cozy games. I always come back to it. The music has me break dancing or vibing in my room at 3am. 100/10'),
 (2, 5, 5, 'Stardew Valley is hands down one of my all-time favorite games. the cozy music / the pixel art / the seasonal events... absolutely BEAUTIFUL! I enjoyed every single part of it from farming to mining.'),
 (1, 5, 5, 'Addicting, one of the best indie games ever, there is so much content and if you manage to get bored you can find SO MANY mods to try. Definitely recommended.'),
-(3, 6, 5, 'Black Myth: Wukong was my first real dive into the Soulslike genre, so I wasn’t sure what to expect going in. Right off the bat, the game hits hard — it’s polished, atmospheric, and sets a high bar in the early hours. It got me hooked enough to go for 100% achievements and see all the endings.'),
+(3, 6, 5, 'Black Myth: Wukong was my first real dive into the Soulslike genre, so I wasnï¿½t sure what to expect going in. Right off the bat, the game hits hard ï¿½ itï¿½s polished, atmospheric, and sets a high bar in the early hours. It got me hooked enough to go for 100% achievements and see all the endings.'),
 (1, 6, 5, '153 hours into the game and it still impresses me with each playthrough. cannot wait for the DLC and will never understand how Astrobot beat this game out for GOTY'),
 (5, 6, 5, 'If you liked Elden Ring, youll probably love this game too once you get into it. Has some great cut-scenes and story along with the boss fighting action');

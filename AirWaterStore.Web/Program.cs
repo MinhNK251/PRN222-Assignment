@@ -26,6 +26,8 @@ namespace AirWaterStore.Web
             builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IChatRoomRepository, ChatRoomRepository>();
+            builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 
             // Register services	
             builder.Services.AddScoped<IGameService, GameService>();
@@ -33,6 +35,8 @@ namespace AirWaterStore.Web
             builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
             builder.Services.AddScoped<IReviewService, ReviewService>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IChatRoomService, ChatRoomService>();
+            builder.Services.AddScoped<IMessageService, MessageService>();
 
             var app = builder.Build();
 

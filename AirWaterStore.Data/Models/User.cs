@@ -15,7 +15,13 @@ public partial class User
 
     public int Role { get; set; }
 
-    public bool Isban { get; set; }
+    public bool? IsBan { get; set; }
+
+    public virtual ICollection<ChatRoom> ChatRoomCustomers { get; set; } = new List<ChatRoom>();
+
+    public virtual ICollection<ChatRoom> ChatRoomStaffs { get; set; } = new List<ChatRoom>();
+
+    public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 

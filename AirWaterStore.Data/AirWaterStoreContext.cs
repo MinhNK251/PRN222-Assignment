@@ -16,7 +16,11 @@ public partial class AirWaterStoreContext : DbContext
     {
     }
 
+    public virtual DbSet<ChatRoom> ChatRooms { get; set; }
+
     public virtual DbSet<Game> Games { get; set; }
+
+    public virtual DbSet<Message> Messages { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
 
@@ -28,9 +32,23 @@ public partial class AirWaterStoreContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ChatRoom>(entity =>
+        {
+            entity.HasKey(e => e.ChatRoomId).HasName("PK__ChatRoom__69733CF7CBE12F65");
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.ChatRoomCustomers)
+                .HasForeignKey(d => d.CustomerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Conversations_Customer");
+
+            entity.HasOne(d => d.Staff).WithMany(p => p.ChatRoomStaffs)
+                .HasForeignKey(d => d.StaffId)
+                .HasConstraintName("FK_Conversations_Staff");
+        });
+
         modelBuilder.Entity<Game>(entity =>
         {
-            entity.HasKey(e => e.GameId).HasName("PK__Games__2AB897FDAA28E3DE");
+            entity.HasKey(e => e.GameId).HasName("PK__Games__2AB897FDC917D318");
 
             entity.Property(e => e.Developer).HasMaxLength(100);
             entity.Property(e => e.Genre).HasMaxLength(200);
@@ -40,9 +58,28 @@ public partial class AirWaterStoreContext : DbContext
             entity.Property(e => e.Title).HasMaxLength(100);
         });
 
+        modelBuilder.Entity<Message>(entity =>
+        {
+            entity.HasKey(e => e.MessageId).HasName("PK__Messages__C87C0C9CD1732A9E");
+
+            entity.Property(e => e.SentAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.ChatRoom).WithMany(p => p.Messages)
+                .HasForeignKey(d => d.ChatRoomId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Messages_Conversation");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Messages)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Messages_Sender");
+        });
+
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCF5E776B1E");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCF32C396C0");
 
             entity.Property(e => e.OrderDate)
                 .HasDefaultValueSql("(getdate())")
@@ -58,7 +95,7 @@ public partial class AirWaterStoreContext : DbContext
 
         modelBuilder.Entity<OrderDetail>(entity =>
         {
-            entity.HasKey(e => e.OrderDetailId).HasName("PK__OrderDet__D3B9D36CDAE9FAD1");
+            entity.HasKey(e => e.OrderDetailId).HasName("PK__OrderDet__D3B9D36C494ADF21");
 
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
 
@@ -75,7 +112,7 @@ public partial class AirWaterStoreContext : DbContext
 
         modelBuilder.Entity<Review>(entity =>
         {
-            entity.HasKey(e => e.ReviewId).HasName("PK__Reviews__74BC79CE22216C09");
+            entity.HasKey(e => e.ReviewId).HasName("PK__Reviews__74BC79CEE384B8AD");
 
             entity.Property(e => e.ReviewDate)
                 .HasDefaultValueSql("(getdate())")
@@ -94,15 +131,15 @@ public partial class AirWaterStoreContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CC4C2938C624");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CC4CDF1AEB6E");
 
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E4885E67F2").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Users__536C85E400471729").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D1053440E911F1").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__A9D10534E06AD6C0").IsUnique();
 
             entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.IsBan).HasDefaultValue(false);
             entity.Property(e => e.Username).HasMaxLength(50);
-            entity.Property(e => e.Isban);
         });
 
         OnModelCreatingPartial(modelBuilder);
