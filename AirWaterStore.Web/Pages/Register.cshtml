@@ -1,0 +1,74 @@
+﻿@page
+@model AirWaterStore.Web.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AirWaterStore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Register New Account</h3>
+                    </div>
+                    <div class="card-body">
+                        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                        {
+                            <div class="alert alert-danger">@Model.ErrorMessage</div>
+                        }
+
+                        <form method="post">
+                            <div class="form-group mb-3">
+                                <label asp-for="RegisterInput.Username"></label>
+                                <input asp-for="RegisterInput.Username" class="form-control" />
+                                <span asp-validation-for="RegisterInput.Username" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="RegisterInput.Email"></label>
+                                <input asp-for="RegisterInput.Email" class="form-control" />
+                                <span asp-validation-for="RegisterInput.Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="RegisterInput.Password"></label>
+                                <input asp-for="RegisterInput.Password" class="form-control" type="password" />
+                                <span asp-validation-for="RegisterInput.Password" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="RegisterInput.ConfirmPassword"></label>
+                                <input asp-for="RegisterInput.ConfirmPassword" class="form-control" type="password" />
+                                <span asp-validation-for="RegisterInput.ConfirmPassword" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary w-100">Register</button>
+                            </div>
+                        </form>
+
+                        <div class="text-center mt-3">
+                            <p>Already have an account? <a asp-page="/Login">Login here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+</body>
+</html>
