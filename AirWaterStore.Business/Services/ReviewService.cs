@@ -21,6 +21,11 @@ namespace AirWaterStore.Data.Repositories
             return await _repository.GetAllByGameIdAsync(gameId);
         }
 
+        public async Task<Review> GetByIdAsync(int reviewId)
+        {
+            return await _repository.GetByIdAsync(reviewId);
+        }
+
         public async Task AddAsync(Review review)
         {
             await _repository.AddAsync(review);
