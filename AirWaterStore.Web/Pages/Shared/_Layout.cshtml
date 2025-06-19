@@ -1,18 +1,33 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var userId = Context.Session.GetInt32("UserId");
+    var username = Context.Session.GetString("Username");
+    var userRole = Context.Session.GetInt32("UserRole");
+    var isAuthenticated = userId.HasValue;
+    var isStaff = userRole == 2;
+    var isCustomer = userRole == 1;
+
+    // Get cart count
+    var cartItems = Context.Session.GetObjectFromJson<List<AirWaterStore.Web.Pages.Games.CartItem>>("Cart") ?? new List<AirWaterStore.Web.Pages.Games.CartItem>();
+    var cartCount = cartItems.Sum(c => c.Quantity);
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AirWaterStore.Web</title>
+    <title>@ViewData["Title"] - AirWaterStore</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AirWaterStore.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">AirWaterStore.Web</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <i class="fas fa-gamepad"></i> AirWaterStore
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,11 +35,91 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Games/Index">
+                                <i class="fas fa-store"></i> Games
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
+                        @if (isAuthenticated)
+                        {
+                            @if (isCustomer)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Orders/Index">
+                                        <i class="fas fa-history"></i> My Orders
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Chat/Index">
+                                        <i class="fas fa-comments"></i> Support Chat
+                                    </a>
+                                </li>
+                            }
+                            @if (isStaff)
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-cog"></i> Admin
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                                        <a class="dropdown-item" asp-page="/Admin/Dashboard">
+                                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                                        </a>
+                                        <a class="dropdown-item" asp-page="/Admin/Games/Create">
+                                            <i class="fas fa-plus"></i> Add Game
+                                        </a>
+                                        <a class="dropdown-item" asp-page="/Orders/Index">
+                                            <i class="fas fa-shopping-bag"></i> All Orders
+                                        </a>
+                                        <a class="dropdown-item" asp-page="/Admin/Users/Index">
+                                            <i class="fas fa-users"></i> Users
+                                        </a>
+                                        <a class="dropdown-item" asp-page="/Admin/Chat/Index">
+                                            <i class="fas fa-headset"></i> Support Chats
+                                        </a>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <ul class="navbar-nav">
+                        @if (isAuthenticated)
+                        {
+                            @if (isCustomer)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Cart">
+                                        <i class="fas fa-shopping-cart"></i> Cart
+                                        @if (cartCount > 0)
+                                        {
+                                            <span class="badge badge-primary">@cartCount</span>
+                                        }
+                                    </a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Profile">
+                                    <i class="fas fa-user"></i> @username
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Logout">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Login">
+                                    <i class="fas fa-sign-in-alt"></i> Login
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Register">
+                                    <i class="fas fa-user-plus"></i> Register
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -38,7 +133,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - AirWaterStore.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2025 - AirWaterStore - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 

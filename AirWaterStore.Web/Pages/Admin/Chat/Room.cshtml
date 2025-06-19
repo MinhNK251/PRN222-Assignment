@@ -1,0 +1,84 @@
+﻿@page "{id:int}"
+@model AirWaterStore.Web.Pages.Admin.Chat.RoomModel
+@{
+    ViewData["Title"] = $"Chat with {Model.CustomerName}";
+}
+
+<h1>Chat with @Model.CustomerName</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5>Chat Room #@Model.ChatRoom.ChatRoomId</h5>
+            </div>
+            <div class="card-body" style="height: 400px; overflow-y: auto;" id="chatMessages">
+                @foreach (var message in Model.Messages)
+                {
+                    <div class="mb-3 @(message.UserId == Model.CurrentUserId ? "text-right" : "text-left")">
+                        <div class="d-inline-block p-2 rounded @(message.UserId == Model.CurrentUserId ? "bg-primary text-white" : "bg-light")">
+                            <small class="d-block @(message.UserId == Model.CurrentUserId ? "text-white-50" : "text-muted")">
+                                @Model.GetUsername(message.UserId) - @message.SentAt?.ToString("HH:mm")
+                            </small>
+                            @message.Content
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="card-footer">
+                <form method="post" asp-page-handler="SendMessage">
+                    <input type="hidden" name="chatRoomId" value="@Model.ChatRoom.ChatRoomId" />
+                    <div class="input-group">
+                        <input type="text" name="messageContent" class="form-control" placeholder="Type your response..." required />
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Chat Information</h5>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-5">Customer:</dt>
+                    <dd class="col-sm-7">@Model.CustomerName</dd>
+
+                    <dt class="col-sm-5">Assigned Staff:</dt>
+                    <dd class="col-sm-7">
+                        @if (Model.ChatRoom.StaffId.HasValue)
+                        {
+                            @Model.GetUsername(Model.ChatRoom.StaffId.Value)
+                        }
+                        else
+                        {
+                            <span class="text-warning">Unassigned</span>
+                        }
+                    </dd>
+
+                    <dt class="col-sm-5">Messages:</dt>
+                    <dd class="col-sm-7">@Model.Messages.Count</dd>
+                </dl>
+
+                <a asp-page="/Admin/Chat/Index" class="btn btn-secondary btn-block">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-scroll to bottom of chat
+        var chatMessages = document.getElementById('chatMessages');
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // Auto-refresh chat every 5 seconds
+        setInterval(function() {
+            location.reload();
+        }, 5000);
+    </script>
+}

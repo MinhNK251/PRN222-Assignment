@@ -1,0 +1,102 @@
+﻿@page
+@model AirWaterStore.Web.Pages.Admin.DashboardModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h1>Admin Dashboard</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Total Games</div>
+            <div class="card-body">
+                <h5 class="card-title">@Model.TotalGames</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">Total Orders</div>
+            <div class="card-body">
+                <h5 class="card-title">@Model.TotalOrders</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-header">Total Users</div>
+            <div class="card-body">
+                <h5 class="card-title">@Model.TotalUsers</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-header">Pending Chats</div>
+            <div class="card-body">
+                <h5 class="card-title">@Model.PendingChats</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <h3>Quick Actions</h3>
+        <div class="list-group">
+            <a asp-page="/Admin/Games/Create" class="list-group-item list-group-item-action">
+                <i class="fas fa-plus"></i> Add New Game
+            </a>
+            <a asp-page="/Games/Index" class="list-group-item list-group-item-action">
+                <i class="fas fa-gamepad"></i> Manage Games
+            </a>
+            <a asp-page="/Admin/Users/Index" class="list-group-item list-group-item-action">
+                <i class="fas fa-users"></i> Manage Users
+            </a>
+            <a asp-page="/Orders/Index" class="list-group-item list-group-item-action">
+                <i class="fas fa-shopping-cart"></i> View All Orders
+            </a>
+            <a asp-page="/Admin/Chat/Index" class="list-group-item list-group-item-action">
+                <i class="fas fa-comments"></i> Support Chat Dashboard
+            </a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h3>Recent Orders</h3>
+        @if (Model.RecentOrders.Any())
+        {
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Order #</th>
+                        <th>Customer</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model.RecentOrders)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-page="/Orders/Details" asp-route-id="@order.OrderId">#@order.OrderId</a>
+                            </td>
+                            <td>@Model.GetUsername(order.UserId)</td>
+                            <td>$@order.TotalPrice.ToString("F2")</td>
+                            <td>
+                                <span class="badge badge-@(order.Status == "Completed" ? "success" : "warning")">
+                                    @order.Status
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="text-muted">No recent orders.</p>
+        }
+    </div>
+</div>
