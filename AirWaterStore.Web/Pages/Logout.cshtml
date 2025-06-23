@@ -1,14 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace AirWaterStore.Web.Pages
-{
-    public class LogoutModel : PageModel
-    {
-        public IActionResult OnGet()
-        {
-            HttpContext.Session.Clear();
-            return RedirectToPage("/Login");
-        }
-    }
+﻿@page
+@model AirWaterStore.Web.Pages.LogoutModel
+@{
+    ViewData["Title"] = "Logout";
 }
+
+<h2>Logging out...</h2>
+
+@* This page will redirect immediately via OnGet, so this content is rarely seen *@

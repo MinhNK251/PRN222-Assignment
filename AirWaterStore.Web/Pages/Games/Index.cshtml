@@ -8,10 +8,14 @@
 
 <div class="row mb-3">
     <div class="col-md-6">
-        <form method="get" class="form-inline">
-            <input type="text" name="searchString" value="@Model.SearchString" class="form-control mr-2" placeholder="Search games..." />
-            <button type="submit" class="btn btn-primary">Search</button>
-            <a asp-page="/Games/Index" class="btn btn-secondary ml-2">Clear</a>
+        <form method="get">
+            <div class="input-group">
+                <input type="text" name="searchString" value="@Model.SearchString" class="form-control" placeholder="Search games..." />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    <a asp-page="/Games/Index" class="btn btn-secondary">Clear</a>
+                </div>
+            </div>
         </form>
     </div>
     @if (Model.IsStaff)

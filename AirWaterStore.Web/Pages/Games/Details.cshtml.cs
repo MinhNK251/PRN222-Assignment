@@ -137,6 +137,24 @@ namespace AirWaterStore.Web.Pages.Games
             return RedirectToPage(new { id = NewReview.GameId });
         }
 
+        public async Task<IActionResult> OnPostUpdateReviewAsync(int reviewId, int gameId, int rating, string comment)
+        {
+            if (!IsAuthenticated || !IsCustomer)
+            {
+                return RedirectToPage("/Login");
+            }
+
+            var review = await _reviewService.GetByIdAsync(reviewId);
+            if (review != null && review.UserId == CurrentUserId.Value)
+            {
+                review.Rating = rating;
+                review.Comment = comment;
+                await _reviewService.UpdateAsync(review);
+            }
+
+            return RedirectToPage(new { id = gameId });
+        }
+
         public async Task<IActionResult> OnPostDeleteReviewAsync(int reviewId)
         {
             if (!IsAuthenticated || !IsCustomer)

@@ -5,8 +5,10 @@ namespace AirWaterStore.Web.Pages
 {
     public class LogoutModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            HttpContext.Session.Clear();
+            return RedirectToPage("/Login");
         }
     }
 }

@@ -56,27 +56,10 @@
                             }
                             @if (isStaff)
                             {
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-cog"></i> Admin
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/Admin/Dashboard">
+                                        <i class="fas fa-tachometer-alt"></i> Dashboard
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                                        <a class="dropdown-item" asp-page="/Admin/Dashboard">
-                                            <i class="fas fa-tachometer-alt"></i> Dashboard
-                                        </a>
-                                        <a class="dropdown-item" asp-page="/Admin/Games/Create">
-                                            <i class="fas fa-plus"></i> Add Game
-                                        </a>
-                                        <a class="dropdown-item" asp-page="/Orders/Index">
-                                            <i class="fas fa-shopping-bag"></i> All Orders
-                                        </a>
-                                        <a class="dropdown-item" asp-page="/Admin/Users/Index">
-                                            <i class="fas fa-users"></i> Users
-                                        </a>
-                                        <a class="dropdown-item" asp-page="/Admin/Chat/Index">
-                                            <i class="fas fa-headset"></i> Support Chats
-                                        </a>
-                                    </div>
                                 </li>
                             }
                         }

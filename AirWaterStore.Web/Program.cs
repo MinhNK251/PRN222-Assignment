@@ -2,6 +2,7 @@ using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Business.Services;
 using AirWaterStore.Data;
 using AirWaterStore.Data.Repositories;
+using AirWaterStore.Web.Hubs;
 using Microsoft.EntityFrameworkCore;
 
 namespace AirWaterStore.Web
@@ -15,6 +16,8 @@ namespace AirWaterStore.Web
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddSession();
+            builder.Services.AddSignalR();
+            builder.Services.AddHttpContextAccessor();
 
             //Configure DbContext
             builder.Services.AddDbContext<AirWaterStoreContext>(options =>
@@ -53,8 +56,10 @@ namespace AirWaterStore.Web
             app.UseRouting();
             app.UseSession();
             app.UseAuthorization();
+
             app.MapRazorPages();
-            //app.MapGet("/", context => Task.Factory.StartNew(() => context.Response.Redirect("/Login")));
+            app.MapHub<ChatHub>("/chathub");
+
             app.Run();
         }
     }

@@ -1,0 +1,107 @@
+﻿@page "{id:int}"
+@model AirWaterStore.Web.Pages.Admin.Games.EditModel
+@{
+    ViewData["Title"] = "Edit Game";
+}
+
+<h1>Edit Game</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Game.GameId" />
+
+            <div class="form-group">
+                <label asp-for="Game.Title" class="control-label"></label>
+                <input asp-for="Game.Title" class="form-control" />
+                <span asp-validation-for="Game.Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Game.Description" class="control-label"></label>
+                <textarea asp-for="Game.Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Game.Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Game.ThumbnailUrl" class="control-label">Thumbnail URL</label>
+                <input asp-for="Game.ThumbnailUrl" class="form-control" maxlength="255" />
+                <span asp-validation-for="Game.ThumbnailUrl" class="text-danger"></span>
+                <small class="form-text text-muted">Maximum 255 characters. Use direct image URLs.</small>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Game.Genre" class="control-label"></label>
+                <input asp-for="Game.Genre" class="form-control" />
+                <span asp-validation-for="Game.Genre" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Game.Developer" class="control-label"></label>
+                        <input asp-for="Game.Developer" class="form-control" />
+                        <span asp-validation-for="Game.Developer" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Game.Publisher" class="control-label"></label>
+                        <input asp-for="Game.Publisher" class="form-control" />
+                        <span asp-validation-for="Game.Publisher" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Game.ReleaseDate" class="control-label">Release Date</label>
+                        <input asp-for="Game.ReleaseDate" class="form-control" type="date" />
+                        <span asp-validation-for="Game.ReleaseDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Game.Price" class="control-label"></label>
+                        <input asp-for="Game.Price" class="form-control" type="number" step="0.01" min="0" />
+                        <span asp-validation-for="Game.Price" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Game.Quantity" class="control-label"></label>
+                        <input asp-for="Game.Quantity" class="form-control" type="number" min="0" />
+                        <span asp-validation-for="Game.Quantity" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-page="/Games/Details" asp-route-id="@Model.Game.GameId" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        @if (!string.IsNullOrEmpty(Model.Game?.ThumbnailUrl))
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h5>Current Thumbnail</h5>
+                </div>
+                <div class="card-body">
+                    <img src="@Model.Game.ThumbnailUrl" class="img-fluid" alt="@Model.Game.Title" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
