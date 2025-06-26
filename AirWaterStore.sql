@@ -30,7 +30,7 @@ CREATE TABLE Games (
     Publisher NVARCHAR(100),
     ReleaseDate DATE,
     Price DECIMAL(10, 2) NOT NULL,
-	Quantity INT NOT NULL
+	Quantity INT NULL
 );
 GO
 
