@@ -104,27 +104,27 @@ INSERT INTO Users (Username, Email, Password, Role) VALUES
 -- Insert Games
 INSERT INTO Games (ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity) VALUES 
 ('https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1748630546', 'Elden Ring', 'THE CRITICALLY ACCLAIMED FANTASY ACTION RPG. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.',
-'Souls-like, Open World, Dark Fantasy, RPG', 'FromSoftware, Inc', 'FromSoftware, Inc., Bandai Namco Entertainment', '2022-02-25', 69.99, 100),
+'Souls-like, Open World, Dark Fantasy, RPG', 'FromSoftware, Inc', 'FromSoftware, Inc., Bandai Namco Entertainment', '2022-02-25', 990000, 100),
 ('https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg?t=1715722799', 'Hades', 'Defy the god of the dead as you hack and slash out of the Underworld in this rogue-like dungeon crawler from the creators of Bastion, Transistor, and Pyre.', 
-'Rogue-like, Hack and Slash, Dungeon Crawler.', 'Supergiant Games', 'Supergiant Games', '2020-09-17', 24.99, 50),
+'Rogue-like, Hack and Slash, Dungeon Crawler.', 'Supergiant Games', 'Supergiant Games', '2020-09-17', 321000, 50),
 ('https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1062090/4bc77318229981d441aa33fad4959c684116f599/header.jpg?t=1748943231', 'Timberborn', 'Humans are long gone. In a world struck by droughts and toxic waste, will your lumberpunk beavers do any better? A city-building game featuring ingenious animals, vertical architecture, water physics, and terraforming. Contains high amounts of wood.',
-'City Builder, Voxel, Colony Sim, Nature, Sandbox', 'Mechanistry', 'Mechanistry', '2021-09-15', 20.99, 60),
+'City Builder, Voxel, Colony Sim, Nature, Sandbox', 'Mechanistry', 'Mechanistry', '2021-09-15', 311500, 60),
 ('https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2420510/header.jpg?t=1740642230', 'HoloCure - Save the Fans!', 'Play as your favorite Vtubers from Hololive! Fight, explore, and clear your way through armies of fans and save them from their mind-control in this unofficial free fan-game.',
-'Pixel Graphics, Anime, Bullet Hell, Action Roguelike, Cute', 'KayAnimate', 'KayAnimate', '2023-08-17', 0.99, 120),
+'Pixel Graphics, Anime, Bullet Hell, Action Roguelike, Cute', 'KayAnimate', 'KayAnimate', '2023-08-17', 100000, 120),
 ('https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/header.jpg?t=1711128146', 'Stardew Valley', 'You haveve inherited your grandfathers old farm plot in Stardew Valley. Armed with hand-me-down tools and a few coins, you set out to begin your new life. Can you learn to live off the land and turn these overgrown fields into a thriving home?',
-'Farming Sim, Pixel Graphics, Multiplayer, Life Sim, RPG', 'ConcernedApe', 'ConcernedApe', '2016-02-27', 8.99, 30),
+'Farming Sim, Pixel Graphics, Multiplayer, Life Sim, RPG', 'ConcernedApe', 'ConcernedApe', '2016-02-27', 165000, 30),
 ('https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/header.jpg?t=1749182199', 'Black Myth: Wukong', 'Black Myth: Wukong is an action RPG rooted in Chinese mythology. You shall set out as the Destined One to venture into the challenges and marvels ahead, to uncover the obscured truth beneath the veil of a glorious legend from the past.',
-'Mythology, Souls-like, Singleplayer, RPG', 'Game Science', 'Game Science', '2024-08-20', 79.99, 72);
+'Mythology, Souls-like, Singleplayer, RPG', 'Game Science', 'Game Science', '2024-08-20', 1039000, 72);
 
 -- Insert Orders
 INSERT INTO Orders (UserId, TotalPrice, Status) VALUES 
-(1, 69.99, 'Completed'),
-(1, 24.99, 'Pending');
+(1, 990000, 'Paid'),
+(1, 321000, 'Pending');
 
 -- Insert OrderDetails
 INSERT INTO OrderDetails (OrderId, GameId, Quantity, Price) VALUES 
-(1, 1, 1, 69.99),
-(2, 2, 1, 24.99);
+(1, 1, 1, 990000),
+(2, 2, 1, 321000);
 
 -- Insert Reviews
 INSERT INTO Reviews (UserId, GameId, Rating, Comment) VALUES 
