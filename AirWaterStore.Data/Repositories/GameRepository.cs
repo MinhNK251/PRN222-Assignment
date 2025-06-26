@@ -25,7 +25,7 @@ namespace AirWaterStore.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Game> GetByIdAsync(int gameId)
+        public async Task<Game?> GetByIdAsync(int gameId)
         {
             return await _context.Games
                 .Include(m => m.Reviews)

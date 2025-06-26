@@ -19,12 +19,12 @@ namespace AirWaterStore.Web.Pages.Games
             _userService = userService;
         }
 
-        public Game Game { get; set; }
-        public List<Review> Reviews { get; set; }
+        public Game Game { get; set; } = default!;
+        public List<Review> Reviews { get; set; } = default!;  
         public Dictionary<int, string> UserNames { get; set; } = new Dictionary<int, string>();
 
         [BindProperty]
-        public ReviewInputModel NewReview { get; set; }
+        public ReviewInputModel NewReview { get; set; } = default!;
 
         public int? CurrentUserId => HttpContext.Session.GetInt32("UserId");
         public bool IsAuthenticated => CurrentUserId.HasValue;
@@ -42,16 +42,18 @@ namespace AirWaterStore.Web.Pages.Games
 
             [Required]
             [StringLength(1000)]
-            public string Comment { get; set; }
+            public string Comment { get; set; } = string.Empty;
         }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Game = await _gameService.GetByIdAsync(id);
-            if (Game == null)
+            var game = await _gameService.GetByIdAsync(id);
+            if (game == null)
             {
                 return NotFound();
             }
+
+            Game = game;
 
             Reviews = await _reviewService.GetAllByGameIdAsync(id);
 
@@ -118,7 +120,7 @@ namespace AirWaterStore.Web.Pages.Games
                 return RedirectToPage("/Login");
             }
 
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || CurrentUserId == null)
             {
                 return await OnGetAsync(NewReview.GameId);
             }
@@ -139,7 +141,7 @@ namespace AirWaterStore.Web.Pages.Games
 
         public async Task<IActionResult> OnPostUpdateReviewAsync(int reviewId, int gameId, int rating, string comment)
         {
-            if (!IsAuthenticated || !IsCustomer)
+            if (!IsAuthenticated || !IsCustomer || CurrentUserId == null)
             {
                 return RedirectToPage("/Login");
             }
@@ -157,7 +159,7 @@ namespace AirWaterStore.Web.Pages.Games
 
         public async Task<IActionResult> OnPostDeleteReviewAsync(int reviewId)
         {
-            if (!IsAuthenticated || !IsCustomer)
+            if (!IsAuthenticated || !IsCustomer || CurrentUserId == null)
             {
                 return RedirectToPage("/Login");
             }

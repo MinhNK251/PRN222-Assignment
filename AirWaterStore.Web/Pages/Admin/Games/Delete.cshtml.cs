@@ -15,7 +15,7 @@ namespace AirWaterStore.Web.Pages.Admin.Games
         }
 
         [BindProperty]
-        public Game Game { get; set; }
+        public Game Game { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -25,12 +25,14 @@ namespace AirWaterStore.Web.Pages.Admin.Games
                 return RedirectToPage("/Login");
             }
 
-            Game = await _gameService.GetByIdAsync(id);
+            var game = await _gameService.GetByIdAsync(id);
 
-            if (Game == null)
+            if (game == null)
             {
                 return NotFound();
             }
+
+            Game = game;
 
             return Page();
         }
@@ -48,7 +50,7 @@ namespace AirWaterStore.Web.Pages.Admin.Games
                 TempData["SuccessMessage"] = "Game deleted successfully!";
                 return RedirectToPage("/Games/Index");
             }
-            catch (Exception ex)
+            catch
             {
                 // If deletion fails (e.g., due to foreign key constraints)
                 TempData["ErrorMessage"] = "Cannot delete this game because it has associated orders or reviews.";

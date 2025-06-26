@@ -15,7 +15,7 @@ namespace AirWaterStore.Web.Pages.Admin.Games
         }
 
         [BindProperty]
-        public Game Game { get; set; }
+        public Game Game { get; set; } = default!;
 
         public IActionResult OnGet()
         {

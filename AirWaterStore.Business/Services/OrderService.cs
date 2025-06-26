@@ -26,7 +26,7 @@ namespace AirWaterStore.Data.Repositories
             return await _repository.GetAllByUserIdAsync(userId, pageNumber, pageSize);
         }
 
-        public async Task<Order> GetByIdAsync(int orderId)
+        public async Task<Order?> GetByIdAsync(int orderId)
         {
             return await _repository.GetByIdAsync(orderId);
         }

@@ -21,7 +21,7 @@ namespace AirWaterStore.Data.Repositories
             return await _repository.GetAllAsync(userId, pageNumber, pageSize);
         }
 
-        public async Task<User> GetByIdAsync(int userId)
+        public async Task<User?> GetByIdAsync(int userId)
         {
             return await _repository.GetByIdAsync(userId);
         }
@@ -31,7 +31,7 @@ namespace AirWaterStore.Data.Repositories
             return await _repository.GetTotalCountAsync();
         }
 
-        public async Task<User> LoginAsync(string email, string password)
+        public async Task<User?> LoginAsync(string email, string password)
         {
             return await _repository.LoginAsync(email, password);
         }

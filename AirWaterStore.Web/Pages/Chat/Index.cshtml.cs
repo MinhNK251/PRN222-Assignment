@@ -18,7 +18,7 @@ namespace AirWaterStore.Web.Pages.Chat
             _userService = userService;
         }
 
-        public ChatRoom ChatRoom { get; set; }
+        public ChatRoom ChatRoom { get; set; } = default!;
         public List<Message> Messages { get; set; } = new List<Message>();
         public Dictionary<int, string> UserNames { get; set; } = new Dictionary<int, string>();
         public int CurrentUserId => HttpContext.Session.GetInt32("UserId") ?? 0;

@@ -22,7 +22,7 @@ namespace AirWaterStore.Business.Services
             return await _repository.GetAllAsync(pageNumber, pageSize);
         }
 
-        public async Task<Game> GetByIdAsync(int gameId)
+        public async Task<Game?> GetByIdAsync(int gameId)
         {
             return await _repository.GetByIdAsync(gameId);
         }

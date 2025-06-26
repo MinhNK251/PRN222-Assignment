@@ -26,7 +26,7 @@ namespace AirWaterStore.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<User> GetByIdAsync(int userId)
+        public async Task<User?> GetByIdAsync(int userId)
         {
             return await _context.Users
                 .FirstOrDefaultAsync(m => m.UserId == userId);
@@ -37,7 +37,7 @@ namespace AirWaterStore.Data.Repositories
             return await _context.Users.CountAsync();
         }
 
-        public async Task<User> LoginAsync(string email, string password)
+        public async Task<User?> LoginAsync(string email, string password)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
         }

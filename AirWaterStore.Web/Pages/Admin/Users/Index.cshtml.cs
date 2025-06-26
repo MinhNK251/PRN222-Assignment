@@ -18,7 +18,7 @@ namespace AirWaterStore.Web.Pages.Admin.Users
         public List<User> Users { get; set; } = new List<User>();
         public int CurrentPage { get; set; } = 1;
         public int TotalPages { get; set; }
-        public string SuccessMessage { get; set; }
+        public string? SuccessMessage { get; set; }
         public int CurrentUserId => HttpContext.Session.GetInt32("UserId") ?? 0;
 
         public async Task<IActionResult> OnGetAsync(int currentPage = 1)
@@ -31,9 +31,10 @@ namespace AirWaterStore.Web.Pages.Admin.Users
 
             CurrentPage = currentPage;
 
-            if (TempData["SuccessMessage"] != null)
+            var successMessage = TempData["SuccessMessage"];
+            if (successMessage != null)
             {
-                SuccessMessage = TempData["SuccessMessage"].ToString();
+                SuccessMessage = successMessage.ToString();
             }
 
             Users = await _userService.GetAllAsync(CurrentUserId, currentPage, PageSize);

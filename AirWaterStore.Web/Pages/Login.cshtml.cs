@@ -15,19 +15,19 @@ namespace AirWaterStore.Web.Pages
         }
 
         [BindProperty]
-        public LoginInputModel LoginInput { get; set; }
+        public LoginInputModel LoginInput { get; set; } = default!;
 
-        public string ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; } = string.Empty;
 
         public class LoginInputModel
         {
             [Required]
             [EmailAddress]
-            public string Email { get; set; }
+            public string Email { get; set; } = string.Empty;
 
             [Required]
             [DataType(DataType.Password)]
-            public string Password { get; set; }
+            public string Password { get; set; } = string.Empty;
         }
 
         public void OnGet()

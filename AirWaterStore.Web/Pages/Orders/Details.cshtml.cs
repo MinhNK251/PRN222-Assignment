@@ -18,9 +18,9 @@ namespace AirWaterStore.Web.Pages.Orders
             _userService = userService;
         }
 
-        public Order Order { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; }
-        public string CustomerName { get; set; }
+        public Order Order { get; set; } = default!;
+        public List<OrderDetail> OrderDetails { get; set; } = new();
+        public string CustomerName { get; set; } = string.Empty;
 
         public bool IsStaff => HttpContext.Session.GetInt32("UserRole") == 2;
         public int? CurrentUserId => HttpContext.Session.GetInt32("UserId");
@@ -32,12 +32,14 @@ namespace AirWaterStore.Web.Pages.Orders
                 return RedirectToPage("/Login");
             }
 
-            Order = await _orderService.GetByIdAsync(id);
+            var order = await _orderService.GetByIdAsync(id);
 
-            if (Order == null)
+            if (order == null)
             {
                 return NotFound();
             }
+
+            Order = order;
 
             // Check authorization - customers can only see their own orders
             if (!IsStaff && Order.UserId != CurrentUserId.Value)

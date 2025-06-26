@@ -37,7 +37,7 @@ namespace AirWaterStore.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Order> GetByIdAsync(int orderId)
+        public async Task<Order?> GetByIdAsync(int orderId)
         {
             return await _context.Orders
                 .Include(m => m.OrderDetails)
@@ -58,7 +58,7 @@ namespace AirWaterStore.Data.Repositories
         {
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
-        }      
+        }
 
         public async Task UpdateAsync(Order order)
         {

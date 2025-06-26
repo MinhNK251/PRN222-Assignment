@@ -42,7 +42,8 @@ namespace AirWaterStore.Web.Pages.Admin
             TotalUsers = await _userService.GetTotalCountAsync();
 
             // Get pending chats (chats without assigned staff)
-            var allChats = await _chatRoomService.GetChatRoomsByUserIdAsync(HttpContext.Session.GetInt32("UserId").Value);
+            var userId = HttpContext.Session.GetInt32("UserId");
+            var allChats = await _chatRoomService.GetChatRoomsByUserIdAsync(userId == null ? 0 : userId.Value);
             PendingChats = allChats.Count(c => c.StaffId == null);
 
             // Get recent orders

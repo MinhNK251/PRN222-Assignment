@@ -18,9 +18,9 @@ namespace AirWaterStore.Web.Pages.Admin.Chat
             _userService = userService;
         }
 
-        public ChatRoom ChatRoom { get; set; }
+        public ChatRoom ChatRoom { get; set; } = default!;
         public List<Message> Messages { get; set; } = new List<Message>();
-        public string CustomerName { get; set; }
+        public string CustomerName { get; set; } = string.Empty;
         public Dictionary<int, string> UserNames { get; set; } = new Dictionary<int, string>();
         public int CurrentUserId => HttpContext.Session.GetInt32("UserId") ?? 0;
 
@@ -32,11 +32,13 @@ namespace AirWaterStore.Web.Pages.Admin.Chat
                 return RedirectToPage("/Login");
             }
 
-            ChatRoom = await _chatRoomService.GetChatRoomByIdAsync(id);
-            if (ChatRoom == null)
+            var chatRoom = await _chatRoomService.GetChatRoomByIdAsync(id);
+            if (chatRoom == null)
             {
                 return NotFound();
             }
+
+            ChatRoom = chatRoom;
 
             // Get messages
             Messages = await _messageService.GetMessagesByChatRoomIdAsync(id);

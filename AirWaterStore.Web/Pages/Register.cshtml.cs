@@ -16,29 +16,29 @@ namespace AirWaterStore.Web.Pages
         }
 
         [BindProperty]
-        public RegisterInputModel RegisterInput { get; set; }
+        public RegisterInputModel RegisterInput { get; set; } = default!;
 
-        public string ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; } = string.Empty;
 
         public class RegisterInputModel
         {
             [Required]
             [StringLength(50, MinimumLength = 3)]
-            public string Username { get; set; }
+            public string Username { get; set; } = string.Empty;
 
             [Required]
             [EmailAddress]
-            public string Email { get; set; }
+            public string Email { get; set; } = string.Empty;
 
             [Required]
             [StringLength(100, MinimumLength = 6)]
             [DataType(DataType.Password)]
-            public string Password { get; set; }
+            public string Password { get; set; } = string.Empty;
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
+            public string ConfirmPassword { get; set; } = string.Empty;
         }
 
         public void OnGet()

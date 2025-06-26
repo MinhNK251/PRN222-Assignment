@@ -20,7 +20,7 @@ namespace AirWaterStore.Web.Pages
 
         public List<Games.CartItem> CartItems { get; set; } = new List<Games.CartItem>();
         public decimal TotalPrice => CartItems.Sum(item => item.Price * item.Quantity);
-        public string ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; } = string.Empty;
 
         public IActionResult OnGet()
         {
@@ -94,8 +94,11 @@ namespace AirWaterStore.Web.Pages
 
                     // Update game stock
                     var game = await _gameService.GetByIdAsync(item.GameId);
-                    game.Quantity -= item.Quantity;
-                    await _gameService.UpdateAsync(game);
+                    if(game != null)
+                    {
+                        game.Quantity -= item.Quantity;
+                        await _gameService.UpdateAsync(game);
+                    }
                 }
 
                 // Clear cart
@@ -104,7 +107,7 @@ namespace AirWaterStore.Web.Pages
                 // Redirect to order confirmation
                 return RedirectToPage("/Orders/Details", new { id = order.OrderId });
             }
-            catch (Exception ex)
+            catch
             {
                 ErrorMessage = "An error occurred while processing your order. Please try again.";
                 return Page();

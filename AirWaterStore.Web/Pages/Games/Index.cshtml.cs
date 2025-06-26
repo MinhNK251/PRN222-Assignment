@@ -18,8 +18,8 @@ namespace AirWaterStore.Web.Pages.Games
         public List<Game> Games { get; set; } = new List<Game>();
         public int CurrentPage { get; set; } = 1;
         public int TotalPages { get; set; }
-        public string SearchString { get; set; }
-        public string SuccessMessage { get; set; }
+        public string SearchString { get; set; } = string.Empty;
+        public string? SuccessMessage { get; set; }
 
         public bool IsAuthenticated => HttpContext.Session.GetInt32("UserId").HasValue;
         public bool IsCustomer => HttpContext.Session.GetInt32("UserRole") == 1;
@@ -31,9 +31,10 @@ namespace AirWaterStore.Web.Pages.Games
             SearchString = searchString;
 
             // Get success message from TempData
-            if (TempData["SuccessMessage"] != null)
+            var successMessgae = TempData["SuccessMessage"];
+            if ( successMessgae != null)
             {
-                SuccessMessage = TempData["SuccessMessage"].ToString();
+                SuccessMessage = successMessgae.ToString();
             }
 
             var allGames = await _gameService.GetAllAsync(1, 1000); // Get all for filtering
@@ -101,7 +102,7 @@ namespace AirWaterStore.Web.Pages.Games
     public class CartItem
     {
         public int GameId { get; set; }
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public int Quantity { get; set; }
     }

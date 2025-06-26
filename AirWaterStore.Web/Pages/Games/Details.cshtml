@@ -1,4 +1,5 @@
 ﻿@page "{id:int}"
+@using AirWaterStore.Web.Helper
 @model AirWaterStore.Web.Pages.Games.DetailsModel
 @{
     ViewData["Title"] = Model.Game.Title;
@@ -18,7 +19,8 @@
         </div>
         <div class="col-md-8">
             <h1>@Model.Game.Title</h1>
-
+            using AirWaterStore.Web.Helper;
+            #line default
             <div class="mb-3">
                 <span class="badge badge-secondary">@Model.Game.Genre</span>
                 <span class="badge badge-@(Model.Game.Quantity > 0 ? "success" : "danger")">
@@ -26,7 +28,7 @@
                 </span>
             </div>
 
-            <h3 class="text-primary">$@Model.Game.Price.ToString("F2")</h3>
+            <h3 class="text-primary">@Model.Game.Price.ToString("C", Currency.VnCurrencyFormat())</h3>
 
             <dl class="row">
                 <dt class="col-sm-3">Developer</dt>
@@ -47,14 +49,16 @@
                     <form method="post" asp-page-handler="AddToCart" class="form-inline">
                         <input type="hidden" name="gameId" value="@Model.Game.GameId" />
                         <label class="mr-2">Quantity:</label>
-                        <input type="number" name="quantity" value="1" min="1" max="@Model.Game.Quantity" class="form-control mr-2" style="width: 80px;">
+                        <input type="number" name="quantity" value="1" min="1" max="@Model.Game.Quantity"
+                            class="form-control mr-2" style="width: 80px;">
                         <button type="submit" class="btn btn-primary">Add to Cart</button>
                     </form>
                 }
                 @if (Model.IsStaff)
                 {
                     <a asp-page="/Admin/Games/Edit" asp-route-id="@Model.Game.GameId" class="btn btn-warning">Edit Game</a>
-                    <a asp-page="/Admin/Games/Delete" asp-route-id="@Model.Game.GameId" class="btn btn-danger">Delete Game</a>
+                    <a asp-page="/Admin/Games/Delete" asp-route-id="@Model.Game.GameId" class="btn btn-danger">Delete
+                        Game</a>
                 }
             </div>
         </div>
@@ -122,10 +126,12 @@
                                 @if (Model.CurrentUserId == review.UserId)
                                 {
                                     <div class="mt-2">
-                                        <button type="button" class="btn btn-sm btn-secondary" onclick="showEditForm(@review.ReviewId)">Edit</button>
+                                        <button type="button" class="btn btn-sm btn-secondary"
+                                            onclick="showEditForm(@review.ReviewId)">Edit</button>
                                         <form method="post" asp-page-handler="DeleteReview" class="d-inline">
                                             <input type="hidden" name="reviewId" value="@review.ReviewId" />
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this review?')">Delete</button>
+                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                onclick="return confirm('Are you sure you want to delete this review?')">Delete</button>
                                         </form>
                                     </div>
                                 }
@@ -141,21 +147,23 @@
                                         <div class="form-group">
                                             <label>Rating</label>
                                             <select name="rating" class="form-control" style="width: 100px;">
-                                                <option value="5" @@(review.Rating == 5 ? "selected" : "")>5 Stars</option>
-                                                <option value="4" @@(review.Rating == 4 ? "selected" : "")>4 Stars</option>
-                                                <option value="3" @@(review.Rating == 3 ? "selected" : "")>3 Stars</option>
-                                                <option value="2" @@(review.Rating == 2 ? "selected" : "")>2 Stars</option>
-                                                <option value="1" @@(review.Rating == 1 ? "selected" : "")>1 Star</option>
+                                                <option value="5" @@(review.Rating==5 ? "selected" : "" )>5 Stars</option>
+                                                <option value="4" @@(review.Rating==4 ? "selected" : "" )>4 Stars</option>
+                                                <option value="3" @@(review.Rating==3 ? "selected" : "" )>3 Stars</option>
+                                                <option value="2" @@(review.Rating==2 ? "selected" : "" )>2 Stars</option>
+                                                <option value="1" @@(review.Rating==1 ? "selected" : "" )>1 Star</option>
                                             </select>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Comment</label>
-                                            <textarea name="comment" class="form-control" rows="3" required>@review.Comment</textarea>
+                                            <textarea name="comment" class="form-control" rows="3"
+                                    required>@review.Comment</textarea>
                                         </div>
 
                                         <button type="submit" class="btn btn-sm btn-primary">Save</button>
-                                        <button type="button" class="btn btn-sm btn-secondary" onclick="hideEditForm(@review.ReviewId)">Cancel</button>
+                                        <button type="button" class="btn btn-sm btn-secondary"
+                                            onclick="hideEditForm(@review.ReviewId)">Cancel</button>
                                     </form>
                                 </div>
                             }
