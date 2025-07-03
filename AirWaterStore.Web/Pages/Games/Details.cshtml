@@ -19,8 +19,6 @@
         </div>
         <div class="col-md-8">
             <h1>@Model.Game.Title</h1>
-            using AirWaterStore.Web.Helper;
-            #line default
             <div class="mb-3">
                 <span class="badge badge-secondary">@Model.Game.Genre</span>
                 <span class="badge badge-@(Model.Game.Quantity > 0 ? "success" : "danger")">
@@ -28,7 +26,7 @@
                 </span>
             </div>
 
-            <h3 class="text-primary">@Model.Game.Price.ToString("C", Currency.VnCurrencyFormat())</h3>
+            <h3 class="text-primary">@Model.Game.Price.ToString("C", Currency.VnCurrencyFormat)</h3>
 
             <dl class="row">
                 <dt class="col-sm-3">Developer</dt>

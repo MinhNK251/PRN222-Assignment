@@ -62,7 +62,7 @@
                         }
                     </p>
                     <p class="card-text mt-auto">
-                        <strong>@game.Price.ToString("C", Currency.VnCurrencyFormat())</strong>
+                        <strong>@game.Price.ToString("C", Currency.VnCurrencyFormat)</strong>
                         <span class="badge badge-@(game.Quantity > 0 ? "success" : "danger") ml-2">
                             @(game.Quantity > 0 ? $"{game.Quantity} in stock" : "Out of stock")
                         </span>

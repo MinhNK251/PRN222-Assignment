@@ -1,4 +1,5 @@
 ﻿@page
+@using AirWaterStore.Web.Helper
 @model AirWaterStore.Web.Pages.Admin.DashboardModel
 @{
     ViewData["Title"] = "Admin Dashboard";
@@ -83,7 +84,7 @@
                                 <a asp-page="/Orders/Details" asp-route-id="@order.OrderId">#@order.OrderId</a>
                             </td>
                             <td>@Model.GetUsername(order.UserId)</td>
-                            <td>$@order.TotalPrice.ToString("F2")</td>
+                            <td>@order.TotalPrice.ToString("C",Currency.VnCurrencyFormat)</td>
                             <td>
                                 <span class="badge badge-@(order.Status == "Completed" ? "success" : "warning")">
                                     @order.Status

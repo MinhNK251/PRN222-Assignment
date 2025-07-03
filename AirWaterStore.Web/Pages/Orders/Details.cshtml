@@ -1,4 +1,5 @@
 ﻿@page "{id:int}"
+@using AirWaterStore.Web.Helper;
 @model AirWaterStore.Web.Pages.Orders.DetailsModel
 @{
     ViewData["Title"] = $"Order #{Model.Order.OrderId}";
@@ -26,7 +27,7 @@
             </dd>
 
             <dt class="col-sm-4">Total Amount:</dt>
-            <dd class="col-sm-8"><strong>$@Model.Order.TotalPrice.ToString("F2")</strong></dd>
+            <dd class="col-sm-8"><strong>@Model.Order.TotalPrice.ToString("C", Currency.VnCurrencyFormat)</strong></dd>
         </dl>
     </div>
 </div>
@@ -51,16 +52,16 @@
                             @detail.Game.Title
                         </a>
                     </td>
-                    <td>$@detail.Price.ToString("F2")</td>
+                    <td>@detail.Price.ToString("C", Currency.VnCurrencyFormat)</td>
                     <td>@detail.Quantity</td>
-                    <td>$@((detail.Price * detail.Quantity).ToString("F2"))</td>
+                    <td>@((detail.Price * detail.Quantity).ToString("C", Currency.VnCurrencyFormat))</td>
                 </tr>
             }
         </tbody>
         <tfoot>
             <tr>
                 <th colspan="3">Total</th>
-                <th>$@Model.Order.TotalPrice.ToString("F2")</th>
+                <th>@Model.Order.TotalPrice.ToString("C", Currency.VnCurrencyFormat)</th>
             </tr>
         </tfoot>
     </table>

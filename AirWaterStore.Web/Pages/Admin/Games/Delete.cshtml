@@ -1,4 +1,5 @@
 ﻿@page "{id:int}"
+@using AirWaterStore.Web.Helper
 @model AirWaterStore.Web.Pages.Admin.Games.DeleteModel
 @{
     ViewData["Title"] = "Delete Game";
@@ -30,7 +31,7 @@
             <dd class="col-sm-9">@(Model.Game.ReleaseDate?.ToString("MMMM dd, yyyy") ?? "N/A")</dd>
 
             <dt class="col-sm-3">Price</dt>
-            <dd class="col-sm-9">$@Model.Game.Price.ToString("F2")</dd>
+            <dd class="col-sm-9">@Model.Game.Price.ToString("C", Currency.VnCurrencyFormat)</dd>
 
             <dt class="col-sm-3">Quantity</dt>
             <dd class="col-sm-9">@Model.Game.Quantity</dd>
