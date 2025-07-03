@@ -1,5 +1,6 @@
 using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -21,8 +22,8 @@ namespace AirWaterStore.Web.Pages.Orders
 
         public async Task<IActionResult> OnGetAsync(int currentPage = 1)
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
-            var userRole = HttpContext.Session.GetInt32("UserRole");
+            var userId = HttpContext.Session.GetInt32(SessionParams.UserId);
+            var userRole = HttpContext.Session.GetInt32(SessionParams.UserRole);
 
             if (!userId.HasValue)
             {

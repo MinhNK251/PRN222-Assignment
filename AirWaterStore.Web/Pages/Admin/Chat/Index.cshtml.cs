@@ -1,5 +1,6 @@
 using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -19,12 +20,13 @@ namespace AirWaterStore.Web.Pages.Admin.Chat
         public List<ChatRoom> ChatRooms { get; set; } = new List<ChatRoom>();
         public Dictionary<int, string> UserNames { get; set; } = new Dictionary<int, string>();
         public int? SelectedRoomId { get; set; }
-        public int CurrentUserId => HttpContext.Session.GetInt32("UserId") ?? 0;
+        // public int CurrentUserId => HttpContext.Session.GetInt32(SessionParams.UserId) ?? 0;
 
         public async Task<IActionResult> OnGetAsync(int? selectedRoom = null)
         {
             // Check if user is staff
-            if (HttpContext.Session.GetInt32("UserRole") != 2)
+            // if (HttpContext.Session.GetInt32(SessionParams.UserRole) != 2)
+            if (!this.IsStaff())
             {
                 return RedirectToPage("/Login");
             }
@@ -32,7 +34,7 @@ namespace AirWaterStore.Web.Pages.Admin.Chat
             SelectedRoomId = selectedRoom;
 
             // Get all chat rooms (assigned to this staff or unassigned)
-            ChatRooms = await _chatRoomService.GetChatRoomsByUserIdAsync(CurrentUserId);
+            ChatRooms = await _chatRoomService.GetChatRoomsByUserIdAsync(this.GetCurrentUserId());
 
             // Load usernames
             var userIds = new HashSet<int>();

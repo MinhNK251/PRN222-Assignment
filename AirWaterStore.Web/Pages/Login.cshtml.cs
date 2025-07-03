@@ -1,4 +1,5 @@
 using AirWaterStore.Business.Interfaces;
+using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -54,9 +55,9 @@ namespace AirWaterStore.Web.Pages
                 }
 
                 // Set session
-                HttpContext.Session.SetInt32("UserId", user.UserId);
-                HttpContext.Session.SetString("Username", user.Username);
-                HttpContext.Session.SetInt32("UserRole", user.Role);
+                HttpContext.Session.SetInt32(SessionParams.UserId, user.UserId);
+                HttpContext.Session.SetString(SessionParams.UserName, user.Username);
+                HttpContext.Session.SetInt32(SessionParams.UserRole, user.Role);
 
                 // Redirect based on role
                 if (user.Role == 2) // Staff

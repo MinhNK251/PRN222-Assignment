@@ -1,5 +1,6 @@
 using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -31,7 +32,7 @@ namespace AirWaterStore.Web.Pages.Admin
         public async Task<IActionResult> OnGetAsync()
         {
             // Check if user is staff
-            if (HttpContext.Session.GetInt32("UserRole") != 2)
+            if (!this.IsStaff())
             {
                 return RedirectToPage("/Login");
             }
@@ -42,8 +43,9 @@ namespace AirWaterStore.Web.Pages.Admin
             TotalUsers = await _userService.GetTotalCountAsync();
 
             // Get pending chats (chats without assigned staff)
-            var userId = HttpContext.Session.GetInt32("UserId");
-            var allChats = await _chatRoomService.GetChatRoomsByUserIdAsync(userId == null ? 0 : userId.Value);
+            // var userId = HttpContext.Session.GetInt32(SessionParams.UserId);
+            var userId = this.GetCurrentUserId();
+            var allChats = await _chatRoomService.GetChatRoomsByUserIdAsync(userId);
             PendingChats = allChats.Count(c => c.StaffId == null);
 
             // Get recent orders

@@ -20,7 +20,7 @@
             </div>
         </form>
     </div>
-    @if (Model.IsStaff)
+    @if (Model.IsStaff())
     {
         <div class="col-md-6 text-right">
             <a asp-page="/Admin/Games/Create" class="btn btn-success">Add New Game</a>
@@ -63,16 +63,18 @@
                     </p>
                     <p class="card-text mt-auto">
                         <strong>@game.Price.ToString("C", Currency.VnCurrencyFormat)</strong>
-                        <span class="badge badge-@(game.Quantity > 0 ? "success" : "danger") ml-2">
+                        <span class="badge badge-@(game.Quantity > 0 ? "success" : "danger") text-dark ml-2">
                             @(game.Quantity > 0 ? $"{game.Quantity} in stock" : "Out of stock")
                         </span>
                     </p>
                     <div class="btn-group" role="group">
                         <a asp-page="/Games/Details" asp-route-id="@game.GameId" class="btn btn-info btn-sm">View
                             Details</a>
-                        @if (Model.IsCustomer && game.Quantity > 0)
+                        @if (Model.IsCustomer() && game.Quantity > 0)
                         {
                             <form method="post" asp-page-handler="AddToCart" class="d-inline">
+                                <input type="hidden" name="CurrentPage" value="@Model.CurrentPage" />
+                                <input type="hidden" name="SearchString" value="@Model.SearchString" />
                                 <input type="hidden" name="gameId" value="@game.GameId" />
                                 <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
                             </form>

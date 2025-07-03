@@ -6,11 +6,7 @@ SET IDENTITY_INSERT Games ON;
 --SET IDENTITY_INSERT Reviews ON;
 
 INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity)
-VALUES (413150, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/header.jpg?t=1711128146', 'Stardew Valley', 'You''ve inherited your grandfather''s old farm plot in Stardew Valley. Armed with hand-me-down tools and a few coins, you set out to begin your new life. Can you learn to live off the land and turn these overgrown fields into a thriving home?', 'Farming Sim, Pixel Graphics, Multiplayer, Life Sim, RPG', 'ConcernedApe', 'ConcernedApe', '2016-02-26', 35000, 71);
-INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity)
 VALUES (346110, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/346110/header.jpg?t=1748884377', 'ARK: Survival Evolved', 'Stranded on the shores of a mysterious island, you must learn to survive. Use your cunning to kill or tame the primeval creatures roaming the land, and encounter other players to survive, dominate... and escape!', 'Open World Survival Craft, Survival, Multiplayer, Open World, Dinosaurs', 'Studio Wildcard', 'Studio Wildcard', '2017-08-27', 205000, 85);
-INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity)
-VALUES (1245620, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1748630546', 'ELDEN RING', 'THE CRITICALLY ACCLAIMED FANTASY ACTION RPG. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.', 'Souls-like, Open World, Dark Fantasy, RPG, Difficult', 'FromSoftware, Inc.', 'FromSoftware, Inc.', '2022-02-24', 1390000, 156);
 INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity)
 VALUES (252490, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252490/header.jpg?t=1747389753', 'Rust', 'The only aim in Rust is to survive. Everything wants you to die - the island’s wildlife, other inhabitants, the environment, and other survivors. Do whatever it takes to last another night.', 'Survival, Crafting, Multiplayer, Open World, Open World Survival Craft', 'Facepunch Studios', 'Facepunch Studios', '2018-02-08', 306000, 116);
 INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity)
@@ -23,8 +19,6 @@ INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, P
 VALUES (227300, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/227300/header.jpg?t=1750168417', 'Euro Truck Simulator 2', 'Travel across Europe as king of the road, a trucker who delivers important cargo across impressive distances! With dozens of cities to explore, your endurance, skill and speed will all be pushed to their limits.', 'Driving, Transportation, Simulation, Open World, Automobile Sim', 'SCS Software', 'SCS Software', '2012-10-18', 2305000, 155);
 INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity)
 VALUES (892970, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/892970/header.jpg?t=1748853427', 'Valheim', 'A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture. Battle, build, and conquer your way to a saga worthy of Odin’s patronage!', 'Open World Survival Craft, Survival, Online Co-Op, Open World, Multiplayer', 'Iron Gate AB', 'Coffee Stain Publishing', '2021-02-02', 70000, 193);
-INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity)
-VALUES (2358720, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/header.jpg?t=1749182199', 'Black Myth: Wukong', 'Black Myth: Wukong is an action RPG rooted in Chinese mythology. You shall set out as the Destined One to venture into the challenges and marvels ahead, to uncover the obscured truth beneath the veil of a glorious legend from the past.', 'Mythology, Action RPG, Action, Souls-like, RPG', 'Game Science', 'Game Science', '2024-08-19', 240000, 46);
 INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity)
 VALUES (1086940, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/48a2fcbda8565bb45025e98fd8ebde8a7203f6a0/header.jpg?t=1748346026', 'Baldur''s Gate 3', 'Baldur’s Gate 3 is a story-rich, party-based RPG set in the universe of Dungeons & Dragons, where your choices shape a tale of fellowship and betrayal, survival and sacrifice, and the lure of absolute power.', 'RPG, Character Customization, Choices Matter, Story Rich, Turn-Based Combat', 'Larian Studios', 'Larian Studios', '2023-08-03', 113500, 78);
 INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity)
@@ -69,8 +63,6 @@ INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, P
 VALUES (394360, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/394360/67bbd0057627fc2244793bcdd09260c2539499cf/header.jpg?t=1747327288', 'Hearts of Iron IV', 'Victory is at your fingertips! Your ability to lead your nation is your supreme weapon, the strategy game Hearts of Iron IV lets you take command of any nation in World War II; the most engaging conflict in world history.', 'Strategy, World War II, Grand Strategy, War, Historical', 'Paradox Development Studio', 'Paradox Interactive', '2016-06-06', 2665000, 130);
 INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity)
 VALUES (990080, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/a3cdc6f40d97df8ac993679c2dd1edeb5222421e/header.jpg?t=1747346162', 'Hogwarts Legacy', 'Hogwarts Legacy is an immersive, open-world action RPG. Now you can take control of the action and be at the center of your own adventure in the wizarding world.', 'Magic, Open World, Fantasy, Singleplayer, Adventure', 'Avalanche Software', 'Warner Bros. Games', '2023-02-10', 77500, 198);
-INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity)
-VALUES (1145360, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg?t=1715722799', 'Hades', 'Defy the god of the dead as you hack and slash out of the Underworld in this rogue-like dungeon crawler from the creators of Bastion, Transistor, and Pyre.', 'Action Roguelike, Roguelite, Hack and Slash, Indie, Mythology', 'Supergiant Games', 'Supergiant Games', '2020-09-17', 48500, 115);
 INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity)
 VALUES (391540, 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/391540/header.jpg?t=1579096091', 'Undertale', 'UNDERTALE! The RPG game where you don''t have to destroy anyone.', 'Great Soundtrack, Story Rich, Choices Matter, Multiple Endings, Pixel Graphics', 'tobyfox', 'tobyfox', '2015-09-15', 180000, 153);
 INSERT INTO Games (GameId, ThumbnailUrl, Title, Description, Genre, Developer, Publisher, ReleaseDate, Price, Quantity)
@@ -130,177 +122,177 @@ GO
 
 SET IDENTITY_INSERT Users ON;
 
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (100, 'robert37', 'iramos@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (101, 'john83', 'francojames@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (102, 'ashleyphillips', 'paul72@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (103, 'bfoster', 'psimmons@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (104, 'sherry34', 'jessicastout@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (105, 'andre34', 'vaughnjoyce@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (106, 'jasmineparker', 'anthonychapman@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (107, 'qreid', 'fmoore@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (108, 'ystokes', 'donna75@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (109, 'mbrown', 'msmith@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (110, 'bruce73', 'nicole04@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (111, 'cooperregina', 'sanchezkimberly@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (112, 'ericmartin', 'hburke@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (113, 'rhernandez', 'joshua78@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (114, 'xpeck', 'wcarlson@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (115, 'christopherferguson', 'grayjamie@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (116, 'alexandertiffany', 'sclark@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (117, 'shahlauren', 'sabrina31@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (118, 'gsanders', 'marygarcia@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (119, 'brendanbates', 'anthony70@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (120, 'jmurphy', 'nleon@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (121, 'andrew66', 'rodriguezchristopher@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (122, 'john85', 'charles11@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (123, 'katherine22', 'katherinerogers@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (124, 'tmartinez', 'stephen30@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (125, 'thompsonjames', 'barnettjoyce@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (126, 'gfischer', 'brittanymoore@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (127, 'pamelarosario', 'ivega@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (128, 'todd09', 'hmarks@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (129, 'elizabeth14', 'cooperbarbara@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (130, 'stafforddarryl', 'john34@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (131, 'clong', 'stevenjones@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (132, 'crystal05', 'amandawhite@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (133, 'laneadrian', 'douglas65@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (134, 'ypatton', 'hollyreese@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (135, 'esanford', 'jasontaylor@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (136, 'beckytaylor', 'ijones@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (137, 'odean', 'epatel@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (138, 'vnavarro', 'mdickerson@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (139, 'arthur78', 'williamsjohn@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (140, 'msweeney', 'jennifer69@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (141, 'michaelramirez', 'vazquezdaniel@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (142, 'kara65', 'john47@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (143, 'folson', 'gjohnston@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (144, 'christopher54', 'jkim@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (145, 'carlos32', 'brookejackson@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (146, 'melanie02', 'austinashley@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (147, 'robinsonscott', 'jacqueline57@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (148, 'tburns', 'joshuastewart@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (149, 'rebeccajackson', 'wellsemma@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (150, 'murphyjesus', 'bthompson@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (151, 'gabbott', 'paul15@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (152, 'wrice', 'carolynlove@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (153, 'johnsonjerry', 'wilkinsjohn@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (154, 'bartonrichard', 'vcampbell@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (155, 'annlee', 'michaelpowell@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (156, 'figueroaanthony', 'josephharvey@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (157, 'jjohnson', 'christian17@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (158, 'anna07', 'michael91@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (159, 'mark12', 'brad19@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (160, 'brightcrystal', 'sierra06@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (161, 'william10', 'nichole37@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (162, 'taylormichael', 'hallerin@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (163, 'gcordova', 'blyons@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (164, 'psharp', 'rhoward@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (165, 'nicholsmatthew', 'wzavala@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (166, 'randerson', 'dianebennett@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (167, 'singhvictoria', 'ricesarah@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (168, 'ufritz', 'becky91@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (169, 'ricardo42', 'nelsonkaren@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (170, 'william26', 'lanemark@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (171, 'rogersrobert', 'pharrison@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (172, 'kgarcia', 'tracycarlson@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (173, 'moranangel', 'vmiller@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (174, 'oliviaortiz', 'shane50@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (175, 'christine66', 'williamsangelica@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (176, 'francesrodriguez', 'kgarcia@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (177, 'oconnorsteven', 'burnsdanny@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (178, 'xking', 'deandean@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (179, 'destiny18', 'ramirezkyle@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (180, 'diazhannah', 'teresa91@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (181, 'joseph83', 'bryandennis@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (182, 'kevinbuck', 'millsallen@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (183, 'smithdavid', 'zklein@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (184, 'david30', 'johnsonemily@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (185, 'jenniferkidd', 'cynthia16@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (186, 'jeffreymurphy', 'martincatherine@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (187, 'jhughes', 'irivera@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (188, 'jennifer48', 'deborahanderson@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (189, 'john45', 'jamesgates@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (190, 'idowns', 'sullivanthomas@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (191, 'deniseparker', 'acostakevin@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (192, 'dalton70', 'ewilliams@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (193, 'robert66', 'suttonjeffrey@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (194, 'spencer07', 'meghan55@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (195, 'kristengarcia', 'tonypierce@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (196, 'nkrueger', 'nmartinez@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (197, 'urivera', 'aguilarlori@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (198, 'sheilabryan', 'brownlatoya@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (199, 'stewartsherry', 'hicksmichelle@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (200, 'jennifer43', 'odomjohn@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (201, 'mthomas', 'emayo@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (202, 'frederick53', 'stephen06@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (203, 'mark32', 'pooleronald@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (204, 'matthewwest', 'teresa30@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (205, 'ortizstephen', 'nicholas91@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (206, 'websteralicia', 'rkrueger@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (207, 'crystalblackburn', 'riosangela@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (208, 'walkermarcus', 'brian87@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (209, 'johndaugherty', 'mendezlauren@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (210, 'alexwells', 'erikamiller@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (211, 'gregory19', 'ethan89@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (212, 'schultzbrandon', 'parrishamy@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (213, 'nsantos', 'nlewis@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (214, 'troy69', 'samantha15@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (215, 'elainewalker', 'avilakimberly@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (216, 'hesterbrandy', 'kennethgarcia@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (217, 'jason81', 'smithdavid@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (218, 'patricia87', 'daniel28@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (219, 'zsims', 'bsanchez@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (220, 'heather30', 'jessicawade@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (221, 'ingramsandy', 'chad16@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (222, 'schultzamy', 'ninacastillo@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (223, 'fmclaughlin', 'michellegillespie@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (224, 'nicolemartinez', 'rjimenez@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (225, 'jasminebrown', 'amy07@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (226, 'oschultz', 'rmartin@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (227, 'jcarlson', 'tina69@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (228, 'strongfrank', 'vboyd@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (229, 'jeffreysuarez', 'amycook@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (230, 'melaniespears', 'mooretoni@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (231, 'jessicareilly', 'rhorne@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (232, 'uashley', 'sandraberger@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (233, 'pearsoncory', 'howellwilliam@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (234, 'aprilreyes', 'ochoashawn@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (235, 'millernancy', 'kimberlyjenkins@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (236, 'debra19', 'dickersonsteve@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (237, 'kaitlynalvarado', 'vjackson@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (238, 'johnsoncynthia', 'aliciamcdonald@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (239, 'pattoncameron', 'morr@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (240, 'keith59', 'johnsonkim@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (241, 'tayloradkins', 'elizabethmcbride@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (242, 'jason53', 'rodney43@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (243, 'evansjessica', 'lorettadavis@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (244, 'amy18', 'sararoberts@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (245, 'wmiles', 'khoward@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (246, 'emilyreese', 'alison28@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (247, 'donnajarvis', 'brittany61@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (248, 'jenningsjames', 'kimberly67@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (249, 'farmerralph', 'kcurry@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (250, 'jessicachurch', 'nicholas98@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (251, 'kmiller', 'ndouglas@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (252, 'batesjennifer', 'gregoryjuarez@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (253, 'douglasryan', 'ccain@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (254, 'antoniobaker', 'steven06@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (255, 'karensullivan', 'gevans@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (256, 'erinblack', 'skinnerjohn@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (257, 'simpsonreginald', 'clarkbrian@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (258, 'steeledavid', 'maria49@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (259, 'smithbrooke', 'carrollcharles@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (260, 'zachary80', 'ninarichardson@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (261, 'hrogers', 'zwilson@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (262, 'amy42', 'yvette86@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (263, 'obuck', 'bgray@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (264, 'mistydavis', 'ashleyoconnor@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (265, 'annaclark', 'qpruitt@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (266, 'johnnymckenzie', 'dsmith@example.com', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (267, 'breweredwin', 'lewisjoseph@example.org', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (268, 'josemason', 'michelle90@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (269, 'stewartedward', 'nfox@example.net', '123456', 0, 0);
-INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (270, 'smithmatthew', 'byrdsteven@example.net', '123456', 0, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (100, 'robert37', 'iramos@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (101, 'john83', 'francojames@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (102, 'ashleyphillips', 'paul72@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (103, 'bfoster', 'psimmons@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (104, 'sherry34', 'jessicastout@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (105, 'andre34', 'vaughnjoyce@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (106, 'jasmineparker', 'anthonychapman@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (107, 'qreid', 'fmoore@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (108, 'ystokes', 'donna75@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (109, 'mbrown', 'msmith@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (110, 'bruce73', 'nicole04@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (111, 'cooperregina', 'sanchezkimberly@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (112, 'ericmartin', 'hburke@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (113, 'rhernandez', 'joshua78@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (114, 'xpeck', 'wcarlson@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (115, 'christopherferguson', 'grayjamie@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (116, 'alexandertiffany', 'sclark@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (117, 'shahlauren', 'sabrina31@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (118, 'gsanders', 'marygarcia@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (119, 'brendanbates', 'anthony70@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (120, 'jmurphy', 'nleon@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (121, 'andrew66', 'rodriguezchristopher@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (122, 'john85', 'charles11@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (123, 'katherine22', 'katherinerogers@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (124, 'tmartinez', 'stephen30@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (125, 'thompsonjames', 'barnettjoyce@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (126, 'gfischer', 'brittanymoore@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (127, 'pamelarosario', 'ivega@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (128, 'todd09', 'hmarks@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (129, 'elizabeth14', 'cooperbarbara@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (130, 'stafforddarryl', 'john34@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (131, 'clong', 'stevenjones@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (132, 'crystal05', 'amandawhite@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (133, 'laneadrian', 'douglas65@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (134, 'ypatton', 'hollyreese@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (135, 'esanford', 'jasontaylor@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (136, 'beckytaylor', 'ijones@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (137, 'odean', 'epatel@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (138, 'vnavarro', 'mdickerson@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (139, 'arthur78', 'williamsjohn@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (140, 'msweeney', 'jennifer69@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (141, 'michaelramirez', 'vazquezdaniel@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (142, 'kara65', 'john47@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (143, 'folson', 'gjohnston@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (144, 'christopher54', 'jkim@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (145, 'carlos32', 'brookejackson@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (146, 'melanie02', 'austinashley@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (147, 'robinsonscott', 'jacqueline57@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (148, 'tburns', 'joshuastewart@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (149, 'rebeccajackson', 'wellsemma@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (150, 'murphyjesus', 'bthompson@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (151, 'gabbott', 'paul15@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (152, 'wrice', 'carolynlove@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (153, 'johnsonjerry', 'wilkinsjohn@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (154, 'bartonrichard', 'vcampbell@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (155, 'annlee', 'michaelpowell@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (156, 'figueroaanthony', 'josephharvey@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (157, 'jjohnson', 'christian17@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (158, 'anna07', 'michael91@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (159, 'mark12', 'brad19@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (160, 'brightcrystal', 'sierra06@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (161, 'william10', 'nichole37@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (162, 'taylormichael', 'hallerin@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (163, 'gcordova', 'blyons@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (164, 'psharp', 'rhoward@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (165, 'nicholsmatthew', 'wzavala@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (166, 'randerson', 'dianebennett@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (167, 'singhvictoria', 'ricesarah@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (168, 'ufritz', 'becky91@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (169, 'ricardo42', 'nelsonkaren@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (170, 'william26', 'lanemark@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (171, 'rogersrobert', 'pharrison@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (172, 'kgarcia', 'tracycarlson@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (173, 'moranangel', 'vmiller@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (174, 'oliviaortiz', 'shane50@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (175, 'christine66', 'williamsangelica@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (176, 'francesrodriguez', 'kgarcia@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (177, 'oconnorsteven', 'burnsdanny@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (178, 'xking', 'deandean@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (179, 'destiny18', 'ramirezkyle@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (180, 'diazhannah', 'teresa91@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (181, 'joseph83', 'bryandennis@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (182, 'kevinbuck', 'millsallen@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (183, 'smithdavid', 'zklein@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (184, 'david30', 'johnsonemily@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (185, 'jenniferkidd', 'cynthia16@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (186, 'jeffreymurphy', 'martincatherine@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (187, 'jhughes', 'irivera@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (188, 'jennifer48', 'deborahanderson@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (189, 'john45', 'jamesgates@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (190, 'idowns', 'sullivanthomas@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (191, 'deniseparker', 'acostakevin@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (192, 'dalton70', 'ewilliams@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (193, 'robert66', 'suttonjeffrey@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (194, 'spencer07', 'meghan55@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (195, 'kristengarcia', 'tonypierce@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (196, 'nkrueger', 'nmartinez@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (197, 'urivera', 'aguilarlori@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (198, 'sheilabryan', 'brownlatoya@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (199, 'stewartsherry', 'hicksmichelle@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (200, 'jennifer43', 'odomjohn@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (201, 'mthomas', 'emayo@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (202, 'frederick53', 'stephen06@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (203, 'mark32', 'pooleronald@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (204, 'matthewwest', 'teresa30@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (205, 'ortizstephen', 'nicholas91@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (206, 'websteralicia', 'rkrueger@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (207, 'crystalblackburn', 'riosangela@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (208, 'walkermarcus', 'brian87@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (209, 'johndaugherty', 'mendezlauren@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (210, 'alexwells', 'erikamiller@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (211, 'gregory19', 'ethan89@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (212, 'schultzbrandon', 'parrishamy@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (213, 'nsantos', 'nlewis@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (214, 'troy69', 'samantha15@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (215, 'elainewalker', 'avilakimberly@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (216, 'hesterbrandy', 'kennethgarcia@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (217, 'jason81', 'smithdavid@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (218, 'patricia87', 'daniel28@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (219, 'zsims', 'bsanchez@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (220, 'heather30', 'jessicawade@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (221, 'ingramsandy', 'chad16@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (222, 'schultzamy', 'ninacastillo@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (223, 'fmclaughlin', 'michellegillespie@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (224, 'nicolemartinez', 'rjimenez@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (225, 'jasminebrown', 'amy07@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (226, 'oschultz', 'rmartin@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (227, 'jcarlson', 'tina69@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (228, 'strongfrank', 'vboyd@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (229, 'jeffreysuarez', 'amycook@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (230, 'melaniespears', 'mooretoni@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (231, 'jessicareilly', 'rhorne@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (232, 'uashley', 'sandraberger@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (233, 'pearsoncory', 'howellwilliam@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (234, 'aprilreyes', 'ochoashawn@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (235, 'millernancy', 'kimberlyjenkins@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (236, 'debra19', 'dickersonsteve@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (237, 'kaitlynalvarado', 'vjackson@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (238, 'johnsoncynthia', 'aliciamcdonald@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (239, 'pattoncameron', 'morr@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (240, 'keith59', 'johnsonkim@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (241, 'tayloradkins', 'elizabethmcbride@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (242, 'jason53', 'rodney43@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (243, 'evansjessica', 'lorettadavis@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (244, 'amy18', 'sararoberts@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (245, 'wmiles', 'khoward@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (246, 'emilyreese', 'alison28@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (247, 'donnajarvis', 'brittany61@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (248, 'jenningsjames', 'kimberly67@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (249, 'farmerralph', 'kcurry@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (250, 'jessicachurch', 'nicholas98@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (251, 'kmiller', 'ndouglas@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (252, 'batesjennifer', 'gregoryjuarez@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (253, 'douglasryan', 'ccain@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (254, 'antoniobaker', 'steven06@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (255, 'karensullivan', 'gevans@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (256, 'erinblack', 'skinnerjohn@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (257, 'simpsonreginald', 'clarkbrian@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (258, 'steeledavid', 'maria49@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (259, 'smithbrooke', 'carrollcharles@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (260, 'zachary80', 'ninarichardson@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (261, 'hrogers', 'zwilson@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (262, 'amy42', 'yvette86@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (263, 'obuck', 'bgray@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (264, 'mistydavis', 'ashleyoconnor@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (265, 'annaclark', 'qpruitt@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (266, 'johnnymckenzie', 'dsmith@example.com', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (267, 'breweredwin', 'lewisjoseph@example.org', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (268, 'josemason', 'michelle90@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (269, 'stewartedward', 'nfox@example.net', '123456', 1, 0);
+INSERT INTO Users (UserId, Username, Email, Password, Role, IsBan) VALUES (270, 'smithmatthew', 'byrdsteven@example.net', '123456', 1, 0);
 
 
 SET IDENTITY_INSERT Users OFF;
@@ -310,73 +302,6 @@ GO
 
 SET IDENTITY_INSERT Reviews ON;
 
-INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (100, 198, 2358720, 4, N'153 hours into the game and it still impresses me with each playthrough. cannot wait for the DLC and will never understand how Astrobot beat this game out for GOTY', '2025-06-05 20:41:00');
-INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (101, 171, 2358720, 4, N'First, to get it out of the way, this game is great. I love it. It''s a lot of fun, the story is engaging and memorable, it is *mostly* very polished. I''ve played through completely several times, and got 100% of the achievements.
-
-That being said, the FLAWS in the game are very irritating a best, and stroke-risk levels of infuriating at worst. Starting with minor gripes and "feedback".
-
-Most of the crafting materials are able to be purchased after a certain point. There are a couple of materials, however, that MUST be farmed, at least one of which has a terrible drop rate and amount, only drop from ONE enemy type, and those enemies are not only very few, but they aren''t really set up along a "farming route". I''m talking about the withered silk-worm. Luckily, you only need it for two medicines, and they aren''t super important, but it IS irritating. You only get them from these annoying stone worm things that basically knock you off of your feet, and take a few hits to kill, even with top tier, end game gear. Either making the enemies drop more of the item, make them drop from more enemies, arrange the enemies along a route that is efficient, or MAKE ALL CRAFTING ITEMS PURCHASABLE ONCE YOU BEAT THE GAME AND CONTINUE BEFORE BEGINNING A NEW CYCLE.
-
-Respect the player''s time, please. Doing things like this may pad out "play time" in some way, but these are the types of things that irk me and a lot of other players.
-
-In the same vein, end game crafting materials should be abundant by the end of the second or third play through. I shouldn''t have to play through the game 5 times to fully upgrade all of my weapons and armor because one or two crafting materials are only available in specific, limited amounts per play-through. During the first run, that makes sense, but by the end of the second or third, it''s ridiculous. 
-
-This is highlighted by the fact that beyond a certain point, there''s nothing you can really do with the excess of "will" (the in-game currency) that you do NOT drop upon death (like in souls games) and have hundreds of thousands of in the end. And while we''re at it, it''s really dumb that you can''t sell UNNEEDED crafting materials that don''t "convert to will" on additional play-throughs (which only seems to happen with key items). My inventory is cluttered with BS I can''t do anything except watch the stack number raise.
-
-Another minor gripe is the fact that there are unskippable cut scenes, either fully rendered or scripted "in-engine" scenes, even in NG+ and beyond. I understand making certain things unskippable during NG, because you want the story to be experienced, but I should have the option to skip ALL cut-scenes from NG+ and beyond. Again, PLEASE RESPECT THE PLAYER''S TIME. I am an adult. I love playing video games. I only have so much time to play them though, and having to sit through repeated, unchanged iterations of the same scenes over again takes away from my enjoyment.
-
-The last *minor* gripe is that for some reason, probably the fault of the localization process (maybe?), certain mechanics are poorly explained and unclear. I shouldn''t have to google what "seeing through and enemy" means in practice when it''s a fairly core mechanic of the game. Or what exactly "might" and "qi" are while playing. And that''s aside from the fact that there''s no direct way to aquire them, even being impossible without certain items in your build.
-
-More aggravating gripes:
-
-While the game plays well most of the time, and this may be more of an engine problem, but the game seems to suffer from the EXTREMELY common trend of being under-optimized and assuming that anyone playing the game will have a machine new/powerful enough to compensate for heaving processing. While I NOW have good machines, I didn''t always, so I can readily put myself in the shoes of someone with an older PC that wants to enjoy this game, but has to suffer through sudden frame rate drops. While I mostly play games on my desktop PC, I have been traveling with my laptop and playing on it. With a great processor and a 2070 super, I have to use throttlestop and MSI afterburner to overclock things enough to get the game to play decently, using TPFancontrol to lock fan speeds at max in order to keep things cool enough to not thermal throttle. And even then, for some reason, the dialed back settings seem to be overridden in the pause menu, dropping the frame rate from 60 to 8 and often crashing the game, if not my driver. I know most people aren''t going to OC their machine, but hasn''t been a problem with other games like Lies of P, Elden Ring, RE Village, etc.
-
-Next, I don''t know about anyone else, but I HATE runbacks to bosses in general. This game mostly doesn''t have them, but the few that do exist are OBNOXIOUS. The battle with Giant Shigandang is a good example of this.
-
-And speaking of Giant Shigandang... The auto-target system NEEDS WORK. Really, the camera placement needs work. When fighting this GIANT boss, you really need to stay in one area to avoid one-shot kill attacks, while also being close enough to run in and attack when you have the opportunity. For whatever reason, even with auto-target and all associated settings turned off, in that specific area, as the boss moves around, auto-target STILL automatically kicks in but switching, losing, and targeting different parts of the boss, whipping the camera around and often away from where you need to be looking.
-That also brings up how often the entire screen gets obstructed by the enemy you''re fighting, often resulting in taking an outsized amount of damage. This wouldn''t be a HUGE problem, except....
-
-If you''re going to have a game that is based around dodging with no blocking or parrying mechanic outside of optional skills, you''d better make the timing on those skills AND dodging VERY CONSISTENT. It simply isn''t here. The "seeing through" mechanic, for example, requires timing based on where THE ANIMATION is in the middle of a combo, relative to the enemy''s attack animation, which is also affected by frame drops. A delayed parry can be fine, like the special parry skill with the sword in Lies of P, but it is consistent and there is an alternative parry/block with that weapon. The timing here is worse than the parry mechanic in Code Vein, which was so bad I just never tried to parry since the parry was delayed, varied in its effective window, and just sucked. However, the other two games had practice dummies, with Lies of P even having one that attacked with consistent timing so you could practice parrying and get used to the timing without needing to go through loading screens to respawn enemies for practice.
-
-Now for the MAJOR gripes:
-
-This goes for MANY games, most of which I love, even though I hate these things:
-
-INPUT READING, ROLL CATCHING, AND UNBLOCKABLE/UNDODGEABLE ANIMATION TRIGGERING ATTACKS ARE NOT A GOOD WAY OF INCREASING DIFFICULTY FOR BOSSES! IT IS JUST LAZY AND INFURIATING.
-
-Make the boss faster, more responsive and punishing for button mashing or mistimed healing or dodges, but input reading especially is just infuriating. With the loong dragon in the webbed hollow, you can have the boss entirely stunlocked by your gang of monkey doubles while you charge your heavy attack, and the boss will block your attack every time. This is clear input reading. And don''t get me started with the first "final boss" monkey in his final stage. I can be in cloud step, yet get parried EVERY SINGLE TIME if I use a heavy attack. INPUT READING IS LAZY.
-
-As for roll catching, the Yin Tiger fight is the worst about this that I can'' think of right now. He also pulls the unavoidable, animation triggering brutal attack, but not as bad as Non-Able. All of those things suck, and feel unfair during the fight, like they''re just cheating. All of these "difficulty measures" do.
-
-In general, the game is great, but it''s not perfect, and all of these things make the balance feel off and could be improved upon.', '2025-06-20 14:16:59');
-INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (102, 140, 2358720, 3, N'Black Myth: Wukong is not a game that will leave you with bloody fingers because it is so incredibly difficult. It convinces on many points but also has its downsides. It has great graphics and beautiful landscapes but also a few graphics bugs. The performance is generally good but sometimes with a few lags. It offers a great variety of enemies but unfortunately no variety in your own weapon. You only have your staff that you can upgrade, which makes the combat system quite simple. There are epic boss fights but most of them are quite easy to beat. Most of the time it felt more like a boss rush than a real challenge. The levels are relatively linear, which I liked because I wasn''t a big fan of the Elden Ring style open world. However, there are a lot of invisible walls here. The soundtrack is good, the cutscenes and presentation are fantastic and each enemy has its own story. Overall, Black Myth: Wukong is a great game with some downsides, but one that I can recommend.', '2025-06-27 19:43:03');
-INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (103, 233, 413150, 4, N'I would never trust anyone who gives this game a bad review. It''s that good. I''m not even kidding. 
-
-Okay, so Stardew Valley completely ate my life in the best way. (Most of my hours are on the Nintendo Switch) but I like playing on PC too because well... Mods.
-
-I downloaded it thinking it’d be a cute little farming game, and now I’ve got spreadsheets for crop profits, strong opinions on which villagers are shady, and a weird emotional attachment to my chickens. It’s super chill but also weirdly addicting. The music is cozy, the art is adorable, and there’s always something to do ... whether it’s mining, fishing, flirting, or just watering your plants and vibing.
-
-But honestly? What I love most is how low-pressure it is. You can play at your own pace, focus on whatever makes you happy, and it still feels rewarding. Some days I just walk around town doing nothing and I’m like, yeah… this is self-care. It’s sweet, sometimes surprisingly deep, and kinda feels like a warm hug with dirt under its nails. Total comfort game.
-', '2025-06-20 16:38:58');
-INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (104, 264, 413150, 5, N'My bf introduced me to this game when I was in a bad place. Working a corporate job for ungodly hours a week sucks the souls out of me. I almost forget how vibrant the colours in this world are when I finally get out in the day. This game is like a little haven for me.
-
-I haven''t made to perfection yet, since I like taking my time. My game is fully modded with SDV expanded, and other wonderful mods this talented community has to offer. I used to hate the fishing mini game since I was suck at it and avoid the mines for I kept getting killed. Now all I do is fishing for my aquariums collection and going down the skull cavern to spam the bombs.
-
-At first, I didn''t understand what''s so fun about it. Felt like a chore. But then I learn to like the mundane and cute little moments with the villagers. The oddity and weird glitches to exploit. Causing mayhem and chaos. By the time I''m writing this review, I just quit my job. One of the hardest decision I made. But I''ll try to put less pressure on my next step. Maybe I''ll find my own Stardew Valley out here.', '2025-06-20 07:27:06');
-INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (105, 105, 413150, 5, N'I got this to game with the girlfriend. Dumped her and kept playing by myself, so yeah I guess its pretty good.', '2025-06-21 09:43:58');
-INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (106, 109, 1245620, 5, N'By this point, the strengths and weaknesses of Elden Ring have been fairly thoroughly discussed. As an open world game, what it lacks (as is innate to the nature of most truly open games) is a lack of authorial guard railing that prevents you from playing the game in a way that produces an unenjoyable experience. The experience that you hear some people report having had with this game are still there and its possible for you to have them, but you must apply autonomous discernment so as to not produce for yourself a miserable experience.
-
-I think the greatest mistake when approaching this game is treating it like a single player MMO or online RPG where the goal is to hoover up all of the "content". Many things are there not necessarily to be dealt with but to provide verisimilitude. An easy example of this is the great expanse of powerful miscellaneous fauna in the game world such as the Rune Bears and the large crabs. There are environments where there are many of these. They offer some reward, but not enough for fighting them all. You''re not really meant to fight them all. They just live in this world, if you''re picking a fight with a bear you''re doing so for the same reasons you might do so in real life. Because you felt like it.
-
-The game provides a great many things to do, but it is not neccessary or expected that you try to do them all. There are optional dungeons and caves and this optional content is rightfully treated as the most middling aspects of the larger experience, but I think its worth remembering that the game is designed to [b]end when you feel that it is time to end[/b]. Of the many obtuse mysteries this game has, one of the least mysterious is how to reach the end, which is the most clearly communicated goal of all the various objectives you might come across. To enjoy this fully, and to see what other people saw, I recommend treating the experience like a trip to a foreign land that you only spend as much time in as you feel is right. You might become compelled to stay for certain mysteries or challenges for their own sake, but completion is unneccessary and not even truly the point. One of the other best ways to treat this game is as a photography sim that you play with your F12 key. If this is all you do with this game before ending it on your terms, I would say you will have gotten the more optimal experience out of this vast work than those who treat it like an MMO to completely master.
-
-In various interviews regarding the development of the game with Miyazaki, he says that it was originally going to be more of a Shadow of the Colossus inspired experience, where the world would be more deliberately lacking in "content" between the major destination points that lead to bosses or signficant NPC encounters. I think this is the key to enjoying this game. To play it like a Shadow of the Colossus which has the optional side options of a conventional open world game. You must instead approach the game with a holistic appreciation of the total environment that you are contained within. There is certainly enjoyment to be had in the extra contents of the game, but that is not [b]The Point[/b]
-
-https://steamcommunity.com/sharedfiles/filedetails/?id=3215037099
-
-The negative space is [b]The Point[/b]', '2025-06-13 01:06:39');
-INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (107, 183, 1245620, 5, N'Elden Ring feels like home to me—not because it’s easy, but because it’s where I’ve learned something important. It''s one of those game where I can say that failure is a necessity. I’ve fallen so many times in this game, but every fall taught me something. And somehow, that made me want to keep coming back.', '2025-06-24 18:40:45');
-INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (108, 213, 1245620, 4, N'Damn, this game is good. There aren’t many games I finish for the fifth time and still think, “Well, time for round six.” This is one of them.', '2025-06-29 02:28:49');
 INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (109, 208, 105600, 5, N'Spent a couple hours on it. Pretty good game. Would recommend and play again.', '2025-06-26 06:01:27');
 INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (110, 176, 105600, 4, N'---{Review For Terraria!}---
 
@@ -2045,33 +1970,6 @@ If the game didn''t have this EULA 13 years ago, it doesn''t need it now.
 
 Obviously like all the EULA stuff, it is rarely enforced, and is just a sad reality of modern gaming. It doesn''t change anything about the game, which is still good.
 [EDIT] Yes my review is positive, because the game is good, and it didn''t change. I don''t see why I should have a negative review just because the EULA is the same as all other modern games. Yes it sucks they changed it, but it''s not a dealbreaker to me.', '2025-06-06 10:21:15');
-INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (202, 172, 1145360, 3, N'To anyone on the fence, just get it. You will NOT be disappointed. Personally, I''ve never been into the roguelike games, as it gets too boring too quick. But Hades is truly special. Amazing voice acting, great animations, beautiful art style and music. I had a really good time with Hades and I can see myself coming back to it on my deck every now and then because new runs get quickly addicting.', '2025-06-26 06:11:29');
-INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (203, 169, 1145360, 5, N'Genuinely one of the best games I''ve ever played in my life, and I''ve been gaming for 25 years. The attention to detail that SGG put into this game is absolutely phenomenal. The art and character writing is evocative and insightful. The gameplay feels SO crisp and smooth after a little bit of a learning curve.
-
-
-
-The replayability ... I have >5500 hours at time of this review, I launched and streamed without steam for around 1100 hours. If that doesn''t say replayability I don''t know what to tell you. It''s a glorious framework for self improvement and growth if you employ the right mindset.
-
-
-
-Buy this game. You won''t regret it.', '2025-06-04 12:52:15');
-INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (204, 173, 1145360, 4, N'A great game — but the pacing stumbles.
-
-
-
-Hades is absolutely worth its price and the time you initially invest. I won’t list every visual or audio strength — they speak for themselves. The art direction and soundtrack are fantastic, and the gameplay, especially in the early hours, is gripping. It impresses with its depth and makes you think strategically about each run. The core loop is highly engaging at first, and the story sets up enough intrigue to keep you interested.
-
-
-
-However, one of the few but significant drawbacks lies in how poorly the story and gameplay progression are paced. The narrative is stretched out far beyond the point where gameplay offers anything truly new. Around the 15–20 hour mark, the mechanics start to feel repetitive, while the story may still take 30–40 hours to fully unfold — depending on random and which story events happen to trigger.
-
-
-
-By the time you fully understand the game’s formula, you’re left with many more hours of story content, but very little fresh gameplay to support it. This imbalance eventually killed my motivation to continue. The runs stopped feeling meaningful, and the combat loop no longer evolved. Even the “Pact of Punishment” modifiers didn’t do much to change this, they mostly just restrict your options rather than create new dynamics.
-
-
-
-Had the story been tightened by 5–10 hours, the overall experience would be far stronger. There’s already plenty of endgame content for players who enjoy farming and grinding — dragging the story out for everyone else only weakens the pacing.', '2025-06-26 16:45:07');
 INSERT INTO Reviews (ReviewId, UserId, GameId, Rating, Comment, ReviewDate) VALUES (205, 189, 391540, 4, N'It is fairly impossible to discuss Undertale and what it is, without discussing what it isn''t. It truly isn''t the most revolutionary game on its engine, but it did prove to be innovative. Toby Fox, a veteraned modder of Earthbound/Mother 3, who had cut his teeth with making ROM hacks, went on to make something truly interesting with Undertale.
 
 Undertale is not so much a game, it is more a vehicle for a much larger fandom. And a fandom that has proven to be so significantly diverse, talented and at times, outright insane and intolerable, that it ironically had become the anti-thesis to the thesis of the game. But Undertale, itself, a game the embraces minimalism and yet, has ambitious, big ideas and remarkable presentation at the cost of anything being fairly high-brow, truly does something that few media forms can do. 

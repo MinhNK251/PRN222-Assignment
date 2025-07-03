@@ -1,5 +1,6 @@
 using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -22,12 +23,12 @@ namespace AirWaterStore.Web.Pages.Orders
         public List<OrderDetail> OrderDetails { get; set; } = new();
         public string CustomerName { get; set; } = string.Empty;
 
-        public bool IsStaff => HttpContext.Session.GetInt32("UserRole") == 2;
-        public int? CurrentUserId => HttpContext.Session.GetInt32("UserId");
+        // public bool IsStaff => HttpContext.Session.GetInt32(SessionParams.UserRole) == UserRole.Staff;
+        // public int? CurrentUserId => HttpContext.Session.GetInt32(SessionParams.UserId);
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (!CurrentUserId.HasValue)
+            if (!this.IsAuthenticated())
             {
                 return RedirectToPage("/Login");
             }
@@ -42,7 +43,7 @@ namespace AirWaterStore.Web.Pages.Orders
             Order = order;
 
             // Check authorization - customers can only see their own orders
-            if (!IsStaff && Order.UserId != CurrentUserId.Value)
+            if (!this.IsStaff() && Order.UserId != this.GetCurrentUserId())
             {
                 return Forbid();
             }
@@ -57,7 +58,7 @@ namespace AirWaterStore.Web.Pages.Orders
 
         public async Task<IActionResult> OnPostUpdateStatusAsync(int orderId, string status)
         {
-            if (!IsStaff)
+            if (!this.IsStaff())
             {
                 return Forbid();
             }

@@ -1,5 +1,6 @@
 using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -21,14 +22,16 @@ namespace AirWaterStore.Web.Pages.Chat
         public ChatRoom ChatRoom { get; set; } = default!;
         public List<Message> Messages { get; set; } = new List<Message>();
         public Dictionary<int, string> UserNames { get; set; } = new Dictionary<int, string>();
-        public int CurrentUserId => HttpContext.Session.GetInt32("UserId") ?? 0;
+        // public int CurrentUserId => HttpContext.Session.GetInt32(SessionParams.UserId) ?? 0;
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
-            var userRole = HttpContext.Session.GetInt32("UserRole");
+            // var userId = HttpContext.Session.GetInt32(SessionParams.UserId);
+            // var userRole = HttpContext.Session.GetInt32(SessionParams.UserRole);
+            var userId = this.GetCurrentUserId();
+            var userRole = this.GetCurrentUserRole();
 
-            if (!userId.HasValue)
+            if (!this.IsAuthenticated())
             {
                 return RedirectToPage("/Login");
             }
@@ -40,14 +43,14 @@ namespace AirWaterStore.Web.Pages.Chat
             }
 
             // Get or create chat room for customer
-            ChatRoom = await _chatRoomService.GetOrCreateChatRoomAsync(userId.Value);
+            ChatRoom = await _chatRoomService.GetOrCreateChatRoomAsync(userId);
 
             // Get messages
             Messages = await _messageService.GetMessagesByChatRoomIdAsync(ChatRoom.ChatRoomId);
 
             // Load usernames
             var userIds = Messages.Select(m => m.UserId).Distinct().ToList();
-            userIds.Add(userId.Value);
+            userIds.Add(userId);
 
             foreach (var id in userIds)
             {
@@ -60,7 +63,7 @@ namespace AirWaterStore.Web.Pages.Chat
 
         public async Task<IActionResult> OnPostSendMessageAsync(string messageContent)
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
+            var userId = HttpContext.Session.GetInt32(SessionParams.UserId);
             if (!userId.HasValue || string.IsNullOrWhiteSpace(messageContent))
             {
                 return RedirectToPage();

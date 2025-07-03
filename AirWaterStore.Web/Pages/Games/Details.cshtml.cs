@@ -1,5 +1,6 @@
 ﻿using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -20,16 +21,16 @@ namespace AirWaterStore.Web.Pages.Games
         }
 
         public Game Game { get; set; } = default!;
-        public List<Review> Reviews { get; set; } = default!;  
+        public List<Review> Reviews { get; set; } = default!;
         public Dictionary<int, string> UserNames { get; set; } = new Dictionary<int, string>();
 
         [BindProperty]
         public ReviewInputModel NewReview { get; set; } = default!;
 
-        public int? CurrentUserId => HttpContext.Session.GetInt32("UserId");
-        public bool IsAuthenticated => CurrentUserId.HasValue;
-        public bool IsCustomer => HttpContext.Session.GetInt32("UserRole") == 1;
-        public bool IsStaff => HttpContext.Session.GetInt32("UserRole") == 2;
+        // public int? CurrentUserId => HttpContext.Session.GetInt32(SessionParams.UserId);
+        // public bool IsAuthenticated => CurrentUserId.HasValue;
+        // public bool IsCustomer => HttpContext.Session.GetInt32(SessionParams.UserRole) == 1;
+        // public bool IsStaff => HttpContext.Session.GetInt32(SessionParams.UserRole) == 2;
         public bool CanReview { get; set; }
 
         public class ReviewInputModel
@@ -68,9 +69,9 @@ namespace AirWaterStore.Web.Pages.Games
             }
 
             // Check if current user can review (hasn't reviewed this game yet)
-            if (IsCustomer && CurrentUserId.HasValue)
+            if (this.IsCustomer() && this.IsAuthenticated())
             {
-                CanReview = !Reviews.Any(r => r.UserId == CurrentUserId.Value);
+                CanReview = !Reviews.Any(r => r.UserId == this.GetCurrentUserId());
             }
 
             return Page();
@@ -78,7 +79,7 @@ namespace AirWaterStore.Web.Pages.Games
 
         public async Task<IActionResult> OnPostAddToCartAsync(int gameId, int quantity = 1)
         {
-            if (!IsAuthenticated || !IsCustomer)
+            if (!this.IsAuthenticated() || !this.IsCustomer())
             {
                 return RedirectToPage("/Login");
             }
@@ -115,19 +116,19 @@ namespace AirWaterStore.Web.Pages.Games
 
         public async Task<IActionResult> OnPostAddReviewAsync()
         {
-            if (!IsAuthenticated || !IsCustomer)
+            if (!this.IsAuthenticated() || !this.IsCustomer())
             {
                 return RedirectToPage("/Login");
             }
 
-            if (!ModelState.IsValid || CurrentUserId == null)
+            if (!ModelState.IsValid || !this.IsAuthenticated())
             {
                 return await OnGetAsync(NewReview.GameId);
             }
 
             var review = new Review
             {
-                UserId = CurrentUserId.Value,
+                UserId = this.GetCurrentUserId(),
                 GameId = NewReview.GameId,
                 Rating = NewReview.Rating,
                 Comment = NewReview.Comment,
@@ -141,13 +142,14 @@ namespace AirWaterStore.Web.Pages.Games
 
         public async Task<IActionResult> OnPostUpdateReviewAsync(int reviewId, int gameId, int rating, string comment)
         {
-            if (!IsAuthenticated || !IsCustomer || CurrentUserId == null)
+            // if (!this.IsAuthenticated() || !this.IsCustomer() || this.GetCurrentUserId() == null)
+            if (!this.IsAuthenticated() || !this.IsCustomer())
             {
                 return RedirectToPage("/Login");
             }
 
             var review = await _reviewService.GetByIdAsync(reviewId);
-            if (review != null && review.UserId == CurrentUserId.Value)
+            if (review != null && review.UserId == this.GetCurrentUserId())
             {
                 review.Rating = rating;
                 review.Comment = comment;
@@ -159,13 +161,14 @@ namespace AirWaterStore.Web.Pages.Games
 
         public async Task<IActionResult> OnPostDeleteReviewAsync(int reviewId)
         {
-            if (!IsAuthenticated || !IsCustomer || CurrentUserId == null)
+            // if (!this.IsAuthenticated() || !this.IsCustomer() || this.GetCurrentUserId() == null)
+            if (!this.IsAuthenticated() || !this.IsCustomer())
             {
                 return RedirectToPage("/Login");
             }
 
             var review = await _reviewService.GetByIdAsync(reviewId);
-            if (review != null && review.UserId == CurrentUserId.Value)
+            if (review != null && review.UserId == this.GetCurrentUserId())
             {
                 await _reviewService.DeleteAsync(reviewId);
             }

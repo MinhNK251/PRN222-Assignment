@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using AirWaterStore.Web.Helper;
 
 namespace AirWaterStore.Web.Hubs
 {
@@ -128,19 +129,19 @@ namespace AirWaterStore.Web.Hubs
         private int? GetUserId()
         {
             var httpContext = _httpContextAccessor.HttpContext;
-            return httpContext?.Session.GetInt32("UserId");
+            return httpContext?.Session.GetInt32(SessionParams.UserId);
         }
 
         private int? GetUserRole()
         {
             var httpContext = _httpContextAccessor.HttpContext;
-            return httpContext?.Session.GetInt32("UserRole");
+            return httpContext?.Session.GetInt32(SessionParams.UserRole);
         }
 
         private string GetUsername()
         {
             var httpContext = _httpContextAccessor.HttpContext;
-            return httpContext?.Session.GetString("Username") ?? "Unknown User";
+            return httpContext?.Session.GetString(SessionParams.UserName) ?? "Unknown User";
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -16,23 +17,28 @@ namespace AirWaterStore.Web.Pages.Games
         }
 
         public List<Game> Games { get; set; } = new List<Game>();
+
+        [BindProperty(SupportsGet = true)]
         public int CurrentPage { get; set; } = 1;
-        public int TotalPages { get; set; }
+
+        [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; } = string.Empty;
+        public int TotalPages { get; set; }
         public string? SuccessMessage { get; set; }
 
-        public bool IsAuthenticated => HttpContext.Session.GetInt32("UserId").HasValue;
-        public bool IsCustomer => HttpContext.Session.GetInt32("UserRole") == 1;
-        public bool IsStaff => HttpContext.Session.GetInt32("UserRole") == 2;
+        // public bool IsAuthenticated => HttpContext.Session.GetInt32(SessionParams.UserId).HasValue;
+        // public bool IsCustomer => HttpContext.Session.GetInt32(SessionParams.UserRole) == 1;
+        // public bool IsStaff => HttpContext.Session.GetInt32(SessionParams.UserRole) == 2;
 
-        public async Task<IActionResult> OnGetAsync(int currentPage = 1, string searchString = "")
+        // public async Task<IActionResult> OnGetAsync(int currentPage = 1, string searchString = "")
+        public async Task<IActionResult> OnGetAsync()
         {
-            CurrentPage = currentPage;
-            SearchString = searchString;
+            // CurrentPage = currentPage;
+            // SearchString = searchString;
 
             // Get success message from TempData
             var successMessgae = TempData["SuccessMessage"];
-            if ( successMessgae != null)
+            if (successMessgae != null)
             {
                 SuccessMessage = successMessgae.ToString();
             }
@@ -40,12 +46,12 @@ namespace AirWaterStore.Web.Pages.Games
             var allGames = await _gameService.GetAllAsync(1, 1000); // Get all for filtering
 
             // Filter by search string
-            if (!string.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(SearchString))
             {
                 allGames = allGames.Where(g =>
-                    g.Title.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-                    (g.Genre?.Contains(searchString, StringComparison.OrdinalIgnoreCase) ?? false) ||
-                    (g.Developer?.Contains(searchString, StringComparison.OrdinalIgnoreCase) ?? false)
+                    g.Title.Contains(SearchString, StringComparison.OrdinalIgnoreCase) ||
+                    (g.Genre?.Contains(SearchString, StringComparison.OrdinalIgnoreCase) ?? false) ||
+                    (g.Developer?.Contains(SearchString, StringComparison.OrdinalIgnoreCase) ?? false)
                 ).ToList();
             }
 
@@ -64,7 +70,7 @@ namespace AirWaterStore.Web.Pages.Games
 
         public async Task<IActionResult> OnPostAddToCartAsync(int gameId)
         {
-            if (!IsAuthenticated || !IsCustomer)
+            if (!this.IsAuthenticated() || !this.IsCustomer())
             {
                 return RedirectToPage("/Login");
             }
@@ -95,7 +101,8 @@ namespace AirWaterStore.Web.Pages.Games
             HttpContext.Session.SetObjectAsJson("Cart", cart);
             TempData["SuccessMessage"] = "Game added to cart!";
 
-            return RedirectToPage();
+            return RedirectToPage(null, new
+            { CurrentPage, SearchString });
         }
     }
 

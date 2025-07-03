@@ -118,7 +118,7 @@ INSERT INTO Games (ThumbnailUrl, Title, Description, Genre, Developer, Publisher
 
 -- Insert Orders
 INSERT INTO Orders (UserId, TotalPrice, Status) VALUES 
-(1, 990000, 'Paid'),
+(1, 990000, 'Completed'),
 (1, 321000, 'Pending');
 
 -- Insert OrderDetails

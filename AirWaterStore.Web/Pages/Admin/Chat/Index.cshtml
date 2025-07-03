@@ -1,4 +1,5 @@
 ﻿@page
+@using AirWaterStore.Web.Helper
 @model AirWaterStore.Web.Pages.Admin.Chat.IndexModel
 @{
     ViewData["Title"] = "Support Chat Dashboard";
@@ -16,20 +17,20 @@
                 @foreach (var room in Model.ChatRooms)
                 {
                     <a asp-page="/Admin/Chat/Room" asp-route-id="@room.ChatRoomId"
-                       class="list-group-item list-group-item-action @(Model.SelectedRoomId == room.ChatRoomId ? "active" : "")">
+                        class="list-group-item list-group-item-action @(Model.SelectedRoomId == room.ChatRoomId ? "active" : "")">
                         <div class="d-flex w-100 justify-content-between">
                             <h6 class="mb-1">@Model.GetCustomerName(room.CustomerId)</h6>
                             @if (room.StaffId == null)
                             {
-                                <span class="badge badge-warning">Unassigned</span>
+                                <span class="badge badge-warning text-dark">Unassigned</span>
                             }
-                            else if (room.StaffId == Model.CurrentUserId)
+                            else if (room.StaffId == Model.GetCurrentUserId())
                             {
-                                <span class="badge badge-primary">My Chat</span>
+                                <span class="badge badge-primary text-dark">My Chat</span>
                             }
                             else
                             {
-                                <span class="badge badge-secondary">@Model.GetStaffName(room.StaffId.Value)</span>
+                                <span class="badge badge-secondary text-dark">@Model.GetStaffName(room.StaffId.Value)</span>
                             }
                         </div>
                         <small class="text-muted">Chat Room #@room.ChatRoomId</small>

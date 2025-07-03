@@ -1,5 +1,6 @@
 using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -22,12 +23,13 @@ namespace AirWaterStore.Web.Pages.Admin.Chat
         public List<Message> Messages { get; set; } = new List<Message>();
         public string CustomerName { get; set; } = string.Empty;
         public Dictionary<int, string> UserNames { get; set; } = new Dictionary<int, string>();
-        public int CurrentUserId => HttpContext.Session.GetInt32("UserId") ?? 0;
+        // public int CurrentUserId => HttpContext.Session.GetInt32(SessionParams.UserId) ?? 0;
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
             // Check if user is staff
-            if (HttpContext.Session.GetInt32("UserRole") != 2)
+            // if (HttpContext.Session.GetInt32(SessionParams.UserRole) != 2)
+            if (!this.IsStaff())
             {
                 return RedirectToPage("/Login");
             }
@@ -62,7 +64,7 @@ namespace AirWaterStore.Web.Pages.Admin.Chat
 
         public async Task<IActionResult> OnPostSendMessageAsync(int chatRoomId, string messageContent)
         {
-            if (HttpContext.Session.GetInt32("UserRole") != 2 || string.IsNullOrWhiteSpace(messageContent))
+            if (HttpContext.Session.GetInt32(SessionParams.UserRole) != 2 || string.IsNullOrWhiteSpace(messageContent))
             {
                 return RedirectToPage();
             }
@@ -76,14 +78,14 @@ namespace AirWaterStore.Web.Pages.Admin.Chat
             // If chat is unassigned, assign it to current staff
             if (!chatRoom.StaffId.HasValue)
             {
-                await _chatRoomService.AssignStaffToChatRoomAsync(chatRoomId, CurrentUserId);
+                await _chatRoomService.AssignStaffToChatRoomAsync(chatRoomId, this.GetCurrentUserId());
             }
 
             // Send message
             var message = new Message
             {
                 ChatRoomId = chatRoomId,
-                UserId = CurrentUserId,
+                UserId = this.GetCurrentUserId(),
                 Content = messageContent.Trim(),
                 SentAt = DateTime.Now
             };

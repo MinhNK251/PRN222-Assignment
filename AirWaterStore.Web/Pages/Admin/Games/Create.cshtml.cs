@@ -1,5 +1,6 @@
 using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -20,7 +21,7 @@ namespace AirWaterStore.Web.Pages.Admin.Games
         public IActionResult OnGet()
         {
             // Check if user is staff
-            if (HttpContext.Session.GetInt32("UserRole") != 2)
+            if (!this.IsStaff())
             {
                 return RedirectToPage("/Login");
             }
@@ -30,7 +31,7 @@ namespace AirWaterStore.Web.Pages.Admin.Games
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (HttpContext.Session.GetInt32("UserRole") != 2)
+            if (HttpContext.Session.GetInt32(SessionParams.UserRole) != 2)
             {
                 return RedirectToPage("/Login");
             }

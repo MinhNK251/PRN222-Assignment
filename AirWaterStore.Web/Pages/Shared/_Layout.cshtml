@@ -1,17 +1,20 @@
-﻿@{
-    var userId = Context.Session.GetInt32("UserId");
-    var username = Context.Session.GetString("Username");
-    var userRole = Context.Session.GetInt32("UserRole");
+﻿@using AirWaterStore.Web.Helper
+@{
+    var userId = Context.Session.GetInt32(SessionParams.UserId);
+    var username = Context.Session.GetString(SessionParams.UserName);
+    var userRole = Context.Session.GetInt32(SessionParams.UserRole);
     var isAuthenticated = userId.HasValue;
     var isStaff = userRole == 2;
     var isCustomer = userRole == 1;
 
     // Get cart count
-    var cartItems = Context.Session.GetObjectFromJson<List<AirWaterStore.Web.Pages.Games.CartItem>>("Cart") ?? new List<AirWaterStore.Web.Pages.Games.CartItem>();
+    var cartItems = Context.Session.GetObjectFromJson<List<AirWaterStore.Web.Pages.Games.CartItem>>("Cart") ?? new
+    List<AirWaterStore.Web.Pages.Games.CartItem>();
     var cartCount = cartItems.Sum(c => c.Quantity);
 }
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,15 +24,16 @@
     <link rel="stylesheet" href="~/AirWaterStore.Web.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                <a class="navbar-brand" asp-area="" asp-page="/Games/Index">
                     <i class="fas fa-gamepad"></i> AirWaterStore
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -74,7 +78,7 @@
                                         <i class="fas fa-shopping-cart"></i> Cart
                                         @if (cartCount > 0)
                                         {
-                                            <span class="badge badge-primary">@cartCount</span>
+                                            <span class="badge badge-primary text-dark">@cartCount</span>
                                         }
                                     </a>
                                 </li>
@@ -126,4 +130,5 @@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

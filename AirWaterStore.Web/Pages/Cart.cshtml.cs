@@ -1,3 +1,4 @@
+using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -10,7 +11,7 @@ namespace AirWaterStore.Web.Pages
 
         public IActionResult OnGet()
         {
-            if (!HttpContext.Session.GetInt32("UserId").HasValue)
+            if (!this.IsAuthenticated())
             {
                 return RedirectToPage("/Login");
             }

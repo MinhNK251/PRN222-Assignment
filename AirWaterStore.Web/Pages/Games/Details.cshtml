@@ -20,8 +20,8 @@
         <div class="col-md-8">
             <h1>@Model.Game.Title</h1>
             <div class="mb-3">
-                <span class="badge badge-secondary">@Model.Game.Genre</span>
-                <span class="badge badge-@(Model.Game.Quantity > 0 ? "success" : "danger")">
+                <span class="badge badge-secondary text-dark">@Model.Game.Genre</span>
+                <span class="badge badge-@(Model.Game.Quantity > 0 ? "success" : "danger") text-dark">
                     @(Model.Game.Quantity > 0 ? $"{Model.Game.Quantity} in stock" : "Out of stock")
                 </span>
             </div>
@@ -42,7 +42,7 @@
             <p>@Model.Game.Description</p>
 
             <div class="mt-3">
-                @if (Model.IsCustomer && Model.Game.Quantity > 0)
+                @if (Model.IsCustomer() && Model.Game.Quantity > 0)
                 {
                     <form method="post" asp-page-handler="AddToCart" class="form-inline">
                         <input type="hidden" name="gameId" value="@Model.Game.GameId" />
@@ -52,7 +52,7 @@
                         <button type="submit" class="btn btn-primary">Add to Cart</button>
                     </form>
                 }
-                @if (Model.IsStaff)
+                @if (Model.IsStaff())
                 {
                     <a asp-page="/Admin/Games/Edit" asp-route-id="@Model.Game.GameId" class="btn btn-warning">Edit Game</a>
                     <a asp-page="/Admin/Games/Delete" asp-route-id="@Model.Game.GameId" class="btn btn-danger">Delete
@@ -69,7 +69,7 @@
         <div class="col-12">
             <h3>Customer Reviews</h3>
 
-            @if (Model.IsCustomer && Model.CanReview)
+            @if (Model.IsCustomer() && Model.CanReview)
             {
                 <div class="card mb-4">
                     <div class="card-body">
@@ -121,7 +121,7 @@
                                 </div>
                                 <p class="card-text">@review.Comment</p>
 
-                                @if (Model.CurrentUserId == review.UserId)
+                                @if (Model.GetCurrentUserId() == review.UserId)
                                 {
                                     <div class="mt-2">
                                         <button type="button" class="btn btn-sm btn-secondary"
@@ -135,7 +135,7 @@
                                 }
                             </div>
 
-                            @if (Model.CurrentUserId == review.UserId)
+                            @if (Model.GetCurrentUserId() == review.UserId)
                             {
                                 <div id="review-edit-@review.ReviewId" style="display: none;">
                                     <form method="post" asp-page-handler="UpdateReview">

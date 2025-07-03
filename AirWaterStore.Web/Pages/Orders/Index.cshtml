@@ -30,7 +30,7 @@
                         <td>@order.OrderDetails.Count items</td>
                         <td>@order.TotalPrice.ToString("C", Currency.VnCurrencyFormat)</td>
                         <td>
-                            <span class="badge badge-@(order.Status == "Completed" ? "success" : "warning")">
+                            <span class="badge badge-@(order.Status == "Completed" ? "success" : "warning") text-dark">
                                 @order.Status
                             </span>
                         </td>

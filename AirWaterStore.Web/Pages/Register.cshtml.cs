@@ -1,5 +1,6 @@
 using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -66,9 +67,9 @@ namespace AirWaterStore.Web.Pages
                 await _userService.AddAsync(newUser);
 
                 // Auto-login after registration
-                HttpContext.Session.SetInt32("UserId", newUser.UserId);
-                HttpContext.Session.SetString("Username", newUser.Username);
-                HttpContext.Session.SetInt32("UserRole", newUser.Role);
+                HttpContext.Session.SetInt32(SessionParams.UserId, newUser.UserId);
+                HttpContext.Session.SetString(SessionParams.UserName, newUser.Username);
+                HttpContext.Session.SetInt32(SessionParams.UserRole, newUser.Role);
 
                 return RedirectToPage("/Games/Index");
             }
@@ -79,7 +80,7 @@ namespace AirWaterStore.Web.Pages
                 {
                     if (ex.InnerException.Message.Contains("Email"))
                         ErrorMessage = "This email is already registered.";
-                    else if (ex.InnerException.Message.Contains("Username"))
+                    else if (ex.InnerException.Message.Contains(SessionParams.UserName))
                         ErrorMessage = "This username is already taken.";
                     else
                         ErrorMessage = "Registration failed. Please try again.";

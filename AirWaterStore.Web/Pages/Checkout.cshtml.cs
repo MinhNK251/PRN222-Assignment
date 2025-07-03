@@ -1,5 +1,6 @@
 using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -24,7 +25,7 @@ namespace AirWaterStore.Web.Pages
 
         public IActionResult OnGet()
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
+            var userId = HttpContext.Session.GetInt32(SessionParams.UserId);
             if (!userId.HasValue)
             {
                 return RedirectToPage("/Login");
@@ -42,7 +43,7 @@ namespace AirWaterStore.Web.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
+            var userId = HttpContext.Session.GetInt32(SessionParams.UserId);
             if (!userId.HasValue)
             {
                 return RedirectToPage("/Login");
@@ -94,7 +95,7 @@ namespace AirWaterStore.Web.Pages
 
                     // Update game stock
                     var game = await _gameService.GetByIdAsync(item.GameId);
-                    if(game != null)
+                    if (game != null)
                     {
                         game.Quantity -= item.Quantity;
                         await _gameService.UpdateAsync(game);
