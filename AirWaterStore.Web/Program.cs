@@ -1,4 +1,5 @@
 using AirWaterStore.Business.Interfaces;
+using AirWaterStore.Business.LibraryS;
 using AirWaterStore.Business.Services;
 using AirWaterStore.Data;
 using AirWaterStore.Data.Repositories;
@@ -24,8 +25,8 @@ namespace AirWaterStore.Web
 
             //Configure DbContext
             builder.Services.AddDbContext<AirWaterStoreContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DockerConnection")));
-            // options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                //options.UseSqlServer(builder.Configuration.GetConnectionString("DockerConnection")));
+             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Register repositories	
             builder.Services.AddScoped<IGameRepository, GameRepository>();
@@ -44,6 +45,9 @@ namespace AirWaterStore.Web
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IChatRoomService, ChatRoomService>();
             builder.Services.AddScoped<IMessageService, MessageService>();
+            builder.Services.AddScoped<IVnPayService, VnPayService>();
+
+            builder.Services.Configure<VnPayConfig>(builder.Configuration.GetSection("VnPay"));
 
             var app = builder.Build();
 

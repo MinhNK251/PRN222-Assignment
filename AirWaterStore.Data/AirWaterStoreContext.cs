@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using AirWaterStore.Data.Models;
+﻿using AirWaterStore.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AirWaterStore.Data;

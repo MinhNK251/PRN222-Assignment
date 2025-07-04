@@ -1,4 +1,4 @@
-﻿@page "{id:int}"
+﻿@page "{id?}"
 @using AirWaterStore.Web.Helper;
 @model AirWaterStore.Web.Pages.Orders.DetailsModel
 @{
@@ -69,7 +69,7 @@
 
 <div class="mt-4">
     <a asp-page="/Orders/Index" class="btn btn-secondary">Back to Orders</a>
-    @if (Model.IsStaff() && Model.Order.Status == "Pending")
+    @if (Model.IsStaff() && Model.Order.Status == OrderStatus.Pending)
     {
         <form method="post" asp-page-handler="UpdateStatus" class="d-inline">
             <input type="hidden" name="orderId" value="@Model.Order.OrderId" />
@@ -79,7 +79,7 @@
     }
     @if (Model.IsCustomer() && Model.Order.Status == OrderStatus.Pending)
     {
-        <form method="post" asp-page-handler="PayOrder" class="d-inline">
+        <form method="post" asp-page-handler="CheckOut" class="d-inline">
             <input type="hidden" name="orderId" value="@Model.Order.OrderId" />
             <button type="submit" class="btn btn-success ml-2">Procees to Checkout</button>
         </form>

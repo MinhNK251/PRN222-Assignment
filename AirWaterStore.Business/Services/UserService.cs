@@ -1,10 +1,5 @@
 ﻿using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AirWaterStore.Data.Repositories
 {
@@ -38,7 +33,7 @@ namespace AirWaterStore.Data.Repositories
         public async Task AddAsync(User user)
         {
             await _repository.AddAsync(user);
-        }        
+        }
 
         public async Task UpdateAsync(User user)
         {

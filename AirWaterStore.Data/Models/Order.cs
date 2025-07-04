@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AirWaterStore.Data.Models;
+﻿namespace AirWaterStore.Data.Models;
 
 public partial class Order
 {

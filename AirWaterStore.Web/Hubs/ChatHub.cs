@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using AirWaterStore.Business.Interfaces;
+﻿using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
 using AirWaterStore.Web.Helper;
+using Microsoft.AspNetCore.SignalR;
 
 namespace AirWaterStore.Web.Hubs
 {
