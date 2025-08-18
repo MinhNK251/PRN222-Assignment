@@ -90,6 +90,41 @@ CREATE TABLE Messages (
 );
 GO
 
+CREATE TABLE CommissionRequests (
+    CommissionRequestId INT IDENTITY(1,1) PRIMARY KEY,
+    UserId INT NOT NULL,
+    GameTitle NVARCHAR(100) NOT NULL,
+    ExpectedPrice DECIMAL(10, 2) NOT NULL,
+    Description NVARCHAR(MAX),
+    Status NVARCHAR(20) NOT NULL, -- 'Pending', 'Approved', 'Rejected'
+    Upvotes INT DEFAULT 0, -- Number of upvotes
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    CONSTRAINT FK_CommissionRequests_User FOREIGN KEY (UserId) REFERENCES Users(UserId)
+);
+GO
+
+CREATE TABLE CommissionRequestUpvotes (
+    UpvoteId INT IDENTITY(1,1) PRIMARY KEY,
+    CommissionRequestId INT NOT NULL,
+    UserId INT NOT NULL,
+    UpvotedAt DATETIME DEFAULT GETDATE(),
+    CONSTRAINT FK_Upvote_Request FOREIGN KEY (CommissionRequestId) REFERENCES CommissionRequests(CommissionRequestId),
+    CONSTRAINT FK_Upvote_User FOREIGN KEY (UserId) REFERENCES Users(UserId),
+    CONSTRAINT UQ_Upvote UNIQUE (CommissionRequestId, UserId) -- Ensure a user can only upvote once
+);
+GO
+
+CREATE TABLE Wishlist (
+    WishlistId INT IDENTITY(1,1) PRIMARY KEY,
+    UserId INT NOT NULL,
+    GameId INT NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    CONSTRAINT FK_Wishlist_User FOREIGN KEY (UserId) REFERENCES Users(UserId),
+    CONSTRAINT FK_Wishlist_Game FOREIGN KEY (GameId) REFERENCES Games(GameId),
+    CONSTRAINT UQ_Wishlist UNIQUE (UserId, GameId) -- Ensure no duplicate wishlist entries
+);
+GO
+
 -- Insert Users
 INSERT INTO Users (Username, Email, Password, Role) VALUES 
 ('Alice Wonder', 'alice@gmail.com', '123456', 1),
