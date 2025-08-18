@@ -39,6 +39,7 @@ namespace AirWaterStore.Web
             builder.Services.AddScoped<ICommissionRequestRepository, CommissionRequestRepository>();
             builder.Services.AddScoped<IRequestUpvoteRepository, RequestUpvoteRepository>();
             builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
+            builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 
             // Register services	
             builder.Services.AddScoped<IGameService, GameService>();
@@ -52,6 +53,7 @@ namespace AirWaterStore.Web
             builder.Services.AddScoped<ICommissionRequestService, CommissionRequestService>();
             builder.Services.AddScoped<IRequestUpvoteService, RequestUpvoteService>();
             builder.Services.AddScoped<IWishlistService, WishlistService>();
+            builder.Services.AddScoped<IPaymentService, PaymentService>();
 
             builder.Services.Configure<VnPayConfig>(builder.Configuration.GetSection("VnPay"));
 

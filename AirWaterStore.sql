@@ -125,6 +125,16 @@ CREATE TABLE Wishlist (
 );
 GO
 
+CREATE TABLE Payment (
+    PaymentId INT IDENTITY(1,1) PRIMARY KEY,
+    OrderId INT NOT NULL,
+    PaymentDate DATETIME NOT NULL DEFAULT GETDATE(),
+    TotalPrice DECIMAL(10, 2) NOT NULL,
+    Status NVARCHAR(20) NOT NULL, -- 'Success', 'Fail'
+    CONSTRAINT FK_Payment_Oder FOREIGN KEY (OrderId) REFERENCES Orders(OrderId)
+);
+GO
+
 -- Insert Users
 INSERT INTO Users (Username, Email, Password, Role) VALUES 
 ('Alice Wonder', 'alice@gmail.com', '123456', 1),
