@@ -18,9 +18,15 @@ public partial class User
 
     public virtual ICollection<ChatRoom> ChatRoomStaffs { get; set; } = new List<ChatRoom>();
 
+    public virtual ICollection<CommissionRequestUpvote> CommissionRequestUpvotes { get; set; } = new List<CommissionRequestUpvote>();
+
+    public virtual ICollection<CommissionRequest> CommissionRequests { get; set; } = new List<CommissionRequest>();
+
     public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
+
+    public virtual ICollection<Wishlist> Wishlists { get; set; } = new List<Wishlist>();
 }

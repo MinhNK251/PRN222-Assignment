@@ -2,6 +2,7 @@
 using AirWaterStore.Data.Models;
 using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 
 namespace AirWaterStore.Web.Hubs
 {
@@ -68,13 +69,10 @@ namespace AirWaterStore.Web.Hubs
             if (userRole == 1 && chatRoom.CustomerId != userId.Value)
                 return;
 
-            if (userRole == 2 && chatRoom.StaffId != null && chatRoom.StaffId != userId.Value)
+            if (userRole == 2 && chatRoom.StaffId == null && chatRoom.StaffId != userId.Value)
             {
                 // If staff is not assigned, assign them
-                if (chatRoom.StaffId == null)
-                {
-                    await _chatRoomService.AssignStaffToChatRoomAsync(chatRoomId, userId.Value);
-                }
+                await _chatRoomService.AssignStaffToChatRoomAsync(chatRoomId, userId.Value);
             }
 
             // Save message
