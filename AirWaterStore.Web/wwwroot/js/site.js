@@ -102,7 +102,7 @@
             input.addEventListener('change', function () {
                 const value = parseInt(this.value);
                 const min = parseInt(this.min) || 1;
-                const max = parseInt(this.max) || 99;
+                const max = parseInt(this.max);
                 
                 if (value < min) {
                     this.value = min;

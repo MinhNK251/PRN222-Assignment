@@ -5,127 +5,487 @@
     ViewData["Title"] = "Admin Dashboard";
 }
 
-<h1>Admin Dashboard</h1>
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="mb-4 text-center">
+        <!-- Title -->
+        <h1 class="h3 text-gray-800 mb-3">Dashboard Overview</h1>
 
-<!-- Month/Year Selection Form -->
-@* <form method="get" class="mb-4">
-    <div class="form-row">
-        <div class="col-md-3">
-            <label for="Month">Select Month</label>
-            <select asp-for="SelectedMonth" class="form-control">
-                @for (int i = 1; i <= 12; i++)
-                {
-                    <option value="@i" @(i == Model.SelectedMonth ? "selected" : "")>@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
-                }
-            </select>
-        </div>
-        <div class="col-md-3">
-            <label for="Year">Select Year</label>
-            <select asp-for="SelectedYear" class="form-control">
-                @for (int i = 2020; i <= DateTime.Now.Year; i++)
-                {
-                    <option value="@i" @(i == Model.SelectedYear ? "selected" : "")>@i</option>
-                }
-            </select>
-        </div>
-        <div class="col-md-2">
-            <button type="submit" class="btn btn-primary mt-4">Filter</button>
-        </div>
-    </div>
-</form> *@
-
-<!-- Display Statistics -->
-<div class="row">
-    <div class="col-md-3">
-        <div class="card text-white bg-primary mb-3">
-            <div class="card-header">Total Games</div>
-            <div class="card-body">
-                <h5 class="card-title">@Model.TotalGames</h5>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card text-white bg-success mb-3">
-            <div class="card-header">Total Orders</div>
-            <div class="card-body">
-                <h5 class="card-title">@Model.TotalOrders</h5>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card text-white bg-info mb-3">
-            <div class="card-header">Total Users</div>
-            <div class="card-body">
-                <h5 class="card-title">@Model.TotalUsers</h5>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card text-white bg-warning mb-3">
-            <div class="card-header">Pending Chats</div>
-            <div class="card-body">
-                <h5 class="card-title">@Model.PendingChats</h5>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row mt-4">
-    <div class="col-md-6">
-        <h3>Quick Actions</h3>
-        <div class="list-group">
-            <a asp-page="/Admin/Games/Create" class="list-group-item list-group-item-action">
-                <i class="fas fa-plus"></i> Add New Game
-            </a>
-            <a asp-page="/Games/Index" class="list-group-item list-group-item-action">
-                <i class="fas fa-gamepad"></i> Manage Games
-            </a>
-            <a asp-page="/Admin/Users/Index" class="list-group-item list-group-item-action">
-                <i class="fas fa-users"></i> Manage Users
-            </a>
-            <a asp-page="/Orders/Index" class="list-group-item list-group-item-action">
-                <i class="fas fa-shopping-cart"></i> View All Orders
-            </a>
-            <a asp-page="/Admin/Chat/Index" class="list-group-item list-group-item-action">
-                <i class="fas fa-comments"></i> Support Chat Dashboard
-            </a>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <h3>Recent Orders</h3>
-        @if (Model.RecentOrders.Any())
-        {
-            <table class="table table-sm">
-                <thead>
-                    <tr>
-                        <th>Order #</th>
-                        <th>Customer</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var order in Model.RecentOrders)
+        <!-- Filter directly under title, centered -->
+        <form method="get" class="d-inline-flex justify-content-center">
+            <div class="form-group me-2 mb-0">
+                <label asp-for="SelectedMonth" class="sr-only">Month</label>
+                <select asp-for="SelectedMonth" class="form-control form-control-sm">
+                    @for (int i = 1; i <= 12; i++)
                     {
-                        <tr>
-                            <td>
-                                <a asp-page="/Orders/Details" asp-route-id="@order.OrderId">#@order.OrderId</a>
-                            </td>
-                            <td>@Model.GetUsername(order.UserId)</td>
-                            <td>@order.TotalPrice.ToString("C",Currency.VnCurrencyFormat)</td>
-                            <td>
-                                <span class="badge badge-@(order.Status == "Completed" ? "success" : "warning") text-dark">
-                                    @order.Status
-                                </span>
-                            </td>
-                        </tr>
+                        <option value="@i" selected="@(i == Model.SelectedMonth)">
+                            @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)
+                        </option>
                     }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <p class="text-muted">No recent orders.</p>
-        }
+                </select>
+            </div>
+            <div class="form-group me-2 mb-0">
+                <label asp-for="SelectedYear" class="sr-only">Year</label>
+                <select asp-for="SelectedYear" class="form-control form-control-sm">
+                    @for (int i = 2020; i <= DateTime.Now.Year; i++)
+                    {
+                        <option value="@i" selected="@(i == Model.SelectedYear)">@i</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary">
+                <i class="fas fa-filter"></i> Apply
+            </button>
+        </form>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row">
+        <!-- Revenue Cards -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total Revenue
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalRevenue.ToString("C", Currency.VnCurrencyFormat)</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                Today Revenue
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TodayRevenue.ToString("C", Currency.VnCurrencyFormat)</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.SelectedMonth) Revenue
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.MonthlyRevenue.ToString("C", Currency.VnCurrencyFormat)</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Year @Model.SelectedYear Revenue
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.YearlyRevenue.ToString("C", Currency.VnCurrencyFormat)</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-chart-line fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </div>
+
+    <div class="row">
+        <!-- Other Stats Cards -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Total Games
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalGames</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-gamepad fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                Total Orders
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalOrders</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-dark shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
+                                Total Users
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalUsers</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                Pending Chats
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.PendingChats</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Lists Section -->
+    <div class="row">
+        <!-- Top Selling Games -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Top Selling Games</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Game</th>
+                                    <th>Orders</th>
+                                    <th>Revenue</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var game in Model.TrendingGames)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a asp-page="/Games/Details" asp-route-id="@game.GameId">@game.Title</a>
+                                        </td>
+                                        <td>@game.TotalOrders</td>
+                                        <td>@game.TotalRevenue.ToString("C", Currency.VnCurrencyFormat)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Most Wishlisted Games -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Most Wishlisted Games</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Game</th>
+                                    <th>Wishlists</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var game in Model.TopWishlistGames)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a asp-page="/Games/Details" asp-route-id="@game.GameId">@game.Title</a>
+                                        </td>
+                                        <td>@game.WishlistCount</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Commission Games -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Top Commission Games</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Game</th>
+                                    <th>Expected Price</th>
+                                    <th>Upvotes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var game in Model.TopCommissionRequests)
+                                {
+                                    <tr>
+                                        <td>@game.GameTitle</td>
+                                        <td>@game.ExpectedPrice.ToString("C", Currency.VnCurrencyFormat)</td>
+                                        <td>@game.Upvotes</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Low Stock Games -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Low Stock Games</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Game</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var game in Model.LowStockGames)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a asp-page="/Games/Details" asp-route-id="@game.GameId">@game.Title</a>
+                                        </td>
+                                        <td>@game.Quantity</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Recent Orders -->
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Recent Orders</h6>
+                    <a asp-page="/Orders/Index" class="btn btn-sm btn-link">View All</a>
+                </div>
+                <div class="card-body">
+                    @if (Model.RecentOrders.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Order #</th>
+                                        <th>Customer</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var order in Model.RecentOrders)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a asp-page="/Orders/Details" asp-route-id="@order.OrderId">#@order.OrderId</a>
+                                            </td>
+                                            <td>@Model.GetUsername(order.UserId)</td>
+                                            <td>@order.OrderDate.ToString("MMM dd, yyyy")</td>
+                                            <td>@order.TotalPrice.ToString("C", Currency.VnCurrencyFormat)</td>
+                                            <td>
+                                                <span class="badge badge-@(order.Status == "Completed" ? "success" : order.Status == "Pending" ? "warning" : "danger")">
+                                                    @order.Status
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-4">
+                            <i class="fas fa-shopping-cart fa-3x text-gray-300 mb-3"></i>
+                            <p class="text-muted">No recent orders found</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Most Loyal Customer -->
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Most Loyal Customer</h6>
+                    <a asp-page="/Admin/Users/Index" class="btn btn-sm btn-link">View All</a>
+                </div>
+                <div class="card-body">
+                    @if (Model.UserPaymentStats.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Customer</th>
+                                        <th>Total Amount Spent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var user in Model.UserPaymentStats)
+                                    {
+                                        <tr>
+                                            <td>@user.Username</td>
+                                            <td>@user.TotalAmountSpent.ToString("C", Currency.VnCurrencyFormat)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-4">
+                            <i class="fas fa-users fa-3x text-gray-300 mb-3"></i>
+                            <p class="text-muted">No customers found</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Quick Actions</h6>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a asp-page="/Admin/Games/Create" class="list-group-item list-group-item-action d-flex align-items-center">
+                            <i class="fas fa-plus-circle fa-fw mr-2 text-primary"></i>
+                            Add New Game
+                        </a>
+                        <a asp-page="/Games/Index" class="list-group-item list-group-item-action d-flex align-items-center">
+                            <i class="fas fa-gamepad fa-fw mr-2 text-primary"></i>
+                            Manage Games
+                        </a>
+                        <a asp-page="/Admin/Users/Index" class="list-group-item list-group-item-action d-flex align-items-center">
+                            <i class="fas fa-user-cog fa-fw mr-2 text-primary"></i>
+                            Manage Users
+                        </a>
+                        <a asp-page="/Orders/Index" class="list-group-item list-group-item-action d-flex align-items-center">
+                            <i class="fas fa-clipboard-list fa-fw mr-2 text-primary"></i>
+                            View All Orders
+                        </a>
+                        <a asp-page="/Admin/Chat/Index" class="list-group-item list-group-item-action d-flex align-items-center">
+                            <i class="fas fa-comments fa-fw mr-2 text-primary"></i>
+                            Support Chat Dashboard
+                        </a>
+                        <a asp-page="/Admin/Reports/Index" class="list-group-item list-group-item-action d-flex align-items-center">
+                            <i class="fas fa-chart-pie fa-fw mr-2 text-primary"></i>
+                            View Reports
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+@section Styles {
+    <style>
+        .card {
+            border-radius: 0.35rem;
+            transition: all 0.3s;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+            }
+
+        .list-group-item-action:hover {
+            background-color: #f8f9fa;
+        }
+
+        .badge {
+            font-size: 0.85em;
+            font-weight: 500;
+            padding: 0.35em 0.65em;
+        }
+
+        .table {
+            font-size: 0.9rem;
+        }
+
+            .table th {
+                border-top: none;
+            }
+    </style>
+}

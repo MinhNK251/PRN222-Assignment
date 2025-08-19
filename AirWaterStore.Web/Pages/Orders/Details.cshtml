@@ -199,7 +199,7 @@
                 </form>
             }
             
-            @if (Model.IsCustomer() && Model.Order.Status == OrderStatus.Pending)
+            @if (Model.IsCustomer() && Model.Order.Status == OrderStatus.Pending || Model.Order.Status == OrderStatus.Failed)
             {
                 <form method="post" asp-page-handler="CheckOut" class="d-inline">
                     <input type="hidden" name="orderId" value="@Model.Order.OrderId" />

@@ -22,6 +22,16 @@ namespace AirWaterStore.Data.Repositories
             return totalRevenue;
         }
 
+        // Get Today Revenue
+        public async Task<decimal> GetTodayRevenueAsync()
+        {
+            var totalRevenue = await _context.Payments
+                .Where(p => p.PaymentDate.Date == DateTime.Today && p.Status == "Completed")
+                .SumAsync(p => p.TotalPrice);
+
+            return totalRevenue;
+        }
+
         // Get the total income for a given month and year
         public async Task<decimal> GetMonthlyIncomeAsync(int month, int year)
         {
@@ -51,6 +61,7 @@ namespace AirWaterStore.Data.Repositories
                 .Select(g => new UserPaymentStats
                 {
                     UserId = g.Key,
+                    Username = g.FirstOrDefault().Order.User.Username,
                     TotalAmountSpent = g.Sum(p => p.TotalPrice)
                 })
                 .OrderByDescending(u => u.TotalAmountSpent)
@@ -68,7 +79,9 @@ namespace AirWaterStore.Data.Repositories
                 .Select(g => new GameOrderStats
                 {
                     GameId = g.Key,
-                    TotalOrders = g.Sum(od => od.Quantity)
+                    Title = g.FirstOrDefault().Game.Title,
+                    TotalOrders = g.Sum(od => od.Quantity),
+                    TotalRevenue = g.Sum(od => od.Quantity * od.Game.Price)
                 })
                 .OrderByDescending(g => g.TotalOrders)
                 .ToListAsync();
@@ -130,13 +143,16 @@ namespace AirWaterStore.Data.Repositories
     public class UserPaymentStats
     {
         public int UserId { get; set; }
+        public string Username { get; set; }
         public decimal TotalAmountSpent { get; set; }
     }
 
     public class GameOrderStats
     {
         public int GameId { get; set; }
+        public string Title { get; set; }
         public int TotalOrders { get; set; }
+        public decimal TotalRevenue { get; set; }
     }
 
     public class GameWishlistStats

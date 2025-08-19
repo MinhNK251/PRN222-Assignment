@@ -22,6 +22,11 @@ namespace AirWaterStore.Business.Services
             return await _repository.GetTotalRevenueAsync();
         }
 
+        public async Task<decimal> GetTodayRevenueAsync()
+        {
+            return await _repository.GetTodayRevenueAsync();
+        }
+
         public async Task<decimal> GetMonthlyIncomeAsync(int month, int year)
         {
             return await _repository.GetMonthlyIncomeAsync(month, year);

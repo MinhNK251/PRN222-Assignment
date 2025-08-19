@@ -1,4 +1,5 @@
 using AirWaterStore.Business.Interfaces;
+using AirWaterStore.Business.Services;
 using AirWaterStore.Data.Models;
 using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
@@ -9,14 +10,18 @@ namespace AirWaterStore.Web.Pages.Admin.Games
     public class EditModel : PageModel
     {
         private readonly IGameService _gameService;
+        private readonly CloudinaryService _cloudinaryService;
 
-        public EditModel(IGameService gameService)
+        public EditModel(IGameService gameService, CloudinaryService cloudinaryService)
         {
             _gameService = gameService;
+            _cloudinaryService = cloudinaryService;
         }
 
         [BindProperty]
         public Game Game { get; set; } = default!;
+        [BindProperty]
+        public IFormFile? ThumbnailFile { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -32,9 +37,7 @@ namespace AirWaterStore.Web.Pages.Admin.Games
             {
                 return NotFound();
             }
-
             Game = game;
-
             return Page();
         }
 
@@ -52,6 +55,21 @@ namespace AirWaterStore.Web.Pages.Admin.Games
 
             try
             {
+                if (ThumbnailFile != null)
+                {
+                    if (!string.IsNullOrEmpty(Game.ThumbnailUrl))
+                    {
+                        var uri = new Uri(Game.ThumbnailUrl);
+                        var segments = uri.Segments;
+                        string publicId = Path.GetFileNameWithoutExtension(segments.Last());
+                        await _cloudinaryService.DeleteImageAsync(publicId);
+                    }
+                    using (var stream = ThumbnailFile.OpenReadStream())
+                    {
+                        var imageUrl = await _cloudinaryService.UploadImageAsync(stream, ThumbnailFile.FileName);
+                        Game.ThumbnailUrl = imageUrl;
+                    }
+                }
                 await _gameService.UpdateAsync(Game);
                 TempData["SuccessMessage"] = "Game updated successfully!";
                 return RedirectToPage("/Games/Details", new { id = Game.GameId });
