@@ -51,6 +51,7 @@ namespace AirWaterStore.Data.Repositories
                 .Select(g => new UserPaymentStats
                 {
                     UserId = g.Key,
+                    Username = g.FirstOrDefault().Order.User.Username,
                     TotalAmountSpent = g.Sum(p => p.TotalPrice)
                 })
                 .OrderByDescending(u => u.TotalAmountSpent)
@@ -68,6 +69,7 @@ namespace AirWaterStore.Data.Repositories
                 .Select(g => new GameOrderStats
                 {
                     GameId = g.Key,
+                    Title = g.FirstOrDefault().Game.Title,
                     TotalOrders = g.Sum(od => od.Quantity)
                 })
                 .OrderByDescending(g => g.TotalOrders)
@@ -130,12 +132,14 @@ namespace AirWaterStore.Data.Repositories
     public class UserPaymentStats
     {
         public int UserId { get; set; }
+        public string Username { get; set; }
         public decimal TotalAmountSpent { get; set; }
     }
 
     public class GameOrderStats
     {
         public int GameId { get; set; }
+        public string Title { get; set; }
         public int TotalOrders { get; set; }
     }
 
