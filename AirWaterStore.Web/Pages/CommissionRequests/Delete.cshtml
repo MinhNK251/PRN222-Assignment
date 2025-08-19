@@ -1,0 +1,16 @@
+﻿@page "{id:int}"
+@model AirWaterStore.Web.Pages.CommissionRequests.DeleteModel
+@{
+    ViewData["Title"] = "Delete Commission Request";
+}
+
+<h2>Delete Commission Request</h2>
+
+<div class="alert alert-warning">
+    Are you sure you want to delete <strong>@Model.CommissionRequest.GameTitle</strong>?
+</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
+</form>

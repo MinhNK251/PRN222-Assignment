@@ -1,0 +1,79 @@
+﻿@page
+@model AirWaterStore.Web.Pages.CommissionRequests.IndexModel
+@{
+    ViewData["Title"] = "Commission Requests";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Commission Requests</h2>
+        <a asp-page="./Create" class="btn btn-success">
+            <i class="fas fa-plus-circle"></i> Request Commission
+        </a>
+    </div>
+
+    <!-- Search bar -->
+    <form method="get" class="d-flex mb-3">
+        <input type="text" name="Search" value="@Model.Search"
+               placeholder="Search by game title or description..."
+               class="form-control me-2" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <!-- Requests list -->
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Game Title</th>
+                <th>Requested By</th>
+                <th>Expected Price</th>
+                <th>Upvotes</th>
+                <th>Created</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var req in Model.Requests)
+            {
+                <tr>
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@req.CommissionRequestId">
+                            @req.GameTitle
+                        </a>
+                    </td>
+                    <td>@Model.GetUsername(req.UserId)</td>
+                    <td>@req.ExpectedPrice.ToString("C")</td>
+                    <td>@Model.UpvoteCounts[req.CommissionRequestId]</td>
+                    <td>@req.CreatedAt?.ToString("yyyy-MM-dd")</td>
+
+                    <td>
+                        <form method="post" asp-page-handler="Upvote">
+                            <input type="hidden" name="requestId" value="@req.CommissionRequestId" />
+                            <button type="submit" class="btn btn-sm @(Model.UserUpvotedRequests.Contains(req.CommissionRequestId)
+                                                      ? "btn-outline-danger"
+                                                      : "btn-outline-success")">
+                            @(Model.UserUpvotedRequests.Contains(req.CommissionRequestId) ? "👎 Downvote" : "👍 Upvote")
+                        </button>
+
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                    <a class="page-link"
+                       asp-page="./Index"
+                       asp-route-currentPage="@i"
+                       asp-route-Search="@Model.Search">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

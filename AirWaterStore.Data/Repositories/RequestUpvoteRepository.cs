@@ -24,13 +24,8 @@ namespace AirWaterStore.Data.Repositories
             if (existingUpvote != null)
             {
                 _context.CommissionRequestUpvotes.Remove(existingUpvote);
-                var commissionRequest = await _context.CommissionRequests.FindAsync(commissionRequestId);
-                if (commissionRequest != null)
-                {
-                    commissionRequest.Upvotes--;
-                    await _context.SaveChangesAsync();
-                }
-                return false;
+                await _context.SaveChangesAsync();
+                return false; // removed
             }
             else
             {
@@ -41,13 +36,8 @@ namespace AirWaterStore.Data.Repositories
                     UpvotedAt = DateTime.UtcNow
                 };
                 _context.CommissionRequestUpvotes.Add(newUpvote);
-                var commissionRequest = await _context.CommissionRequests.FindAsync(commissionRequestId);
-                if (commissionRequest != null)
-                {
-                    commissionRequest.Upvotes++;
-                    await _context.SaveChangesAsync();
-                }
-                return true;
+                await _context.SaveChangesAsync();
+                return true; // added
             }
         }
 
