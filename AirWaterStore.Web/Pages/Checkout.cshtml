@@ -5,76 +5,199 @@
     ViewData["Title"] = "Checkout";
 }
 
-<h1>Checkout</h1>
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="fas fa-credit-card me-3"></i>Checkout
+                </h1>
+                <p class="lead mb-0">Complete your purchase and get ready to enjoy your new games</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-@if (!string.IsNullOrEmpty(Model.ErrorMessage))
-{
-    <div class="alert alert-danger">@Model.ErrorMessage</div>
-}
-
-@if (Model.CartItems.Any())
-{
+<div class="container">
     <div class="row">
-        <div class="col-md-8">
-            <h3>Order Summary</h3>
-            <table class="table">
-                <thead>
-                    <tr>>
-                        <th>Game</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <!-- Order Summary -->
+        <div class="col-lg-8">
+            <div class="card shadow-custom border-0 mb-4">
+                <div class="card-header bg-white border-0 py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fas fa-shopping-bag me-2 text-primary"></i>Order Summary
+                    </h5>
+                </div>
+                <div class="card-body p-0">
                     @foreach (var item in Model.CartItems)
                     {
-                        <tr>
-                            <td>@item.Title</td>
-                            <td>@item.Price.ToString("C", Currency.VnCurrencyFormat)</td>
-                            <td>@item.Quantity</td>
-                            <td>@((item.Price * item.Quantity).ToString("C", Currency.VnCurrencyFormat))</td>
-                        </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="3">Total</th>
-                        <th>@Model.TotalPrice.ToString("C", Currency.VnCurrencyFormat)</th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Payment Information</h5>
-                    <p class="text-muted">This is a demo store. No actual payment will be processed.</p>
-
-                    <form method="post">
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" id="agreeTerms" required>
-                            <label class="form-check-label" for="agreeTerms">
-                                I agree to the terms and conditions
-                            </label>
+                        <div class="checkout-item p-4 border-bottom">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h6 class="fw-bold mb-2">@item.Title</h6>
+                                    <div class="d-flex align-items-center gap-4">
+                                        <span class="h6 fw-bold text-gradient mb-0">
+                                            @item.Price.ToString("C", Currency.VnCurrencyFormat)
+                                        </span>
+                                        <span class="text-muted">
+                                            <i class="fas fa-times me-1"></i>@item.Quantity
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <span class="h5 fw-bold">
+                                        @((item.Price * item.Quantity).ToString("C", Currency.VnCurrencyFormat))
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-
-                        <button type="submit" class="btn btn-success btn-block">Place Order</button>
-                    </form>
+                    }
                 </div>
             </div>
 
-            <div class="mt-3">
-                <a asp-page="/Cart" class="btn btn-secondary btn-block">Back to Cart</a>
+            <!-- Payment Information -->
+            <div class="card shadow-custom border-0 mb-4">
+                <div class="card-header bg-white border-0 py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fas fa-credit-card me-2 text-primary"></i>Payment Information
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="payment-method p-4 border rounded-custom text-center h-100">
+                                <i class="fas fa-credit-card fa-3x text-primary mb-3"></i>
+                                <h6 class="fw-semibold">Credit/Debit Card</h6>
+                                <p class="text-muted small mb-0">Secure payment via VnPay</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="payment-method p-4 border rounded-custom text-center h-100">
+                                <i class="fas fa-university fa-3x text-primary mb-3"></i>
+                                <h6 class="fw-semibold">Bank Transfer</h6>
+                                <p class="text-muted small mb-0">Direct bank transfer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Notice -->
+            <div class="card shadow-custom border-0">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start">
+                        <i class="fas fa-shield-alt fa-2x text-success me-3 mt-1"></i>
+                        <div>
+                            <h6 class="fw-semibold mb-2">Secure Checkout</h6>
+                            <p class="text-muted mb-0">
+                                Your payment information is encrypted and secure. We use industry-standard SSL encryption 
+                                to protect your data during the checkout process.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Total & Checkout -->
+        <div class="col-lg-4">
+            <div class="card shadow-custom border-0 sticky-top" style="top: 100px;">
+                <div class="card-header bg-gradient-primary text-white border-0 py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fas fa-receipt me-2"></i>Order Total
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="fw-semibold">Subtotal:</span>
+                        <span class="fw-bold">@Model.TotalPrice.ToString("C", Currency.VnCurrencyFormat)</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="fw-semibold">Tax:</span>
+                        <span class="fw-bold">$0.00</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="fw-semibold">Processing Fee:</span>
+                        <span class="fw-bold">$0.00</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-4">
+                        <span class="h5 fw-bold">Total:</span>
+                        <span class="h4 fw-bold text-gradient">@Model.TotalPrice.ToString("C", Currency.VnCurrencyFormat)</span>
+                    </div>
+                    
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+                            <i class="fas fa-exclamation-triangle me-2"></i>@Model.ErrorMessage
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    
+                    <form method="post">
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-lock me-2"></i>Secure Checkout
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="text-center mt-3">
+                        <small class="text-muted">
+                            <i class="fas fa-lock me-1"></i>Powered by VnPay
+                        </small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-}
-else
-{
-    <div class="alert alert-info">
-        <h4>Your cart is empty</h4>
-        <p>Add items to your cart before checking out.</p>
-        <a asp-page="/Games/Index" class="btn btn-primary">Browse Games</a>
+</div>
+
+<!-- Features Section -->
+<div class="container mt-5">
+    <div class="row g-4">
+        <div class="col-md-4 text-center">
+            <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                <i class="fas fa-shipping-fast fa-2x text-primary mb-3"></i>
+                <h6 class="fw-semibold">Instant Delivery</h6>
+                <p class="text-muted small mb-0">Get your games immediately after purchase</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                <i class="fas fa-shield-alt fa-2x text-primary mb-3"></i>
+                <h6 class="fw-semibold">100% Secure</h6>
+                <p class="text-muted small mb-0">Bank-level security for all transactions</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                <i class="fas fa-headset fa-2x text-primary mb-3"></i>
+                <h6 class="fw-semibold">24/7 Support</h6>
+                <p class="text-muted small mb-0">We're here to help anytime</p>
+            </div>
+        </div>
     </div>
+</div>
+
+<style>
+.payment-method {
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
+
+.payment-method:hover {
+    border-color: var(--primary-color) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-item {
+    transition: background-color 0.3s ease;
+}
+
+.checkout-item:hover {
+    background-color: #f8f9fa;
+}
+</style>

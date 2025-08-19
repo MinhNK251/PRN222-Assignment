@@ -5,106 +5,263 @@
     ViewData["Title"] = "Games";
 }
 
-<h1>Game Store</h1>
-
-<div class="row mb-3">
-    <div class="col-md-6">
-        <form method="get">
-            <div class="input-group">
-                <input type="text" name="searchString" value="@Model.SearchString" class="form-control"
-                    placeholder="Search games..." />
-                <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                    <a asp-page="/Games/Index" class="btn btn-secondary">Clear</a>
-                </div>
-            </div>
-        </form>
-    </div>
-    @if (Model.IsStaff())
-    {
-        <div class="col-md-6 text-right">
-            <a asp-page="/Admin/Games/Create" class="btn btn-success">Add New Game</a>
-        </div>
-    }
-</div>
-
-@if (Model.SuccessMessage != null)
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @Model.SuccessMessage
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
-
-<div class="row">
-    @foreach (var game in Model.Games)
-    {
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                @if (!string.IsNullOrEmpty(game.ThumbnailUrl))
-                {
-                    <img src="@game.ThumbnailUrl" class="card-img-top" alt="@game.Title"
-                        style="height: 200px; object-fit: cover;">
-                }
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">@game.Title</h5>
-                    <p class="card-text">
-                        <small class="text-muted">@game.Genre</small><br />
-                        @if (game.Description?.Length > 100)
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="fas fa-gamepad me-3"></i>Discover Amazing Games
+                </h1>
+                <p class="lead mb-4">Explore our curated collection of premium games. From action-packed adventures to relaxing simulations, find your next gaming obsession.</p>
+                
+                <!-- Search Bar -->
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <form method="get" class="d-flex">
+                            <div class="input-group input-group-lg shadow">
+                                <input type="text" name="searchString" value="@Model.SearchString" class="form-control border-0" 
+                                       placeholder="Search games by title, genre, or developer..." />
+                                <button type="submit" class="btn btn-light px-4">
+                                    <i class="fas fa-search me-2"></i>Search
+                                </button>
+                            </div>
+                        </form>
+                        @if (!string.IsNullOrEmpty(Model.SearchString))
                         {
-                            @(game.Description.Substring(0, 100))
-                        }
-                        else
-                        {
-                            @game.Description
-                        }
-                    </p>
-                    <p class="card-text mt-auto">
-                        <strong>@game.Price.ToString("C", Currency.VnCurrencyFormat)</strong>
-                        <span class="badge badge-@(game.Quantity > 0 ? "success" : "danger") text-dark ml-2">
-                            @(game.Quantity > 0 ? $"{game.Quantity} in stock" : "Out of stock")
-                        </span>
-                    </p>
-                    <div class="btn-group" role="group">
-                        <a asp-page="/Games/Details" asp-route-id="@game.GameId" class="btn btn-info btn-sm">View
-                            Details</a>
-                        @if (Model.IsCustomer() && game.Quantity > 0)
-                        {
-                            <form method="post" asp-page-handler="AddToCart" class="d-inline">
-                                <input type="hidden" name="CurrentPage" value="@Model.CurrentPage" />
-                                <input type="hidden" name="SearchString" value="@Model.SearchString" />
-                                <input type="hidden" name="gameId" value="@game.GameId" />
-                                <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
-                            </form>
+                            <div class="mt-3">
+                                <a asp-page="/Games/Index" class="btn btn-outline-light btn-sm">
+                                    <i class="fas fa-times me-2"></i>Clear Search
+                                </a>
+                            </div>
                         }
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Success Message -->
+    @if (Model.SuccessMessage != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show fade-in-up" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@Model.SuccessMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Admin Actions -->
+    @if (Model.IsStaff())
+    {
+        <div class="row mb-4">
+            <div class="col-12 text-end">
+                <a asp-page="/Admin/Games/Create" class="btn btn-success btn-lg">
+                    <i class="fas fa-plus me-2"></i>Add New Game
+                </a>
+            </div>
+        </div>
+    }
+
+    <!-- Search Results Info -->
+    @if (!string.IsNullOrEmpty(Model.SearchString))
+    {
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="bg-white p-3 rounded-custom shadow-custom">
+                    <h5 class="mb-2">
+                        <i class="fas fa-search me-2 text-primary"></i>Search Results
+                    </h5>
+                    <p class="mb-0 text-muted">Found @Model.Games.Count games matching "@Model.SearchString"</p>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Games Grid -->
+    @if (Model.Games.Any())
+    {
+        <div class="game-grid">
+            @foreach (var game in Model.Games)
+            {
+                <div class="card h-100 fade-in-up">
+                    <div class="position-relative">
+                        @if (!string.IsNullOrEmpty(game.ThumbnailUrl))
+                        {
+                            <img src="@game.ThumbnailUrl" class="card-img-top" alt="@game.Title" 
+                                 style="height: 250px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" 
+                                 style="height: 250px;">
+                                <i class="fas fa-gamepad fa-3x text-white-50"></i>
+                            </div>
+                        }
+                        
+                        <!-- Stock Badge -->
+                        <div class="position-absolute top-0 end-0 m-3">
+                            @if (game.Quantity > 0)
+                            {
+                                <span class="badge badge-success fs-6">
+                                    <i class="fas fa-check me-1"></i>@game.Quantity in stock
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger fs-6">
+                                    <i class="fas fa-times me-1"></i>Out of stock
+                                </span>
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-truncate">@game.Title</h5>
+                        
+                        @if (!string.IsNullOrEmpty(game.Genre))
+                        {
+                            <div class="mb-2">
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">
+                                    <i class="fas fa-tags me-1"></i>@game.Genre.Split(',')[0].Trim()
+                                </span>
+                            </div>
+                        }
+                        
+                        <p class="card-text flex-grow-1">
+                            @if (!string.IsNullOrEmpty(game.Description))
+                            {
+                                @(game.Description.Length > 120 ? game.Description.Substring(0, 120) + "..." : game.Description)
+                            }
+                            else
+                            {
+                                <span class="text-muted">No description available</span>
+                            }
+                        </p>
+                        
+                        @if (!string.IsNullOrEmpty(game.Developer))
+                        {
+                            <p class="text-muted small mb-2">
+                                <i class="fas fa-code me-1"></i>@game.Developer
+                            </p>
+                        }
+                        
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="h4 fw-bold text-gradient mb-0">
+                                    @game.Price.ToString("C", Currency.VnCurrencyFormat)
+                                </span>
+                                @if (game.ReleaseDate.HasValue)
+                                {
+                                    <small class="text-muted">
+                                        <i class="fas fa-calendar me-1"></i>@game.ReleaseDate.Value.Year
+                                    </small>
+                                }
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <a asp-page="/Games/Details" asp-route-id="@game.GameId" 
+                                   class="btn btn-info">
+                                    <i class="fas fa-eye me-2"></i>View Details
+                                </a>
+                                
+                                @if (Model.IsCustomer() && game.Quantity > 0)
+                                {
+                                    <form method="post" asp-page-handler="AddToCart" class="d-grid">
+                                        <input type="hidden" name="CurrentPage" value="@Model.CurrentPage" />
+                                        <input type="hidden" name="SearchString" value="@Model.SearchString" />
+                                        <input type="hidden" name="gameId" value="@game.GameId" />
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Pagination -->
+        @if (Model.TotalPages > 1)
+        {
+            <div class="d-flex justify-content-center mt-5">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-lg">
+                        <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                            <a class="page-link" asp-page="/Games/Index" asp-route-currentPage="@(Model.CurrentPage - 1)"
+                               asp-route-searchString="@Model.SearchString">
+                                <i class="fas fa-chevron-left me-1"></i>Previous
+                            </a>
+                        </li>
+
+                        @for (int i = 1; i <= Model.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                                <a class="page-link" asp-page="/Games/Index" asp-route-currentPage="@i"
+                                   asp-route-searchString="@Model.SearchString">@i</a>
+                            </li>
+                        }
+
+                        <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                            <a class="page-link" asp-page="/Games/Index" asp-route-currentPage="@(Model.CurrentPage + 1)"
+                               asp-route-searchString="@Model.SearchString">
+                                Next<i class="fas fa-chevron-right ms-1"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        }
+    }
+    else
+    {
+        <!-- No Results -->
+        <div class="text-center py-5">
+            <div class="bg-white p-5 rounded-custom shadow-custom">
+                <i class="fas fa-search fa-4x text-muted mb-4"></i>
+                <h3 class="text-muted">No games found</h3>
+                <p class="text-muted mb-4">
+                    @if (!string.IsNullOrEmpty(Model.SearchString))
+                    {
+                        @:No games match your search for "@Model.SearchString". Try different keywords or browse all games.
+                    }
+                    else
+                    {
+                        @:No games are currently available. Please check back later.
+                    }
+                </p>
+                <a asp-page="/Games/Index" class="btn btn-primary">
+                    <i class="fas fa-home me-2"></i>Browse All Games
+                </a>
+            </div>
+        </div>
     }
 </div>
 
-<!-- Pagination -->
-<nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-        <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
-            <a class="page-link" asp-page="/Games/Index" asp-route-currentPage="@(Model.CurrentPage - 1)"
-                asp-route-searchString="@Model.SearchString">Previous</a>
-        </li>
+<!-- JavaScript for animations -->
+<script>
+    // Add fade-in animation to cards
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-        @for (int i = 1; i <= Model.TotalPages; i++)
-        {
-            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                <a class="page-link" asp-page="/Games/Index" asp-route-currentPage="@i"
-                    asp-route-searchString="@Model.SearchString">@i</a>
-            </li>
-        }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
 
-        <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
-            <a class="page-link" asp-page="/Games/Index" asp-route-currentPage="@(Model.CurrentPage + 1)"
-                asp-route-searchString="@Model.SearchString">Next</a>
-        </li>
-    </ul>
-</nav>
+    document.querySelectorAll('.card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'all 0.6s ease-out';
+        observer.observe(card);
+    });
+</script>

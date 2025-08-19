@@ -40,6 +40,10 @@ namespace AirWaterStore.Web.Pages
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; } = string.Empty;
+
+            [Required(ErrorMessage = "You must accept the terms and conditions to continue.")]
+            [Display(Name = "Accept Terms")]
+            public bool AcceptTerms { get; set; }
         }
 
         public void OnGet()
@@ -50,6 +54,13 @@ namespace AirWaterStore.Web.Pages
         {
             if (!ModelState.IsValid)
             {
+                return Page();
+            }
+
+            // Additional validation for terms acceptance
+            if (!RegisterInput.AcceptTerms)
+            {
+                ErrorMessage = "You must accept the terms and conditions to continue.";
                 return Page();
             }
 

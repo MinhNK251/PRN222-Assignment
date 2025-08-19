@@ -2,61 +2,106 @@
 @model AirWaterStore.Web.Pages.LoginModel
 @{
     ViewData["Title"] = "Login";
-    Layout = null; // Use a different layout or no layout for login
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AirWaterStore</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <div class="container mt-5">
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="text-center">Login to AirWaterStore</h3>
+            <div class="col-lg-6 text-center">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="fas fa-sign-in-alt me-3"></i>Welcome Back
+                </h1>
+                <p class="lead mb-0">Sign in to your AirWaterStore account to continue your gaming journey.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-custom border-0">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-user-circle fa-3x text-gradient mb-3"></i>
+                        <h3 class="fw-bold">Sign In</h3>
+                        <p class="text-muted">Enter your credentials to access your account</p>
                     </div>
-                    <div class="card-body">
-                        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-                        {
-                            <div class="alert alert-danger">@Model.ErrorMessage</div>
-                        }
 
-                        <form method="post">
-                            <div class="form-group mb-3">
-                                <label asp-for="LoginInput.Email"></label>
-                                <input asp-for="LoginInput.Email" class="form-control" />
-                                <span asp-validation-for="LoginInput.Email" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group mb-3">
-                                <label asp-for="LoginInput.Password"></label>
-                                <input asp-for="LoginInput.Password" class="form-control" type="password" />
-                                <span asp-validation-for="LoginInput.Password" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary w-100">Login</button>
-                            </div>
-                        </form>
-
-                        <div class="text-center mt-3">
-                            <p>Don't have an account? <a asp-page="/Register">Register here</a></p>
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-triangle me-2"></i>@Model.ErrorMessage
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
+                    }
+
+                    <form method="post">
+                        <div class="mb-4">
+                            <label asp-for="LoginInput.Email" class="form-label fw-semibold">
+                                <i class="fas fa-envelope me-2 text-primary"></i>Email Address
+                            </label>
+                            <input asp-for="LoginInput.Email" class="form-control form-control-lg" 
+                                   placeholder="Enter your email" />
+                            <span asp-validation-for="LoginInput.Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="LoginInput.Password" class="form-label fw-semibold">
+                                <i class="fas fa-lock me-2 text-primary"></i>Password
+                            </label>
+                            <input asp-for="LoginInput.Password" class="form-control form-control-lg" 
+                                   placeholder="Enter your password" />
+                            <span asp-validation-for="LoginInput.Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                            </button>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="text-muted mb-0">
+                                Don't have an account? 
+                                <a asp-page="/Register" class="text-decoration-none fw-semibold">
+                                    <span class="text-gradient">Sign up here</span>
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="row mt-5 g-4">
+                <div class="col-md-4 text-center">
+                    <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                        <i class="fas fa-gamepad fa-2x text-primary mb-3"></i>
+                        <h6 class="fw-semibold">Premium Games</h6>
+                        <p class="text-muted small mb-0">Access to exclusive gaming content</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                        <i class="fas fa-headset fa-2x text-primary mb-3"></i>
+                        <h6 class="fw-semibold">24/7 Support</h6>
+                        <p class="text-muted small mb-0">Get help whenever you need it</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                        <i class="fas fa-shield-alt fa-2x text-primary mb-3"></i>
+                        <h6 class="fw-semibold">Secure Shopping</h6>
+                        <p class="text-muted small mb-0">Your data is always protected</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-</body>
-</html>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
