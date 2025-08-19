@@ -19,6 +19,7 @@ namespace AirWaterStore.Web.Pages.Games
         }
 
         public List<Game> Games { get; set; } = new List<Game>();
+        public Dictionary<int, bool> GameWishlistStatus { get; set; } = new Dictionary<int, bool>();
 
         [BindProperty(SupportsGet = true)]
         public int CurrentPage { get; set; } = 1;
@@ -28,21 +29,13 @@ namespace AirWaterStore.Web.Pages.Games
         public int TotalPages { get; set; }
         public string? SuccessMessage { get; set; }
 
-        // public bool IsAuthenticated => HttpContext.Session.GetInt32(SessionParams.UserId).HasValue;
-        // public bool IsCustomer => HttpContext.Session.GetInt32(SessionParams.UserRole) == 1;
-        // public bool IsStaff => HttpContext.Session.GetInt32(SessionParams.UserRole) == 2;
-
-        // public async Task<IActionResult> OnGetAsync(int currentPage = 1, string searchString = "")
         public async Task<IActionResult> OnGetAsync()
         {
-            // CurrentPage = currentPage;
-            // SearchString = searchString;
-
             // Get success message from TempData
-            var successMessgae = TempData["SuccessMessage"];
-            if (successMessgae != null)
+            var successMessage = TempData["SuccessMessage"];
+            if (successMessage != null)
             {
-                SuccessMessage = successMessgae.ToString();
+                SuccessMessage = successMessage.ToString();
             }
 
             var allGames = await _gameService.GetAllAsync(1, 1000); // Get all for filtering
@@ -66,6 +59,27 @@ namespace AirWaterStore.Web.Pages.Games
                 .Skip((CurrentPage - 1) * PageSize)
                 .Take(PageSize)
                 .ToList();
+
+            // Check wishlist status for each game
+            if (this.IsAuthenticated() && this.IsCustomer())
+            {
+                var userId = this.GetCurrentUserId();
+                GameWishlistStatus.Clear();
+                
+                foreach (var game in Games)
+                {
+                    try
+                    {
+                        var isInWishlist = await _wishlistService.HasUserWishlistedAsync(game.GameId, userId);
+                        GameWishlistStatus[game.GameId] = isInWishlist;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error checking wishlist status for game {game.GameId}: {ex.Message}");
+                        GameWishlistStatus[game.GameId] = false;
+                    }
+                }
+            }
 
             return Page();
         }
@@ -103,9 +117,9 @@ namespace AirWaterStore.Web.Pages.Games
             HttpContext.Session.SetObjectAsJson("Cart", cart);
             TempData["SuccessMessage"] = "Game added to cart!";
 
-            return RedirectToPage(null, new
-            { CurrentPage, SearchString });
+            return RedirectToPage(null, new { CurrentPage, SearchString });
         }
+
         public async Task<IActionResult> OnPostToggleWishlistAsync(int gameId)
         {
             if (!this.IsAuthenticated() || !this.IsCustomer())
@@ -114,17 +128,26 @@ namespace AirWaterStore.Web.Pages.Games
             }
 
             var userId = this.GetCurrentUserId();
-            var isInWishlist = await _wishlistService.HasUserWishlistedAsync(gameId, userId);
-
+            
             try
             {
+                // Check if game is currently in wishlist
+                var isInWishlist = await _wishlistService.HasUserWishlistedAsync(gameId, userId);
+                
                 if (isInWishlist)
                 {
+                    // Remove from wishlist using the correct method
                     await _wishlistService.DeleteByUserAndGameAsync(userId, gameId);
-                    TempData["SuccessMessage"] = "Game removed from wishlist!";
+                    
+                    // Get game title for better message
+                    var game = await _gameService.GetByIdAsync(gameId);
+                    var gameTitle = game?.Title ?? "Game";
+                    
+                    TempData["SuccessMessage"] = $"{gameTitle} removed from wishlist!";
                 }
                 else
                 {
+                    // Add to wishlist
                     var wishlist = new Data.Models.Wishlist
                     {
                         UserId = userId,
@@ -132,15 +155,27 @@ namespace AirWaterStore.Web.Pages.Games
                         CreatedAt = DateTime.Now
                     };
                     await _wishlistService.AddAsync(wishlist);
-                    TempData["SuccessMessage"] = "Game added to wishlist!";
+                    
+                    // Get game title for better message
+                    var game = await _gameService.GetByIdAsync(gameId);
+                    var gameTitle = game?.Title ?? "Game";
+                    
+                    TempData["SuccessMessage"] = $"{gameTitle} added to wishlist!";
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                // Log error for debugging
+                Console.WriteLine($"Error toggling wishlist for gameId {gameId}, userId {userId}: {ex.Message}");
                 TempData["ErrorMessage"] = "Unable to update wishlist. Please try again.";
             }
 
             return RedirectToPage(new { CurrentPage, SearchString });
+        }
+
+        public bool IsGameInWishlist(int gameId)
+        {
+            return GameWishlistStatus.TryGetValue(gameId, out var isInWishlist) && isInWishlist;
         }
     }
 

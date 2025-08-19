@@ -1177,7 +1177,9 @@ footer a:hover {
 .bg-gradient-warning {
     background: linear-gradient(135deg, #ffc107, #fd7e14);
 }
-
+.bg-gradient-info {
+    background: linear-gradient(135deg, #17a2b8, #138496) !important;
+}
 .shadow-custom {
     box-shadow: var(--shadow);
 }

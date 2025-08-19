@@ -16,18 +16,19 @@ namespace AirWaterStore.Data.Repositories
         {
             return await _context.Wishlists
                 .Where(w => w.UserId == userId)
-                .OrderByDescending(w => w.WishlistId)
+                .Include(w => w.Game)
+                .OrderByDescending(w => w.CreatedAt)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .Select(w => w.Game)
                 .ToListAsync();
         }
 
-        public async Task<bool> HasUserWishlistedAsync(int wishlistId, int userId)
+        // ✅ FIXED METHOD:
+        public async Task<bool> HasUserWishlistedAsync(int gameId, int userId)
         {
-            var wishlist = await _context.Wishlists
-                .FirstOrDefaultAsync(w => w.WishlistId == wishlistId && w.UserId == userId);
-            return wishlist != null;
+            return await _context.Wishlists
+                .AnyAsync(w => w.GameId == gameId && w.UserId == userId);
         }
 
         public async Task<int> GetTotalCountByGameIdAsync(int gameId)
@@ -44,6 +45,7 @@ namespace AirWaterStore.Data.Repositories
                 .CountAsync();
         }
 
+        // ✅ FIXED METHOD:
         public async Task<Wishlist?> GetWishlistItemAsync(int userId, int gameId)
         {
             return await _context.Wishlists
@@ -52,6 +54,13 @@ namespace AirWaterStore.Data.Repositories
 
         public async Task AddAsync(Wishlist wishlist)
         {
+            // Check if already exists
+            var existing = await GetWishlistItemAsync(wishlist.UserId, wishlist.GameId);
+            if (existing != null)
+            {
+                throw new InvalidOperationException("Game is already in wishlist");
+            }
+
             await _context.Wishlists.AddAsync(wishlist);
             await _context.SaveChangesAsync();
         }
@@ -66,12 +75,13 @@ namespace AirWaterStore.Data.Repositories
             }
         }
 
+        // ✅ FIXED METHOD:
         public async Task DeleteByUserAndGameAsync(int userId, int gameId)
         {
-            var wishlist = await GetWishlistItemAsync(userId, gameId);
-            if (wishlist != null)
+            var wishlistItem = await GetWishlistItemAsync(userId, gameId);
+            if (wishlistItem != null)
             {
-                _context.Wishlists.Remove(wishlist);
+                _context.Wishlists.Remove(wishlistItem);
                 await _context.SaveChangesAsync();
             }
         }

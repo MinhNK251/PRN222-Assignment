@@ -131,18 +131,23 @@ namespace AirWaterStore.Web.Pages.Wishlist
             }
 
             var userId = this.GetCurrentUserId();
-            
-            // Find the wishlist item to remove
-            var wishlistGames = await _wishlistService.GetWishlistGamesForUserAsync(userId, 1, 1000);
-            var game = wishlistGames.FirstOrDefault(g => g.GameId == gameId);
-            
-            if (game != null)
+    
+            try
             {
-                // We need to find the actual wishlist ID
-                // This is a limitation of the current service design
-                // For now, we'll use a workaround by checking the wishlist items
-                await _wishlistService.DeleteAsync(gameId); // This should be wishlistId, not gameId
-                TempData["SuccessMessage"] = $"{game.Title} removed from wishlist!";
+                // Use the correct method to delete by user and game
+                await _wishlistService.DeleteByUserAndGameAsync(userId, gameId);
+        
+                // Get the game title for the success message
+                var game = await _gameService.GetByIdAsync(gameId);
+                var gameTitle = game?.Title ?? "Game";
+        
+                TempData["SuccessMessage"] = $"{gameTitle} removed from wishlist!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Unable to remove game from wishlist. Please try again.";
+                // Log the error if you have logging
+                Console.WriteLine($"Error removing from wishlist: {ex.Message}");
             }
 
             return RedirectToPage(new { currentPage });
@@ -156,14 +161,19 @@ namespace AirWaterStore.Web.Pages.Wishlist
             }
 
             var userId = this.GetCurrentUserId();
-            var wishlistGames = await _wishlistService.GetWishlistGamesForUserAsync(userId, 1, 1000);
-            
-            foreach (var game in wishlistGames)
+    
+            try
             {
-                await _wishlistService.DeleteAsync(game.GameId); // This should be wishlistId
+                // Use the new method to clear all user's wishlist items
+                await _wishlistService.ClearUserWishlistAsync(userId);
+                TempData["SuccessMessage"] = "Wishlist cleared successfully!";
             }
-
-            TempData["SuccessMessage"] = "Wishlist cleared successfully!";
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Unable to clear wishlist. Please try again.";
+                Console.WriteLine($"Error clearing wishlist: {ex.Message}");
+            }
+    
             return RedirectToPage();
         }
     }
