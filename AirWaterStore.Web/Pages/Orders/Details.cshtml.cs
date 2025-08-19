@@ -95,6 +95,13 @@ public class DetailsModel : PageModel
                     {
                         order.Status = OrderStatus.Failed;
                         await _orderService.UpdateAsync(order);
+                        await _paymentService.AddAsync(new Payment
+                        {
+                            OrderId = order.OrderId,
+                            PaymentDate = DateTime.UtcNow,
+                            TotalPrice = order.TotalPrice,
+                            Status = PaymentStatus.Failed
+                        });
                     }
                 }
             }

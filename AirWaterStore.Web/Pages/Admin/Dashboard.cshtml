@@ -7,6 +7,34 @@
 
 <h1>Admin Dashboard</h1>
 
+<!-- Month/Year Selection Form -->
+@* <form method="get" class="mb-4">
+    <div class="form-row">
+        <div class="col-md-3">
+            <label for="Month">Select Month</label>
+            <select asp-for="SelectedMonth" class="form-control">
+                @for (int i = 1; i <= 12; i++)
+                {
+                    <option value="@i" @(i == Model.SelectedMonth ? "selected" : "")>@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="Year">Select Year</label>
+            <select asp-for="SelectedYear" class="form-control">
+                @for (int i = 2020; i <= DateTime.Now.Year; i++)
+                {
+                    <option value="@i" @(i == Model.SelectedYear ? "selected" : "")>@i</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary mt-4">Filter</button>
+        </div>
+    </div>
+</form> *@
+
+<!-- Display Statistics -->
 <div class="row">
     <div class="col-md-3">
         <div class="card text-white bg-primary mb-3">
