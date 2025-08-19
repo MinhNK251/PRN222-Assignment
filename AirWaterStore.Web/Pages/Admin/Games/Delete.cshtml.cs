@@ -1,4 +1,5 @@
 using AirWaterStore.Business.Interfaces;
+using AirWaterStore.Business.Services;
 using AirWaterStore.Data.Models;
 using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
@@ -9,14 +10,18 @@ namespace AirWaterStore.Web.Pages.Admin.Games
     public class DeleteModel : PageModel
     {
         private readonly IGameService _gameService;
+        private readonly CloudinaryService _cloudinaryService;
 
-        public DeleteModel(IGameService gameService)
+        public DeleteModel(IGameService gameService, CloudinaryService cloudinaryService)
         {
             _gameService = gameService;
+            _cloudinaryService = cloudinaryService;
         }
 
         [BindProperty]
-        public Game Game { get; set; } = default!;
+        public Game Game { get; set; } = default!; 
+        [BindProperty]
+        public string? ThumbnailUrl { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -34,6 +39,7 @@ namespace AirWaterStore.Web.Pages.Admin.Games
             }
 
             Game = game;
+            ThumbnailUrl = game.ThumbnailUrl;
 
             return Page();
         }
@@ -47,6 +53,13 @@ namespace AirWaterStore.Web.Pages.Admin.Games
 
             try
             {
+                if (!string.IsNullOrEmpty(ThumbnailUrl) && ThumbnailUrl.Contains("res.cloudinary.com"))
+                {
+                    var uri = new Uri(ThumbnailUrl);
+                    var segments = uri.Segments;
+                    string publicId = Path.GetFileNameWithoutExtension(segments.Last());
+                    await _cloudinaryService.DeleteImageAsync(publicId);
+                }
                 await _gameService.DeleteAsync(id);
                 TempData["SuccessMessage"] = "Game deleted successfully!";
                 return RedirectToPage("/Games/Index");
