@@ -26,6 +26,7 @@ namespace AirWaterStore.Web.Pages.Admin
         }
 
         public decimal TotalRevenue { get; set; }
+        public decimal TodayRevenue { get; set; }
         public decimal MonthlyRevenue { get; set; }
         public decimal YearlyRevenue { get; set; }
         public int TotalGames { get; set; }
@@ -56,6 +57,7 @@ namespace AirWaterStore.Web.Pages.Admin
 
             // Get statistics
             TotalRevenue = await _dashboardService.GetTotalRevenueAsync();
+            TodayRevenue = await _dashboardService.GetTodayRevenueAsync();
             MonthlyRevenue = await _dashboardService.GetMonthlyIncomeAsync(SelectedMonth, SelectedYear);
             YearlyRevenue = await _dashboardService.GetYearlyIncomeAsync(SelectedYear);
             TotalGames = await _gameService.GetTotalCountAsync();

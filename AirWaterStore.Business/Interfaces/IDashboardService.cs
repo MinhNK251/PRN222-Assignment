@@ -11,6 +11,7 @@ namespace AirWaterStore.Business.Interfaces
     public interface IDashboardService
     {
         Task<decimal> GetTotalRevenueAsync();
+        Task<decimal> GetTodayRevenueAsync();
         Task<decimal> GetMonthlyIncomeAsync(int month, int year);
         Task<decimal> GetYearlyIncomeAsync(int year);
         Task<List<UserPaymentStats>> GetUserPaymentStatsAsync(int month, int year);

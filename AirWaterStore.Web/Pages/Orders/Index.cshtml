@@ -82,9 +82,15 @@
                                             <i class="fas fa-check-circle me-1"></i>@order.Status
                                         </span>
                                     }
-                                    else
+                                    else if (order.Status == "Pending")
                                     {
                                         <span class="badge badge-warning fs-6 px-3 py-2">
+                                            <i class="fas fa-clock me-1"></i>@order.Status
+                                        </span>
+                                    }
+                                    else if (order.Status == "Failed")
+                                    {
+                                        <span class="badge badge-danger fs-6 px-3 py-2">
                                             <i class="fas fa-clock me-1"></i>@order.Status
                                         </span>
                                     }

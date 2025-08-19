@@ -22,6 +22,16 @@ namespace AirWaterStore.Data.Repositories
             return totalRevenue;
         }
 
+        // Get Today Revenue
+        public async Task<decimal> GetTodayRevenueAsync()
+        {
+            var totalRevenue = await _context.Payments
+                .Where(p => p.PaymentDate.Date == DateTime.Today && p.Status == "Completed")
+                .SumAsync(p => p.TotalPrice);
+
+            return totalRevenue;
+        }
+
         // Get the total income for a given month and year
         public async Task<decimal> GetMonthlyIncomeAsync(int month, int year)
         {
@@ -70,7 +80,8 @@ namespace AirWaterStore.Data.Repositories
                 {
                     GameId = g.Key,
                     Title = g.FirstOrDefault().Game.Title,
-                    TotalOrders = g.Sum(od => od.Quantity)
+                    TotalOrders = g.Sum(od => od.Quantity),
+                    TotalRevenue = g.Sum(od => od.Quantity * od.Game.Price)
                 })
                 .OrderByDescending(g => g.TotalOrders)
                 .ToListAsync();
@@ -141,6 +152,7 @@ namespace AirWaterStore.Data.Repositories
         public int GameId { get; set; }
         public string Title { get; set; }
         public int TotalOrders { get; set; }
+        public decimal TotalRevenue { get; set; }
     }
 
     public class GameWishlistStats

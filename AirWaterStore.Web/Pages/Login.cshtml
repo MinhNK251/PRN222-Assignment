@@ -4,23 +4,51 @@
     ViewData["Title"] = "Login";
 }
 
-<!-- Hero Section -->
-<div class="hero-section">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 text-center">
-                <h1 class="display-4 fw-bold mb-4">
-                    <i class="fas fa-sign-in-alt me-3"></i>Welcome Back
-                </h1>
-                <p class="lead mb-0">Sign in to your AirWaterStore account to continue your gaming journey.</p>
+<div class="container py-5">
+    <div class="row align-items-center">
+        <!-- Hero Section (Left) -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <div class="card hero-section py-3">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <h1 class="fw-semibold mb-3" style="font-size:1.75rem;">
+                            <i class="fas fa-sign-in-alt me-2"></i>Welcome Back
+                        </h1>
+                        <p class="mb-0" style="font-size:1rem;">
+                            Sign in to your AirWaterStore account to continue your gaming journey.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="row mt-4 g-4">
+                <div class="col-md-4 text-center">
+                    <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                        <i class="fas fa-gamepad fa-2x text-primary mb-3"></i>
+                        <h6 class="fw-semibold">Premium Games</h6>
+                        <p class="text-muted small mb-0">Access to exclusive gaming content</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                        <i class="fas fa-headset fa-2x text-primary mb-3"></i>
+                        <h6 class="fw-semibold">24/7 Support</h6>
+                        <p class="text-muted small mb-0">Get help whenever you need it</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                        <i class="fas fa-shield-alt fa-2x text-primary mb-3"></i>
+                        <h6 class="fw-semibold">Secure Shopping</h6>
+                        <p class="text-muted small mb-0">Your data is always protected</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5">
+        <!-- Login Card (Right) -->
+        <div class="col-lg-5 offset-lg-1">
             <div class="card shadow-custom border-0">
                 <div class="card-body p-5">
                     <div class="text-center mb-4">
@@ -42,8 +70,7 @@
                             <label asp-for="LoginInput.Email" class="form-label fw-semibold">
                                 <i class="fas fa-envelope me-2 text-primary"></i>Email Address
                             </label>
-                            <input asp-for="LoginInput.Email" class="form-control form-control-lg" 
-                                   placeholder="Enter your email" />
+                            <input asp-for="LoginInput.Email" class="form-control form-control-lg" placeholder="Enter your email" />
                             <span asp-validation-for="LoginInput.Email" class="text-danger small"></span>
                         </div>
 
@@ -51,8 +78,7 @@
                             <label asp-for="LoginInput.Password" class="form-label fw-semibold">
                                 <i class="fas fa-lock me-2 text-primary"></i>Password
                             </label>
-                            <input asp-for="LoginInput.Password" class="form-control form-control-lg" 
-                                   placeholder="Enter your password" />
+                            <input asp-for="LoginInput.Password" class="form-control form-control-lg" placeholder="Enter your password" />
                             <span asp-validation-for="LoginInput.Password" class="text-danger small"></span>
                         </div>
 
@@ -64,38 +90,13 @@
 
                         <div class="text-center">
                             <p class="text-muted mb-0">
-                                Don't have an account? 
+                                Don't have an account?
                                 <a asp-page="/Register" class="text-decoration-none fw-semibold">
                                     <span class="text-gradient">Sign up here</span>
                                 </a>
                             </p>
                         </div>
                     </form>
-                </div>
-            </div>
-
-            <!-- Features Section -->
-            <div class="row mt-5 g-4">
-                <div class="col-md-4 text-center">
-                    <div class="bg-white p-4 rounded-custom shadow-custom h-100">
-                        <i class="fas fa-gamepad fa-2x text-primary mb-3"></i>
-                        <h6 class="fw-semibold">Premium Games</h6>
-                        <p class="text-muted small mb-0">Access to exclusive gaming content</p>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
-                    <div class="bg-white p-4 rounded-custom shadow-custom h-100">
-                        <i class="fas fa-headset fa-2x text-primary mb-3"></i>
-                        <h6 class="fw-semibold">24/7 Support</h6>
-                        <p class="text-muted small mb-0">Get help whenever you need it</p>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
-                    <div class="bg-white p-4 rounded-custom shadow-custom h-100">
-                        <i class="fas fa-shield-alt fa-2x text-primary mb-3"></i>
-                        <h6 class="fw-semibold">Secure Shopping</h6>
-                        <p class="text-muted small mb-0">Your data is always protected</p>
-                    </div>
                 </div>
             </div>
         </div>

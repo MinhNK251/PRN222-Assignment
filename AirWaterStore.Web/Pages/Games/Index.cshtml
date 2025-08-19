@@ -27,16 +27,24 @@
                                 </button>
                             </div>
                         </form>
+                        
                         @if (!string.IsNullOrEmpty(Model.SearchString))
                         {
-                            <div class="mt-3">
-                                <a asp-page="/Games/Index" class="btn btn-outline-light btn-sm">
+                            <div class="mt-1">
+                                <a asp-page="/Games/Index" class="btn btn-outline-light btn-sm mt-3">
                                     <i class="fas fa-times me-2"></i>Clear Search
                                 </a>
                             </div>
                         }
+
+                        @if (Model.IsStaff())
+                        {
+                            <a asp-page="/Admin/Games/Create" class="btn btn-success btn-lg mt-3">
+                                <i class="fas fa-plus me-2"></i>Add New Game
+                            </a>
+                        }
                     </div>
-                </div>
+                </div>                
             </div>
         </div>
     </div>
@@ -50,19 +58,7 @@
             <i class="fas fa-check-circle me-2"></i>@Model.SuccessMessage
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    }
-
-    <!-- Admin Actions -->
-    @if (Model.IsStaff())
-    {
-        <div class="row mb-4">
-            <div class="col-12 text-end">
-                <a asp-page="/Admin/Games/Create" class="btn btn-success btn-lg">
-                    <i class="fas fa-plus me-2"></i>Add New Game
-                </a>
-            </div>
-        </div>
-    }
+    }    
 
     <!-- Search Results Info -->
     @if (!string.IsNullOrEmpty(Model.SearchString))
