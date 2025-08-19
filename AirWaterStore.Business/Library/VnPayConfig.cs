@@ -1,4 +1,4 @@
-﻿namespace AirWaterStore.Business.LibraryS;
+﻿namespace AirWaterStore.Business.Library;
 
 public class VnPayConfig
 {

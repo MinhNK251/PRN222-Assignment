@@ -1,5 +1,6 @@
 using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using AirWaterStore.Data.Repositories;
 using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,22 +13,33 @@ namespace AirWaterStore.Web.Pages.Admin
         private readonly IOrderService _orderService;
         private readonly IUserService _userService;
         private readonly IChatRoomService _chatRoomService;
+        private readonly IDashboardService _dashboardService;
 
         public DashboardModel(IGameService gameService, IOrderService orderService,
-            IUserService userService, IChatRoomService chatRoomService)
+            IUserService userService, IChatRoomService chatRoomService, IDashboardService dashboardService)
         {
             _gameService = gameService;
             _orderService = orderService;
             _userService = userService;
             _chatRoomService = chatRoomService;
+            _dashboardService = dashboardService;
         }
 
+        public decimal TotalRevenue { get; set; }
         public int TotalGames { get; set; }
         public int TotalOrders { get; set; }
         public int TotalUsers { get; set; }
         public int PendingChats { get; set; }
         public List<Order> RecentOrders { get; set; } = new List<Order>();
         public Dictionary<int, string> UserNames { get; set; } = new Dictionary<int, string>();
+        public List<GameWishlistStats> TopWishlistGames { get; set; } = new List<GameWishlistStats>();
+        public List<CommissionRequest> TopCommissionRequests { get; set; } = new List<CommissionRequest>();
+        public List<Game> LowStockGames { get; set; } = new List<Game>();
+
+        [BindProperty(SupportsGet = true)]
+        public int SelectedMonth { get; set; } = DateTime.Now.Month;
+        [BindProperty(SupportsGet = true)]
+        public int SelectedYear { get; set; } = DateTime.Now.Year;
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -41,9 +53,12 @@ namespace AirWaterStore.Web.Pages.Admin
             TotalGames = await _gameService.GetTotalCountAsync();
             TotalOrders = await _orderService.GetTotalCountAsync();
             TotalUsers = await _userService.GetTotalCountAsync();
+            TotalRevenue = await _dashboardService.GetTotalRevenueAsync();
+            TopWishlistGames = await _dashboardService.GetTopWishlistGameAsync();
+            TopCommissionRequests = await _dashboardService.GetTopCommissionAsync();
+            LowStockGames = await _dashboardService.GetLowStockAlertsAsync();
 
             // Get pending chats (chats without assigned staff)
-            // var userId = HttpContext.Session.GetInt32(SessionParams.UserId);
             var userId = this.GetCurrentUserId();
             var allChats = await _chatRoomService.GetChatRoomsByUserIdAsync(userId);
             PendingChats = allChats.Count(c => c.StaffId == null);

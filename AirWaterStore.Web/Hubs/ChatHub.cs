@@ -71,6 +71,10 @@ namespace AirWaterStore.Web.Hubs
 
             if (userRole == 2 && chatRoom.StaffId == null && chatRoom.StaffId != userId.Value)
             {
+                await _chatRoomService.AssignStaffToChatRoomAsync(chatRoomId, userId.Value);
+            }
+            if (userRole == 2 && chatRoom.StaffId == null && chatRoom.StaffId != userId.Value)
+            {
                 // If staff is not assigned, assign them
                 await _chatRoomService.AssignStaffToChatRoomAsync(chatRoomId, userId.Value);
             }

@@ -1,6 +1,6 @@
 ﻿using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Business.Library;
-using AirWaterStore.Business.LibraryS;
+using AirWaterStore.Business.Library;
 using AirWaterStore.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;

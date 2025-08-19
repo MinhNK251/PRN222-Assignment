@@ -5,70 +5,298 @@
     ViewData["Title"] = "Order History";
 }
 
-<h1>Order History</h1>
-
-@if (Model.Orders.Any())
-{
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Order #</th>
-                    <th>Date</th>
-                    <th>Items</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var order in Model.Orders)
-                {
-                    <tr>
-                        <td>@order.OrderId</td>
-                        <td>@order.OrderDate.ToString("MMM dd, yyyy HH:mm")</td>
-                        <td>@order.OrderDetails.Count items</td>
-                        <td>@order.TotalPrice.ToString("C", Currency.VnCurrencyFormat)</td>
-                        <td>
-                            <span class="badge badge-@(order.Status == "Completed" ? "success" : "warning") text-dark">
-                                @order.Status
-                            </span>
-                        </td>
-                        <td>
-                            <a asp-page="/Orders/Details" asp-route-id="@order.OrderId" class="btn btn-sm btn-info">View
-                                Details</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="fas fa-history me-3"></i>Order History
+                </h1>
+                <p class="lead mb-0">Track your gaming purchases and order status</p>
+            </div>
+        </div>
     </div>
+</div>
 
-    <!-- Pagination -->
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
-                <a class="page-link" asp-page="/Orders/Index" asp-route-currentPage="@(Model.CurrentPage - 1)">Previous</a>
-            </li>
+<div class="container">
+    @if (Model.Orders.Any())
+    {
+        <!-- Order Statistics -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card bg-gradient-primary text-white border-0 shadow-custom">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-shopping-bag fa-3x mb-3 opacity-75"></i>
+                        <h3 class="fw-bold mb-1">@Model.Orders.Count</h3>
+                        <p class="mb-0 opacity-75">Total Orders</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-gradient-success text-white border-0 shadow-custom">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-check-circle fa-3x mb-3 opacity-75"></i>
+                        <h3 class="fw-bold mb-1">@Model.Orders.Count(o => o.Status == "Completed")</h3>
+                        <p class="mb-0 opacity-75">Completed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-gradient-warning text-white border-0 shadow-custom">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-clock fa-3x mb-3 opacity-75"></i>
+                        <h3 class="fw-bold mb-1">@Model.Orders.Count(o => o.Status == "Pending")</h3>
+                        <p class="mb-0 opacity-75">Pending</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            @for (int i = 1; i <= Model.TotalPages; i++)
+        <!-- Orders Grid -->
+        <div class="orders-grid">
+            @foreach (var order in Model.Orders)
             {
-                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                    <a class="page-link" asp-page="/Orders/Index" asp-route-currentPage="@i">@i</a>
-                </li>
+                <div class="card order-card shadow-custom border-0 mb-4 fade-in-up">
+                    <div class="card-header bg-white border-0 py-3">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="order-icon me-3">
+                                        <i class="fas fa-receipt fa-2x text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="fw-bold mb-1">Order #@order.OrderId</h5>
+                                        <p class="text-muted mb-0">
+                                            <i class="fas fa-calendar me-1"></i>
+                                            @order.OrderDate.ToString("MMM dd, yyyy 'at' HH:mm")
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <div class="order-status">
+                                    @if (order.Status == "Completed")
+                                    {
+                                        <span class="badge badge-success fs-6 px-3 py-2">
+                                            <i class="fas fa-check-circle me-1"></i>@order.Status
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning fs-6 px-3 py-2">
+                                            <i class="fas fa-clock me-1"></i>@order.Status
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <!-- Order Items Preview -->
+                        <div class="order-items mb-4">
+                            <h6 class="fw-semibold mb-3">
+                                <i class="fas fa-gamepad me-2 text-primary"></i>Order Items (@order.OrderDetails.Count)
+                            </h6>
+                            <div class="row g-3">
+                                @foreach (var item in order.OrderDetails.Take(3))
+                                {
+                                    <div class="col-md-4">
+                                        <div class="order-item d-flex align-items-center p-3 bg-light rounded-custom">
+                                            <div class="item-icon me-3">
+                                                <i class="fas fa-gamepad fa-lg text-primary"></i>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="fw-semibold mb-1 text-truncate">
+                                                    @(item.Game?.Title ?? "Unknown Game")
+                                                </h6>
+                                                <p class="text-muted mb-0 small">
+                                                    Qty: @item.Quantity × @item.Price.ToString("C", Currency.VnCurrencyFormat)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @if (order.OrderDetails.Count > 3)
+                                {
+                                    <div class="col-md-4">
+                                        <div class="order-item d-flex align-items-center justify-content-center p-3 bg-light rounded-custom">
+                                            <div class="text-center">
+                                                <i class="fas fa-ellipsis-h fa-lg text-muted"></i>
+                                                <p class="text-muted mb-0 small mt-2">
+                                                    +@(order.OrderDetails.Count - 3) more
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        
+                        <!-- Order Summary -->
+                        <div class="order-summary d-flex justify-content-between align-items-center p-3 bg-gradient-light rounded-custom">
+                            <div>
+                                <h6 class="fw-semibold mb-1">Order Total</h6>
+                                <p class="text-muted mb-0 small">
+                                    @order.OrderDetails.Count items • @order.OrderDate.ToString("MMM dd, yyyy")
+                                </p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="fw-bold text-gradient mb-0">
+                                    @order.TotalPrice.ToString("C", Currency.VnCurrencyFormat)
+                                </h4>
+                            </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="d-flex justify-content-end mt-4">
+                            <a asp-page="/Orders/Details" asp-route-id="@order.OrderId" 
+                               class="btn btn-primary">
+                                <i class="fas fa-eye me-2"></i>View Full Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
             }
+        </div>
 
-            <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
-                <a class="page-link" asp-page="/Orders/Index" asp-route-currentPage="@(Model.CurrentPage + 1)">Next</a>
-            </li>
-        </ul>
-    </nav>
-}
-else
-{
-    <div class="alert alert-info">
-        <h4>No orders yet</h4>
-        <p>You haven't placed any orders. Start shopping to see your order history here.</p>
-        <a asp-page="/Games/Index" class="btn btn-primary">Browse Games</a>
+        <!-- Enhanced Pagination -->
+        @if (Model.TotalPages > 1)
+        {
+            <div class="d-flex justify-content-center mt-5">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-lg">
+                        <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                            <a class="page-link" asp-page="/Orders/Index" asp-route-currentPage="@(Model.CurrentPage - 1)">
+                                <i class="fas fa-chevron-left me-1"></i>Previous
+                            </a>
+                        </li>
+
+                        @for (int i = 1; i <= Model.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                                <a class="page-link" asp-page="/Orders/Index" asp-route-currentPage="@i">@i</a>
+                            </li>
+                        }
+
+                        <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                            <a class="page-link" asp-page="/Orders/Index" asp-route-currentPage="@(Model.CurrentPage + 1)">
+                                Next<i class="fas fa-chevron-right ms-1"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        }
+    }
+    else
+    {
+        <!-- Empty State -->
+        <div class="text-center py-5">
+            <div class="bg-white p-5 rounded-custom shadow-custom">
+                <i class="fas fa-shopping-bag fa-4x text-muted mb-4"></i>
+                <h3 class="text-muted mb-3">No orders yet</h3>
+                <p class="text-muted mb-4">
+                    You haven't placed any orders yet. Start shopping to build your gaming collection!
+                </p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a asp-page="/Games/Index" class="btn btn-primary btn-lg">
+                        <i class="fas fa-store me-2"></i>Browse Games
+                    </a>
+                    <a asp-page="/Cart" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-shopping-cart me-2"></i>View Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Features Section -->
+<div class="container mt-5">
+    <div class="row g-4">
+        <div class="col-md-4 text-center">
+            <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                <i class="fas fa-shipping-fast fa-2x text-primary mb-3"></i>
+                <h6 class="fw-semibold">Instant Delivery</h6>
+                <p class="text-muted small mb-0">Get your games immediately after purchase</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                <i class="fas fa-shield-alt fa-2x text-primary mb-3"></i>
+                <h6 class="fw-semibold">Secure Orders</h6>
+                <p class="text-muted small mb-0">All transactions are protected and secure</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                <i class="fas fa-headset fa-2x text-primary mb-3"></i>
+                <h6 class="fw-semibold">24/7 Support</h6>
+                <p class="text-muted small mb-0">We're here to help with any issues</p>
+            </div>
+        </div>
     </div>
+</div>
+
+<style>
+.orders-grid {
+    display: grid;
+    gap: 1.5rem;
 }
+
+.order-card {
+    transition: all 0.3s ease;
+    border-radius: var(--border-radius);
+}
+
+.order-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.order-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.order-item {
+    transition: all 0.3s ease;
+}
+
+.order-item:hover {
+    background-color: var(--primary-color) !important;
+    color: white;
+}
+
+.order-item:hover .text-primary {
+    color: white !important;
+}
+
+.order-item:hover .text-muted {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.bg-gradient-light {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.badge-success {
+    background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+.badge-warning {
+    background: linear-gradient(135deg, #ffc107, #fd7e14);
+}
+
+.opacity-75 {
+    opacity: 0.75;
+}
+</style>

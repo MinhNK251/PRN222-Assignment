@@ -35,7 +35,6 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
 
         public IActionResult OnGet()
         {
-            // Require login
             var userId = HttpContext.Session.GetInt32(SessionParams.UserId);
             if (userId == null)
             {
@@ -66,12 +65,28 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
                 Status = "Open",
                 Upvotes = 0,
                 CreatedAt = DateTime.UtcNow
-                
             };
 
             await _repository.AddAsync(request);
 
             return RedirectToPage("./Index");
+        }
+
+        // New: Endpoint for autocomplete suggestions
+        public async Task<JsonResult> OnGetSimilarGamesAsync(string term)
+        {
+            if (string.IsNullOrWhiteSpace(term))
+                return new JsonResult(new string[0]);
+
+            var matches = await _repository.GetAllAsync(); // ideally, add a dedicated GetGameTitlesContainingAsync
+            var results = matches
+                .Where(c => c.GameTitle.Contains(term, StringComparison.OrdinalIgnoreCase))
+                .Select(c => c.GameTitle)
+                .Distinct()
+                .Take(5)
+                .ToList();
+
+            return new JsonResult(results);
         }
     }
 }

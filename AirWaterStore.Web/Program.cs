@@ -1,5 +1,5 @@
 using AirWaterStore.Business.Interfaces;
-using AirWaterStore.Business.LibraryS;
+using AirWaterStore.Business.Library;
 using AirWaterStore.Business.Services;
 using AirWaterStore.Data;
 using AirWaterStore.Data.Repositories;
@@ -40,6 +40,7 @@ namespace AirWaterStore.Web
             builder.Services.AddScoped<IRequestUpvoteRepository, RequestUpvoteRepository>();
             builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
             builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+            builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
 
             // Register services	
             builder.Services.AddScoped<IGameService, GameService>();
@@ -54,6 +55,7 @@ namespace AirWaterStore.Web
             builder.Services.AddScoped<IRequestUpvoteService, RequestUpvoteService>();
             builder.Services.AddScoped<IWishlistService, WishlistService>();
             builder.Services.AddScoped<IPaymentService, PaymentService>();
+            builder.Services.AddScoped<IDashboardService, DashboardService>();
 
             builder.Services.Configure<VnPayConfig>(builder.Configuration.GetSection("VnPay"));
 
