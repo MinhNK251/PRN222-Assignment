@@ -1,0 +1,270 @@
+﻿@page
+@using AirWaterStore.Web.Helper
+@model AirWaterStore.Web.Pages.Wishlist.IndexModel
+@{
+ViewData["Title"] = "My Wishlist";
+}
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="fas fa-heart me-3"></i>My Wishlist
+                </h1>
+                <p class="lead mb-0">Your favorite games saved for later</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+    {
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle me-2"></i>@Model.SuccessMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    }
+
+    @if (Model.WishlistGames.Any())
+    {
+    <!-- Wishlist Summary -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card bg-gradient-primary text-white border-0 shadow-custom">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-heart fa-3x mb-3 opacity-75"></i>
+                    <h3 class="fw-bold mb-1">@Model.WishlistGames.Count</h3>
+                    <p class="mb-0 opacity-75">Games in Wishlist</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-gradient-success text-white border-0 shadow-custom">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-tag fa-3x mb-3 opacity-75"></i>
+                    <h3 class="fw-bold mb-1">@Model.TotalValue.ToString("C", Currency.VnCurrencyFormat)</h3>
+                    <p class="mb-0 opacity-75">Total Value</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex gap-3 flex-wrap">
+                <form method="post" asp-page-handler="AddAllToCart" class="d-inline">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-cart-plus me-2"></i>Add All to Cart
+                    </button>
+                </form>
+                <form method="post" asp-page-handler="ClearWishlist" class="d-inline">
+                    <button type="submit" class="btn btn-outline-danger btn-lg"
+                            onclick="return confirm('Are you sure you want to clear your entire wishlist?')">
+                        <i class="fas fa-trash me-2"></i>Clear Wishlist
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Items Grid -->
+    <div class="game-grid">
+        @foreach (var game in Model.WishlistGames)
+        {
+        <div class="card h-100 fade-in-up wishlist-card">
+            <div class="position-relative">
+                @if (!string.IsNullOrEmpty(game.ThumbnailUrl))
+                {
+                <img src="@game.ThumbnailUrl" class="card-img-top" alt="@game.Title"
+                     style="height: 250px; object-fit: cover;">
+                }
+                else
+                {
+                <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center"
+                     style="height: 250px;">
+                    <i class="fas fa-gamepad fa-3x text-white-50"></i>
+                </div>
+                }
+
+                <!-- Stock Badge -->
+                <div class="position-absolute top-0 end-0 m-3">
+                    @if (game.Quantity > 0)
+                    {
+                    <span class="badge badge-success fs-6">
+                                    <i class="fas fa-check me-1"></i>In Stock
+                                </span>
+                    }
+                    else
+                    {
+                    <span class="badge badge-danger fs-6">
+                                    <i class="fas fa-times me-1"></i>Out of Stock
+                                </span>
+                    }
+                </div>
+
+                <!-- Remove from Wishlist Button -->
+                <div class="position-absolute top-0 start-0 m-3">
+                    <form method="post" asp-page-handler="RemoveFromWishlist" class="d-inline">
+                        <input type="hidden" name="gameId" value="@game.GameId" />
+                        <input type="hidden" name="currentPage" value="@Model.CurrentPage" />
+                        <button type="submit" class="btn btn-sm btn-outline-light wishlist-remove-btn"
+                                title="Remove from wishlist">
+                            <i class="fas fa-heart-broken"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title text-truncate">@game.Title</h5>
+
+                @if (!string.IsNullOrEmpty(game.Genre))
+                {
+                <div class="mb-2">
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">
+                                    <i class="fas fa-tags me-1"></i>@game.Genre.Split(',')[0].Trim()
+                                </span>
+                </div>
+                }
+
+                <p class="card-text flex-grow-1">
+                    @if (!string.IsNullOrEmpty(game.Description))
+                    {
+                    @(game.Description.Length > 120 ? game.Description.Substring(0, 120) + "..." : game.Description)
+                    }
+                    else
+                    {
+                    <span class="text-muted">No description available</span>
+                    }
+                </p>
+
+                @if (!string.IsNullOrEmpty(game.Developer))
+                {
+                <p class="text-muted small mb-2">
+                    <i class="fas fa-code me-1"></i>@game.Developer
+                </p>
+                }
+
+                <div class="mt-auto">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="h4 fw-bold text-gradient mb-0">
+                                    @game.Price.ToString("C", Currency.VnCurrencyFormat)
+                                </span>
+                        @if (game.ReleaseDate.HasValue)
+                        {
+                        <small class="text-muted">
+                            <i class="fas fa-calendar me-1"></i>@game.ReleaseDate.Value.Year
+                        </small>
+                        }
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Games/Details" asp-route-id="@game.GameId"
+                           class="btn btn-info">
+                            <i class="fas fa-eye me-2"></i>View Details
+                        </a>
+
+                        @if (game.Quantity > 0)
+                        {
+                        <form method="post" asp-page-handler="AddToCart" class="d-grid">
+                            <input type="hidden" name="gameId" value="@game.GameId" />
+                            <input type="hidden" name="currentPage" value="@Model.CurrentPage" />
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                            </button>
+                        </form>
+                        }
+                        else
+                        {
+                        <button class="btn btn-secondary" disabled>
+                            <i class="fas fa-times me-2"></i>Out of Stock
+                        </button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+
+    <!-- Pagination -->
+    @if (Model.TotalPages > 1)
+    {
+    <div class="d-flex justify-content-center mt-5">
+        <nav aria-label="Page navigation">
+            <ul class="pagination pagination-lg">
+                <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" asp-page="/Wishlist/Index" asp-route-currentPage="@(Model.CurrentPage - 1)">
+                        <i class="fas fa-chevron-left me-1"></i>Previous
+                    </a>
+                </li>
+
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-page="/Wishlist/Index" asp-route-currentPage="@i">@i</a>
+                </li>
+                }
+
+                <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link" asp-page="/Wishlist/Index" asp-route-currentPage="@(Model.CurrentPage + 1)">
+                        Next<i class="fas fa-chevron-right ms-1"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    }
+    }
+    else
+    {
+    <!-- Empty Wishlist -->
+    <div class="text-center py-5">
+        <div class="bg-white p-5 rounded-custom shadow-custom">
+            <i class="fas fa-heart fa-4x text-muted mb-4"></i>
+            <h3 class="text-muted mb-3">Your wishlist is empty</h3>
+            <p class="text-muted mb-4">
+                Start adding games to your wishlist by clicking the heart icon on games you love!
+            </p>
+            <div class="d-flex justify-content-center gap-3">
+                <a asp-page="/Games/Index" class="btn btn-primary btn-lg">
+                    <i class="fas fa-store me-2"></i>Browse Games
+                </a>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+<style>
+    .wishlist-card {
+        transition: all 0.3s ease;
+    }
+
+    .wishlist-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .wishlist-remove-btn {
+        background: rgba(220, 53, 69, 0.8);
+        border: 1px solid rgba(220, 53, 69, 0.5);
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .wishlist-remove-btn:hover {
+        background: rgba(220, 53, 69, 1);
+        border-color: rgba(220, 53, 69, 1);
+        color: white;
+        transform: scale(1.1);
+    }
+
+    .opacity-75 {
+        opacity: 0.75;
+    }
+</style>

@@ -52,6 +52,24 @@
                         <button type="submit" class="btn btn-primary">Add to Cart</button>
                     </form>
                 }
+                @if (Model.IsCustomer())
+                {
+                <form method="post" asp-page-handler="ToggleWishlist" class="d-inline ms-2">
+                    <input type="hidden" name="gameId" value="@Model.Game.GameId" />
+                    @if (Model.IsInWishlist)
+                    {
+                    <button type="submit" class="btn btn-outline-danger">
+                        <i class="fas fa-heart-broken me-2"></i>Remove from Wishlist
+                    </button>
+                    }
+                    else
+                    {
+                    <button type="submit" class="btn btn-outline-pink">
+                        <i class="fas fa-heart me-2"></i>Add to Wishlist
+                    </button>
+                    }
+                </form>
+                }
                 @if (Model.IsStaff())
                 {
                     <a asp-page="/Admin/Games/Edit" asp-route-id="@Model.Game.GameId" class="btn btn-warning">Edit Game</a>
@@ -145,11 +163,11 @@
                                         <div class="form-group">
                                             <label>Rating</label>
                                             <select name="rating" class="form-control" style="width: 100px;">
-                                                <option value="5" @@(review.Rating==5 ? "selected" : "" )>5 Stars</option>
-                                                <option value="4" @@(review.Rating==4 ? "selected" : "" )>4 Stars</option>
-                                                <option value="3" @@(review.Rating==3 ? "selected" : "" )>3 Stars</option>
-                                                <option value="2" @@(review.Rating==2 ? "selected" : "" )>2 Stars</option>
-                                                <option value="1" @@(review.Rating==1 ? "selected" : "" )>1 Star</option>
+                                                @* <option value="5" @@(review.Rating==5 ? "selected" : "" )>5 Stars</option> *@
+                                                @* <option value="4" @@(review.Rating==4 ? "selected" : "" )>4 Stars</option> *@
+                                                @* <option value="3" @@(review.Rating==3 ? "selected" : "" )>3 Stars</option> *@
+                                                @* <option value="2" @@(review.Rating==2 ? "selected" : "" )>2 Stars</option> *@
+                                                @* <option value="1" @@(review.Rating==1 ? "selected" : "" )>1 Star</option> *@
                                             </select>
                                         </div>
 

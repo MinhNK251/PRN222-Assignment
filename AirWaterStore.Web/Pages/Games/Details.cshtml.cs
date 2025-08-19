@@ -12,14 +12,16 @@ namespace AirWaterStore.Web.Pages.Games
         private readonly IGameService _gameService;
         private readonly IReviewService _reviewService;
         private readonly IUserService _userService;
+        private readonly IWishlistService _wishlistService;
 
-        public DetailsModel(IGameService gameService, IReviewService reviewService, IUserService userService)
+        public DetailsModel(IGameService gameService, IReviewService reviewService, IUserService userService, IWishlistService wishlistService)
         {
             _gameService = gameService;
             _reviewService = reviewService;
             _userService = userService;
+            _wishlistService = wishlistService;
         }
-
+        public bool IsInWishlist { get; set; }
         public Game Game { get; set; } = default!;
         public List<Review> Reviews { get; set; } = default!;
         public Dictionary<int, string> UserNames { get; set; } = new Dictionary<int, string>();
@@ -72,6 +74,8 @@ namespace AirWaterStore.Web.Pages.Games
             if (this.IsCustomer() && this.IsAuthenticated())
             {
                 CanReview = !Reviews.Any(r => r.UserId == this.GetCurrentUserId());
+                var userId = this.GetCurrentUserId();
+                IsInWishlist = await _wishlistService.HasUserWishlistedAsync(id, userId);
             }
 
             return Page();
@@ -179,6 +183,49 @@ namespace AirWaterStore.Web.Pages.Games
         public string GetUsername(int userId)
         {
             return UserNames.TryGetValue(userId, out var username) ? username : "Unknown User";
+        }
+        public async Task<IActionResult> OnPostToggleWishlistAsync(int gameId)
+        {
+            if (!this.IsAuthenticated() || !this.IsCustomer())
+            {
+                return RedirectToPage("/Login");
+            }
+
+            var userId = this.GetCurrentUserId();
+            var isInWishlist = await _wishlistService.HasUserWishlistedAsync(gameId, userId);
+
+            try
+            {
+                if (isInWishlist)
+                {
+                    await _wishlistService.DeleteByUserAndGameAsync(userId, gameId);
+                    TempData["SuccessMessage"] = "Game removed from wishlist!";
+                }
+                else
+                {
+                    var wishlist = new Data.Models.Wishlist
+                    {
+                        UserId = userId,
+                        GameId = gameId,
+                        CreatedAt = DateTime.Now
+                    };
+                    await _wishlistService.AddAsync(wishlist);
+                    TempData["SuccessMessage"] = "Game added to wishlist!";
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("already in wishlist"))
+                {
+                    TempData["ErrorMessage"] = "Game is already in your wishlist!";
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Unable to update wishlist. Please try again.";
+                }
+            }
+
+            return RedirectToPage(new { id = gameId });
         }
     }
 }

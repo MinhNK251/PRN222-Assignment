@@ -1,20 +1,17 @@
 ﻿using AirWaterStore.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AirWaterStore.Data.Repositories
 {
     public class WishlistRepository : IWishlistRepository
     {
         private readonly AirWaterStoreContext _context;
+        
         public WishlistRepository(AirWaterStoreContext context)
         {
             _context = context;
         }
+
         public async Task<List<Game>> GetWishlistGamesForUserAsync(int userId, int pageNumber = 1, int pageSize = 10)
         {
             return await _context.Wishlists
@@ -46,6 +43,13 @@ namespace AirWaterStore.Data.Repositories
                 .Where(w => w.UserId == userId)
                 .CountAsync();
         }
+
+        public async Task<Wishlist?> GetWishlistItemAsync(int userId, int gameId)
+        {
+            return await _context.Wishlists
+                .FirstOrDefaultAsync(w => w.UserId == userId && w.GameId == gameId);
+        }
+
         public async Task AddAsync(Wishlist wishlist)
         {
             await _context.Wishlists.AddAsync(wishlist);
@@ -62,5 +66,24 @@ namespace AirWaterStore.Data.Repositories
             }
         }
 
+        public async Task DeleteByUserAndGameAsync(int userId, int gameId)
+        {
+            var wishlist = await GetWishlistItemAsync(userId, gameId);
+            if (wishlist != null)
+            {
+                _context.Wishlists.Remove(wishlist);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task ClearUserWishlistAsync(int userId)
+        {
+            var userWishlists = await _context.Wishlists
+                .Where(w => w.UserId == userId)
+                .ToListAsync();
+            
+            _context.Wishlists.RemoveRange(userWishlists);
+            await _context.SaveChangesAsync();
+        }
     }
 }

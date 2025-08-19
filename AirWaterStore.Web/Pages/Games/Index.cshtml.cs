@@ -9,11 +9,13 @@ namespace AirWaterStore.Web.Pages.Games
     public class IndexModel : PageModel
     {
         private readonly IGameService _gameService;
+        private readonly IWishlistService _wishlistService;
         private const int PageSize = 9;
 
-        public IndexModel(IGameService gameService)
+        public IndexModel(IGameService gameService, IWishlistService wishlistService)
         {
             _gameService = gameService;
+            _wishlistService = wishlistService;
         }
 
         public List<Game> Games { get; set; } = new List<Game>();
@@ -103,6 +105,42 @@ namespace AirWaterStore.Web.Pages.Games
 
             return RedirectToPage(null, new
             { CurrentPage, SearchString });
+        }
+        public async Task<IActionResult> OnPostToggleWishlistAsync(int gameId)
+        {
+            if (!this.IsAuthenticated() || !this.IsCustomer())
+            {
+                return RedirectToPage("/Login");
+            }
+
+            var userId = this.GetCurrentUserId();
+            var isInWishlist = await _wishlistService.HasUserWishlistedAsync(gameId, userId);
+
+            try
+            {
+                if (isInWishlist)
+                {
+                    await _wishlistService.DeleteByUserAndGameAsync(userId, gameId);
+                    TempData["SuccessMessage"] = "Game removed from wishlist!";
+                }
+                else
+                {
+                    var wishlist = new Data.Models.Wishlist
+                    {
+                        UserId = userId,
+                        GameId = gameId,
+                        CreatedAt = DateTime.Now
+                    };
+                    await _wishlistService.AddAsync(wishlist);
+                    TempData["SuccessMessage"] = "Game added to wishlist!";
+                }
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = "Unable to update wishlist. Please try again.";
+            }
+
+            return RedirectToPage(new { CurrentPage, SearchString });
         }
     }
 

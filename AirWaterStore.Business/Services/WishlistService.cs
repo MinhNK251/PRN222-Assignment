@@ -12,6 +12,7 @@ namespace AirWaterStore.Business.Services
     public class WishlistService : IWishlistService
     {
         private readonly IWishlistRepository _repository;
+        
         public WishlistService(IWishlistRepository repository)
         {
             _repository = repository;
@@ -37,6 +38,11 @@ namespace AirWaterStore.Business.Services
             return await _repository.GetTotalCountByGameIdAsync(gameId);
         }
 
+        public async Task<Wishlist?> GetWishlistItemAsync(int userId, int gameId)
+        {
+            return await _repository.GetWishlistItemAsync(userId, gameId);
+        }
+
         public async Task AddAsync(Wishlist wishlist)
         {
             await _repository.AddAsync(wishlist);
@@ -45,6 +51,16 @@ namespace AirWaterStore.Business.Services
         public async Task DeleteAsync(int wishlistId)
         {
             await _repository.DeleteAsync(wishlistId);
+        }
+
+        public async Task DeleteByUserAndGameAsync(int userId, int gameId)
+        {
+            await _repository.DeleteByUserAndGameAsync(userId, gameId);
+        }
+
+        public async Task ClearUserWishlistAsync(int userId)
+        {
+            await _repository.ClearUserWishlistAsync(userId);
         }
     }
 }

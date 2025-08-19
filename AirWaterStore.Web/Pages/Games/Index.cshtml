@@ -165,7 +165,17 @@
                                    class="btn btn-info">
                                     <i class="fas fa-eye me-2"></i>View Details
                                 </a>
-                                
+                                @if (Model.IsCustomer())
+                                {
+                                <form method="post" asp-page-handler="ToggleWishlist" class="d-grid">
+                                    <input type="hidden" name="gameId" value="@game.GameId" />
+                                    <input type="hidden" name="CurrentPage" value="@Model.CurrentPage" />
+                                    <input type="hidden" name="SearchString" value="@Model.SearchString" />
+                                    <button type="submit" class="btn btn-outline-danger">
+                                        <i class="fas fa-heart me-2"></i>Add to Wishlist
+                                    </button>
+                                </form>
+                                }
                                 @if (Model.IsCustomer() && game.Quantity > 0)
                                 {
                                     <form method="post" asp-page-handler="AddToCart" class="d-grid">
