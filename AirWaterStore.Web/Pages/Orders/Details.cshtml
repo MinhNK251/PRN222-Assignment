@@ -5,83 +5,488 @@
     ViewData["Title"] = $"Order #{Model.Order.OrderId}";
 }
 
-<h1>Order Details</h1>
-
-<div class="row">
-    <div class="col-md-6">
-        <dl class="row">
-            <dt class="col-sm-4">Order Number:</dt>
-            <dd class="col-sm-8">#@Model.Order.OrderId</dd>
-
-            <dt class="col-sm-4">Order Date:</dt>
-            <dd class="col-sm-8">@Model.Order.OrderDate.ToString("MMMM dd, yyyy HH:mm")</dd>
-
-            <dt class="col-sm-4">Customer:</dt>
-            <dd class="col-sm-8">@Model.CustomerName</dd>
-
-            <dt class="col-sm-4">Status:</dt>
-            <dd class="col-sm-8">
-                <span class="badge badge-@(Model.Order.Status == "Completed" ? "success" : "warning") text-dark">
-                    @Model.Order.Status
-                </span>
-            </dd>
-
-            <dt class="col-sm-4">Total Amount:</dt>
-            <dd class="col-sm-8"><strong>@Model.Order.TotalPrice.ToString("C", Currency.VnCurrencyFormat)</strong></dd>
-        </dl>
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="fas fa-receipt me-3"></i>Order Details
+                </h1>
+                <p class="lead mb-0">Order #@Model.Order.OrderId • @Model.Order.OrderDate.ToString("MMMM dd, yyyy")</p>
+            </div>
+        </div>
     </div>
 </div>
 
-<h3 class="mt-4">Order Items</h3>
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Game</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var detail in Model.OrderDetails)
+<div class="container">
+    <!-- Order Summary Card -->
+    <div class="card order-summary-card shadow-custom border-0 mb-4 fade-in-up">
+        <div class="card-header bg-white border-0 py-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <div class="order-icon me-3">
+                            <i class="fas fa-shopping-bag fa-2x text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-1">Order #@Model.Order.OrderId</h4>
+                            <p class="text-muted mb-0">
+                                <i class="fas fa-calendar me-1"></i>
+                                @Model.Order.OrderDate.ToString("MMMM dd, yyyy 'at' HH:mm")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="order-status">
+                        @if (Model.Order.Status == "Completed")
+                        {
+                            <span class="badge badge-success fs-5 px-4 py-2">
+                                <i class="fas fa-check-circle me-2"></i>@Model.Order.Status
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-warning fs-5 px-4 py-2">
+                                <i class="fas fa-clock me-2"></i>@Model.Order.Status
+                            </span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-body p-4">
+            <!-- Order Information Grid -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-6">
+                    <div class="info-card bg-light p-3 rounded-custom">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-user fa-lg text-primary me-2"></i>
+                            <h6 class="fw-semibold mb-0">Customer Information</h6>
+                        </div>
+                        <p class="mb-0 text-muted">@Model.CustomerName</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-card bg-light p-3 rounded-custom">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-calendar-alt fa-lg text-primary me-2"></i>
+                            <h6 class="fw-semibold mb-0">Order Date</h6>
+                        </div>
+                        <p class="mb-0 text-muted">@Model.Order.OrderDate.ToString("MMMM dd, yyyy 'at' HH:mm")</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Total Amount Highlight -->
+            <div class="total-amount-card bg-gradient-primary text-white p-4 rounded-custom text-center mb-4">
+                <h6 class="mb-2 opacity-75">Total Order Amount</h6>
+                <h2 class="fw-bold mb-0">@Model.Order.TotalPrice.ToString("C", Currency.VnCurrencyFormat)</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Items Section -->
+    <div class="card shadow-custom border-0 mb-4 fade-in-up">
+        <div class="card-header bg-white border-0 py-4">
+            <h3 class="fw-bold mb-0">
+                <i class="fas fa-gamepad me-2 text-primary"></i>Order Items (@Model.OrderDetails.Count)
+            </h3>
+        </div>
+        
+        <div class="card-body p-0">
+            <div class="order-items-container">
+                @foreach (var detail in Model.OrderDetails)
+                {
+                    <div class="order-item-card p-4 border-bottom">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="game-icon me-3">
+                                        @if (!string.IsNullOrEmpty(detail.Game?.ThumbnailUrl))
+                                        {
+                                            <img src="@detail.Game.ThumbnailUrl" alt="@detail.Game.Title" 
+                                                 class="game-thumbnail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                            <i class="fas fa-gamepad fa-2x text-primary" style="display: none;"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fas fa-gamepad fa-2x text-primary"></i>
+                                        }
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h5 class="fw-semibold mb-1">
+                                            <a asp-page="/Games/Details" asp-route-id="@detail.GameId" 
+                                               class="text-decoration-none text-dark">
+                                                @detail.Game?.Title
+                                            </a>
+                                        </h5>
+                                        <p class="text-muted mb-0 small">
+                                            <i class="fas fa-tag me-1"></i>Game ID: @detail.GameId
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row text-md-end">
+                                    <div class="col-4">
+                                        <div class="price-info">
+                                            <h6 class="fw-semibold mb-1">Unit Price</h6>
+                                            <p class="text-muted mb-0">@detail.Price.ToString("C", Currency.VnCurrencyFormat)</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="quantity-info">
+                                            <h6 class="fw-semibold mb-1">Quantity</h6>
+                                            <p class="text-muted mb-0">@detail.Quantity</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="subtotal-info">
+                                            <h6 class="fw-semibold mb-1">Subtotal</h6>
+                                            <p class="fw-bold text-primary mb-0">@((detail.Price * detail.Quantity).ToString("C", Currency.VnCurrencyFormat))</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            
+            <!-- Order Total Footer -->
+            <div class="order-total-footer p-4 bg-light">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h5 class="fw-bold mb-0">
+                            <i class="fas fa-calculator me-2 text-primary"></i>Order Summary
+                        </h5>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <div class="total-breakdown">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Items:</span>
+                                <span class="fw-semibold">@Model.OrderDetails.Count</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">Total Amount:</span>
+                                <span class="h4 fw-bold text-gradient mb-0">@Model.Order.TotalPrice.ToString("C", Currency.VnCurrencyFormat)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons-section text-center mb-5">
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a asp-page="/Orders/Index" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-arrow-left me-2"></i>Back to Orders
+            </a>
+            
+            @if (Model.IsStaff() && Model.Order.Status == OrderStatus.Pending)
             {
-                <tr>
-                    <td>
-                        <a asp-page="/Games/Details" asp-route-id="@detail.GameId">
-                            @detail.Game.Title
-                        </a>
-                    </td>
-                    <td>@detail.Price.ToString("C", Currency.VnCurrencyFormat)</td>
-                    <td>@detail.Quantity</td>
-                    <td>@((detail.Price * detail.Quantity).ToString("C", Currency.VnCurrencyFormat))</td>
-                </tr>
+                <form method="post" asp-page-handler="UpdateStatus" class="d-inline">
+                    <input type="hidden" name="orderId" value="@Model.Order.OrderId" />
+                    <input type="hidden" name="status" value="Completed" />
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="fas fa-check-circle me-2"></i>Mark as Completed
+                    </button>
+                </form>
             }
-        </tbody>
-        <tfoot>
-            <tr>
-                <th colspan="3">Total</th>
-                <th>@Model.Order.TotalPrice.ToString("C", Currency.VnCurrencyFormat)</th>
-            </tr>
-        </tfoot>
-    </table>
+            
+            @if (Model.IsCustomer() && Model.Order.Status == OrderStatus.Pending)
+            {
+                <form method="post" asp-page-handler="CheckOut" class="d-inline">
+                    <input type="hidden" name="orderId" value="@Model.Order.OrderId" />
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-credit-card me-2"></i>Proceed to Checkout
+                    </button>
+                </form>
+            }
+        </div>
+    </div>
+
+    <!-- Order Timeline -->
+    <div class="card shadow-custom border-0 mb-5 fade-in-up timeline-card">
+        <div class="card-header bg-white border-0 py-4">
+            <h4 class="fw-bold mb-0">
+                <i class="fas fa-clock me-2 text-primary"></i>Order Timeline
+            </h4>
+        </div>
+        <div class="card-body p-4">
+            <div class="timeline">
+                <div class="timeline-item completed">
+                    <div class="timeline-marker">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h6 class="fw-semibold mb-1">Order Placed</h6>
+                        <p class="text-muted mb-0">@Model.Order.OrderDate.ToString("MMMM dd, yyyy 'at' HH:mm")</p>
+                    </div>
+                </div>
+                
+                @if (Model.Order.Status == "Completed")
+                {
+                    <div class="timeline-item completed">
+                        <div class="timeline-marker">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h6 class="fw-semibold mb-1">Order Completed</h6>
+                            <p class="text-muted mb-0">Order has been successfully processed</p>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="timeline-item pending">
+                        <div class="timeline-marker">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h6 class="fw-semibold mb-1">Processing</h6>
+                            <p class="text-muted mb-0">Your order is currently being processed</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="mt-4">
-    <a asp-page="/Orders/Index" class="btn btn-secondary">Back to Orders</a>
-    @if (Model.IsStaff() && Model.Order.Status == OrderStatus.Pending)
-    {
-        <form method="post" asp-page-handler="UpdateStatus" class="d-inline">
-            <input type="hidden" name="orderId" value="@Model.Order.OrderId" />
-            <input type="hidden" name="status" value="Completed" />
-            <button type="submit" class="btn btn-success ml-2">Mark as Completed</button>
-        </form>
+<style>
+.order-summary-card {
+    border-radius: var(--border-radius);
+}
+
+.order-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.info-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.info-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.total-amount-card {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.order-item-card {
+    transition: all 0.3s ease;
+}
+
+.order-item-card:hover {
+    background-color: rgba(102, 126, 234, 0.02);
+}
+
+.order-item-card:last-child {
+    border-bottom: none !important;
+}
+
+.game-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+    position: relative;
+}
+
+.game-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+.game-icon i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.order-total-footer {
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+.timeline-card {
+    border: none !important;
+    outline: none !important;
+}
+
+.timeline-card .card-header {
+    border: none !important;
+    border-bottom: none !important;
+    outline: none !important;
+}
+
+.timeline-card .card-body {
+    border: none !important;
+    outline: none !important;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 3rem;
+    border: none !important;
+    outline: none !important;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 1.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none !important;
+    outline: none !important;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: flex-start;
+    border: none !important;
+    outline: none !important;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -1.5rem;
+    width: 2rem;
+    height: 2rem;
+    background: white;
+    border: 3px solid var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    outline: none !important;
+}
+
+.timeline-item.completed .timeline-marker {
+    background: var(--success-color);
+    border-color: var(--success-color);
+    color: white;
+}
+
+.timeline-item.pending .timeline-marker {
+    background: var(--warning-color);
+    border-color: var(--warning-color);
+    color: white;
+}
+
+.timeline-content {
+    margin-left: 1rem;
+    border: none !important;
+    outline: none !important;
+}
+
+.timeline-content h6,
+.timeline-content p {
+    border: none !important;
+    outline: none !important;
+}
+
+/* Additional fixes for any potential horizontal lines */
+.timeline-card hr,
+.timeline hr,
+.timeline-item hr {
+    display: none !important;
+    border: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Remove any potential box-shadow that might look like a line */
+.timeline-card .card-header::after,
+.timeline-card .card-header::before {
+    display: none !important;
+    content: none !important;
+}
+
+/* Ensure no background images or gradients create lines */
+.timeline-card .card-header {
+    background-image: none !important;
+    background: white !important;
+}
+
+/* Remove any potential pseudo-elements that might create lines */
+.timeline-card::before,
+.timeline-card::after {
+    display: none !important;
+    content: none !important;
+}
+
+.badge-success {
+    background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+.badge-warning {
+    background: linear-gradient(135deg, #ffc107, #fd7e14);
+}
+
+.opacity-75 {
+    opacity: 0.75;
+}
+
+@@media (max-width: 768px) {
+    .order-item-card .row {
+        text-align: center;
     }
-    @if (Model.IsCustomer() && Model.Order.Status == OrderStatus.Pending)
-    {
-        <form method="post" asp-page-handler="CheckOut" class="d-inline">
-            <input type="hidden" name="orderId" value="@Model.Order.OrderId" />
-            <button type="submit" class="btn btn-success ml-2">Procees to Checkout</button>
-        </form>
+    
+    .order-item-card .col-md-6:last-child .row {
+        justify-content: center;
     }
-</div>
+    
+    .timeline {
+        padding-left: 1.5rem;
+    }
+    
+    .timeline::before {
+        left: 0.75rem;
+    }
+    
+    .timeline-marker {
+        left: -1.25rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 0.75rem;
+    }
+}
+</style>

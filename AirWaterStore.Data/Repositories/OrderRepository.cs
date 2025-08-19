@@ -15,6 +15,7 @@ namespace AirWaterStore.Data.Repositories
         {
             return await _context.Orders
                 .Include(m => m.OrderDetails)
+                    .ThenInclude(od => od.Game)
                 .OrderByDescending(m => m.OrderDate)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
@@ -26,6 +27,7 @@ namespace AirWaterStore.Data.Repositories
             return await _context.Orders
                 .Where(o => o.UserId == userId)
                 .Include(m => m.OrderDetails)
+                    .ThenInclude(od => od.Game)
                 .OrderByDescending(m => m.OrderDate)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
@@ -36,6 +38,7 @@ namespace AirWaterStore.Data.Repositories
         {
             return await _context.Orders
                 .Include(m => m.OrderDetails)
+                    .ThenInclude(od => od.Game)
                 .FirstOrDefaultAsync(m => m.OrderId == orderId);
         }
 

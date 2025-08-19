@@ -2,73 +2,137 @@
 @model AirWaterStore.Web.Pages.RegisterModel
 @{
     ViewData["Title"] = "Register";
-    Layout = null;
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AirWaterStore</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <div class="container mt-5">
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="text-center">Register New Account</h3>
+            <div class="col-lg-6 text-center">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="fas fa-user-plus me-3"></i>Join AirWaterStore
+                </h1>
+                <p class="lead mb-0">Create your account and start your gaming adventure today!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-custom border-0">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-user-circle fa-3x text-gradient mb-3"></i>
+                        <h3 class="fw-bold">Create Account</h3>
+                        <p class="text-muted">Fill in your details to get started</p>
                     </div>
-                    <div class="card-body">
-                        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-                        {
-                            <div class="alert alert-danger">@Model.ErrorMessage</div>
-                        }
 
-                        <form method="post">
-                            <div class="form-group mb-3">
-                                <label asp-for="RegisterInput.Username"></label>
-                                <input asp-for="RegisterInput.Username" class="form-control" />
-                                <span asp-validation-for="RegisterInput.Username" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group mb-3">
-                                <label asp-for="RegisterInput.Email"></label>
-                                <input asp-for="RegisterInput.Email" class="form-control" />
-                                <span asp-validation-for="RegisterInput.Email" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group mb-3">
-                                <label asp-for="RegisterInput.Password"></label>
-                                <input asp-for="RegisterInput.Password" class="form-control" type="password" />
-                                <span asp-validation-for="RegisterInput.Password" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group mb-3">
-                                <label asp-for="RegisterInput.ConfirmPassword"></label>
-                                <input asp-for="RegisterInput.ConfirmPassword" class="form-control" type="password" />
-                                <span asp-validation-for="RegisterInput.ConfirmPassword" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary w-100">Register</button>
-                            </div>
-                        </form>
-
-                        <div class="text-center mt-3">
-                            <p>Already have an account? <a asp-page="/Login">Login here</a></p>
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-triangle me-2"></i>@Model.ErrorMessage
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
+                    }
+
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="RegisterInput.Username" class="form-label fw-semibold">
+                                    <i class="fas fa-user me-2 text-primary"></i>Username
+                                </label>
+                                <input asp-for="RegisterInput.Username" class="form-control form-control-lg" 
+                                       placeholder="Choose a username" />
+                                <span asp-validation-for="RegisterInput.Username" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="RegisterInput.Email" class="form-label fw-semibold">
+                                    <i class="fas fa-envelope me-2 text-primary"></i>Email Address
+                                </label>
+                                <input asp-for="RegisterInput.Email" class="form-control form-control-lg" 
+                                       placeholder="Enter your email" />
+                                <span asp-validation-for="RegisterInput.Email" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="RegisterInput.Password" class="form-label fw-semibold">
+                                    <i class="fas fa-lock me-2 text-primary"></i>Password
+                                </label>
+                                <input asp-for="RegisterInput.Password" class="form-control form-control-lg" 
+                                       placeholder="Create a password" />
+                                <span asp-validation-for="RegisterInput.Password" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="RegisterInput.ConfirmPassword" class="form-label fw-semibold">
+                                    <i class="fas fa-lock me-2 text-primary"></i>Confirm Password
+                                </label>
+                                <input asp-for="RegisterInput.ConfirmPassword" class="form-control form-control-lg" 
+                                       placeholder="Confirm your password" />
+                                <span asp-validation-for="RegisterInput.ConfirmPassword" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input asp-for="RegisterInput.AcceptTerms" class="form-check-input" type="checkbox" />
+                                <label asp-for="RegisterInput.AcceptTerms" class="form-check-label">
+                                    I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and 
+                                    <a href="#" class="text-decoration-none">Privacy Policy</a>
+                                </label>
+                            </div>
+                            <span asp-validation-for="RegisterInput.AcceptTerms" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-user-plus me-2"></i>Create Account
+                            </button>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="text-muted mb-0">
+                                Already have an account? 
+                                <a asp-page="/Login" class="text-decoration-none fw-semibold">
+                                    <span class="text-gradient">Sign in here</span>
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Benefits Section -->
+            <div class="row mt-5 g-4">
+                <div class="col-md-4 text-center">
+                    <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                        <i class="fas fa-gamepad fa-2x text-primary mb-3"></i>
+                        <h6 class="fw-semibold">Exclusive Games</h6>
+                        <p class="text-muted small mb-0">Access to premium gaming content</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                        <i class="fas fa-percentage fa-2x text-primary mb-3"></i>
+                        <h6 class="fw-semibold">Member Discounts</h6>
+                        <p class="text-muted small mb-0">Special prices for registered users</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="bg-white p-4 rounded-custom shadow-custom h-100">
+                        <i class="fas fa-gift fa-2x text-primary mb-3"></i>
+                        <h6 class="fw-semibold">Rewards Program</h6>
+                        <p class="text-muted small mb-0">Earn points with every purchase</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-</body>
-</html>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
