@@ -56,6 +56,7 @@ namespace AirWaterStore.Web
             builder.Services.AddScoped<IWishlistService, WishlistService>();
             builder.Services.AddScoped<IPaymentService, PaymentService>();
             builder.Services.AddScoped<IDashboardService, DashboardService>();
+            builder.Services.AddScoped<CloudinaryService>();
 
             builder.Services.Configure<VnPayConfig>(builder.Configuration.GetSection("VnPay"));
 
