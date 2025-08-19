@@ -1,3 +1,7 @@
+USE master;
+ALTER DATABASE AirWaterStore SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+DROP DATABASE AirWaterStore;
+
 USE master
 GO
 
@@ -49,11 +53,11 @@ GO
 CREATE TABLE OrderDetails (
     OrderDetailId INT IDENTITY(1,1) PRIMARY KEY,
     OrderId INT NOT NULL,
-    GameId INT NOT NULL,
+    GameId INT,
 	Quantity INT NOT NULL,
     Price DECIMAL(10, 2) NOT NULL,
     CONSTRAINT FK_OrderDetails_Order FOREIGN KEY (OrderId) REFERENCES Orders(OrderId),
-    CONSTRAINT FK_OrderDetails_Game FOREIGN KEY (GameId) REFERENCES Games(GameId)
+    CONSTRAINT FK_OrderDetails_Game FOREIGN KEY (GameId) REFERENCES Games(GameId) ON DELETE SET NULL
 );
 GO
 
@@ -66,7 +70,7 @@ CREATE TABLE Reviews (
     Comment NVARCHAR(MAX),
     ReviewDate DATETIME DEFAULT GETDATE(),
     CONSTRAINT FK_Reviews_User FOREIGN KEY (UserId) REFERENCES Users(UserId),
-    CONSTRAINT FK_Reviews_Game FOREIGN KEY (GameId) REFERENCES Games(GameId)
+    CONSTRAINT FK_Reviews_Game FOREIGN KEY (GameId) REFERENCES Games(GameId) ON DELETE CASCADE
 );
 GO
 
@@ -120,7 +124,7 @@ CREATE TABLE Wishlist (
     GameId INT NOT NULL,
     CreatedAt DATETIME DEFAULT GETDATE(),
     CONSTRAINT FK_Wishlist_User FOREIGN KEY (UserId) REFERENCES Users(UserId),
-    CONSTRAINT FK_Wishlist_Game FOREIGN KEY (GameId) REFERENCES Games(GameId),
+    CONSTRAINT FK_Wishlist_Game FOREIGN KEY (GameId) REFERENCES Games(GameId) ON DELETE CASCADE,
     CONSTRAINT UQ_Wishlist UNIQUE (UserId, GameId) -- Ensure no duplicate wishlist entries
 );
 GO
