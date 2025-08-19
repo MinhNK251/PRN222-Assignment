@@ -1,6 +1,5 @@
 using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Business.Library;
-using AirWaterStore.Business.LibraryS;
 using AirWaterStore.Data.Models;
 using AirWaterStore.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +13,18 @@ public class DetailsModel : PageModel
     private readonly IOrderService _orderService;
     private readonly IOrderDetailService _orderDetailService;
     private readonly IUserService _userService;
-    private readonly IVnPayService _paymentService;
+    private readonly IVnPayService _vnPaymentService;
     private readonly VnPayConfig _vpnPayConfig;
+    private readonly IPaymentService _paymentService;
 
-    public DetailsModel(IOrderService orderService, IOrderDetailService orderDetailService, IUserService userService, IVnPayService vpnPayService, IOptions<VnPayConfig> vnpayConfig)
+    public DetailsModel(IOrderService orderService, IOrderDetailService orderDetailService, IUserService userService, IVnPayService vpnPayService, IOptions<VnPayConfig> vnpayConfig, IPaymentService paymentService)
     {
         _orderService = orderService;
         _orderDetailService = orderDetailService;
         _userService = userService;
-        _paymentService = vpnPayService;
+        _vnPaymentService = vpnPayService;
         _vpnPayConfig = vnpayConfig.Value;
+        _paymentService = paymentService;
     }
 
     [BindProperty(SupportsGet = true)]
@@ -78,11 +79,23 @@ public class DetailsModel : PageModel
                     {
                         order.Status = OrderStatus.Completed;
                         await _orderService.UpdateAsync(order);
+                        await _paymentService.AddAsync(new Payment
+                        {
+                            OrderId = order.OrderId,
+                            PaymentDate = DateTime.UtcNow,
+                            TotalPrice = order.TotalPrice,
+                            Status = PaymentStatus.Completed
+                        });
                     }
                 }
                 else
                 {
                     Console.WriteLine("Giao dich that bai");
+                    if (order != null && !order.Status.Equals(OrderStatus.Failed))
+                    {
+                        order.Status = OrderStatus.Failed;
+                        await _orderService.UpdateAsync(order);
+                    }
                 }
             }
         }
@@ -145,7 +158,7 @@ public class DetailsModel : PageModel
             return NotFound();
         }
 
-        string paymentLink = _paymentService.CreatePayment(order);
+        string paymentLink = _vnPaymentService.CreatePayment(order);
 
         return Redirect(paymentLink);
     }
