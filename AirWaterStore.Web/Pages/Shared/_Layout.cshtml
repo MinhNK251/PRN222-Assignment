@@ -29,90 +29,10 @@
 
 <body class="bg-light">
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg navbar-dark shadow-sm"
-             style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding-top: .3rem; padding-bottom: .3rem;">
-            <div class="container">
-                <!-- Brand -->
-                <a class="navbar-brand fw-bold fs-5 text-white py-0" asp-area="" asp-page="/Games/Index">
-                    <i class="fas fa-gamepad me-1"></i> AirWaterStore
-                </a>
-
-                <!-- Toggler -->
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Nav links -->
-                <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1 small">
-                        <li class="nav-item">
-                            <a class="nav-link text-white fw-semibold px-2 py-1 nav-link-custom" asp-area="" asp-page="/Games/Index">
-                                <i class="fas fa-store me-1"></i> Games
-                            </a>
-                        </li>
-                        @if (isAuthenticated)
-                        {
-                            @if (isCustomer)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-white fw-semibold px-2 py-1 nav-link-custom" asp-area="" asp-page="/Orders/Index">
-                                        <i class="fas fa-history me-1"></i> My Orders
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white fw-semibold px-2 py-1 nav-link-custom" asp-area="" asp-page="/Chat/Index">
-                                        <i class="fas fa-comments me-1"></i> Support Chat
-                                    </a>
-                                </li>
-                            }
-                            @if (isStaff)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-white fw-semibold px-2 py-1 nav-link-custom" asp-page="/Admin/Users/Index">
-                                        <i class="fas fa-user-cog me-1"></i> Users
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white fw-semibold px-2 py-1 nav-link-custom" asp-page="/Orders/Index">
-                                        <i class="fas fa-clipboard-list me-1"></i> Orders
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white fw-semibold px-2 py-1 nav-link-custom" asp-page="/Admin/Chat/Index">
-                                        <i class="fas fa-comments me-1"></i> Support Chat
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white fw-semibold px-2 py-1 nav-link-custom" asp-page="/Admin/Dashboard">
-                                        <i class="fas fa-tachometer-alt me-1"></i> Dashboard
-                                    </a>
-                                </li>
-                            }
-                        }
-                    </ul>
-
-                    <!-- Right side -->
-                    <ul class="navbar-nav align-items-center small">
-                        @if (isAuthenticated)
-                        {
-                            @if (isCustomer)
-                            {
-                                <li class="nav-item me-2">
-                                    <a class="nav-link text-white position-relative nav-link-custom px-2 py-1" asp-area="" asp-page="/Cart">
-                                        <i class="fas fa-shopping-cart fs-6"></i>
-                                        @if (cartCount > 0)
-                                        {
-                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                                @cartCount
-                                            </span>
-                                        }
-                                    </a>
-                                </li>
-                            }
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white fw-semibold px-2 py-1 nav-link-custom" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user-circle me-1"></i> @username
+                                <nav class="navbar navbar-expand-lg navbar-dark bg-gradient shadow-lg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%), linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%);">
+                            <div class="container">
+                                <a class="navbar-brand fw-bold fs-3 text-white" asp-area="" asp-page="/Games/Index">
+                                    <i class="fas fa-gamepad me-2"></i> AirWaterStore
                                 </a>
                                 <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -201,47 +121,47 @@
                             </div>
                         </nav>
     </header>
-
+    
     <div class="container-fluid px-0">
         <main role="main" class="min-vh-100">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="bg-dark text-light py-4 mt-1">
+    <footer class="bg-dark text-light py-5 mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="fw-bold mb-3 text-white">
+                    <h5 class="fw-bold mb-3">
                         <i class="fas fa-gamepad me-2"></i>AirWaterStore
                     </h5>
-                    <p class="text-white">Your ultimate destination for premium gaming experiences. Discover, purchase, and enjoy the best games in the market.</p>
+                    <p class="text-muted">Your ultimate destination for premium gaming experiences. Discover, purchase, and enjoy the best games in the market.</p>
                 </div>
                 <div class="col-md-3">
-                    <h6 class="fw-bold mb-3 text-white">Quick Links</h6>
+                    <h6 class="fw-bold mb-3">Quick Links</h6>
                     <ul class="list-unstyled">
-                        <li><a href="/Games/Index" class="text-white text-decoration-none">Games</a></li>
-                        <li><a href="/Orders/Index" class="text-white text-decoration-none">Orders</a></li>
-                        <li><a href="/Chat/Index" class="text-white text-decoration-none">Support</a></li>
+                        <li><a href="/Games/Index" class="text-muted text-decoration-none">Games</a></li>
+                        <li><a href="/Orders/Index" class="text-muted text-decoration-none">Orders</a></li>
+                        <li><a href="/Chat/Index" class="text-muted text-decoration-none">Support</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
-                    <h6 class="fw-bold mb-3">Connect</h6>
+                    <h6 class="fw-bold mb-3 text-white">Connect</h6>
                     <div class="d-flex gap-3">
-                        <a href="#" class="text-white fs-5"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-white fs-5"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white fs-5"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white fs-5"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="text-muted fs-5"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-muted fs-5"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted fs-5"><i class="fab fa-discord"></i></a>
                     </div>
                 </div>
             </div>
             <hr class="my-4">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="mb-0 text-white">&copy; 2025 - AirWaterStore. All rights reserved.</p>
+                    <p class="mb-0 text-muted">&copy; 2025 - AirWaterStore. All rights reserved.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <a asp-area="" asp-page="/Privacy" class="text-white text-decoration-none">Privacy Policy</a>
+                    <a asp-area="" asp-page="/Privacy" class="text-muted text-decoration-none">Privacy Policy</a>
                 </div>
             </div>
         </div>
