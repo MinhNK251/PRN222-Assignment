@@ -47,34 +47,34 @@
     </a>
 
     <!-- Suggest new request (only if not the creator) -->
-    @if (Model.IsAuthenticated() && Model.Request.UserId != Model.GetCurrentUserId())
-    {
-        <h4>Suggest Another Game</h4>
-        <form method="post" asp-page-handler="Create">
-            <div class="mb-3">
-                <label asp-for="NewRequest.GameTitle" class="form-label"></label>
-                <input asp-for="NewRequest.GameTitle" class="form-control" />
-                <span asp-validation-for="NewRequest.GameTitle" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="NewRequest.ExpectedPrice" class="form-label"></label>
-                <input asp-for="NewRequest.ExpectedPrice" class="form-control" />
-                <span asp-validation-for="NewRequest.ExpectedPrice" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="NewRequest.Description" class="form-label"></label>
-                <textarea asp-for="NewRequest.Description" class="form-control"></textarea>
-                <span asp-validation-for="NewRequest.Description" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit Suggestion</button>
-        </form>
-    }
-    else if (Model.IsAuthenticated())
-    {
-        <p class="text-muted">You created this request. Others may suggest additional games.</p>
-    }
-    else
-    {
-        <p><a asp-page="/Login">Login</a> to suggest new requests.</p>
-    }
+    @* @if (Model.IsAuthenticated() && Model.Request.UserId != Model.GetCurrentUserId()) *@
+    @* { *@
+    @*     <h4>Suggest Another Game</h4> *@
+    @*     <form method="post" asp-page-handler="Create"> *@
+    @*         <div class="mb-3"> *@
+    @*             <label asp-for="NewRequest.GameTitle" class="form-label"></label> *@
+    @*             <input asp-for="NewRequest.GameTitle" class="form-control" /> *@
+    @*             <span asp-validation-for="NewRequest.GameTitle" class="text-danger"></span> *@
+    @*         </div> *@
+    @*         <div class="mb-3"> *@
+    @*             <label asp-for="NewRequest.ExpectedPrice" class="form-label"></label> *@
+    @*             <input asp-for="NewRequest.ExpectedPrice" class="form-control" /> *@
+    @*             <span asp-validation-for="NewRequest.ExpectedPrice" class="text-danger"></span> *@
+    @*         </div> *@
+    @*         <div class="mb-3"> *@
+    @*             <label asp-for="NewRequest.Description" class="form-label"></label> *@
+    @*             <textarea asp-for="NewRequest.Description" class="form-control"></textarea> *@
+    @*             <span asp-validation-for="NewRequest.Description" class="text-danger"></span> *@
+    @*         </div> *@
+    @*         <button type="submit" class="btn btn-primary">Submit Suggestion</button> *@
+    @*     </form> *@
+    @* } *@
+    @* else if (Model.IsAuthenticated()) *@
+    @* { *@
+    @*     <p class="text-muted">You created this request. Others may suggest additional games.</p> *@
+    @* } *@
+    @* else *@
+    @* { *@
+    @*     <p><a asp-page="/Login">Login</a> to suggest new requests.</p> *@
+    @* } *@
 </div>
