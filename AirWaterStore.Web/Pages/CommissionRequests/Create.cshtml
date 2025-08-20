@@ -1,0 +1,63 @@
+﻿@page
+@model AirWaterStore.Web.Pages.CommissionRequests.CreateModel
+@{
+    ViewData["Title"] = "Request a Commission";
+}
+
+<div class="container mt-4">
+    <h2>Request a Commission</h2>
+    <form method="post">
+        <div class="mb-3 position-relative">
+            <label asp-for="Input.GameTitle" class="form-label"></label>
+            <input asp-for="Input.GameTitle" id="gameTitle" class="form-control" autocomplete="off" />
+            <div id="suggestions" class="list-group position-absolute" style="z-index:1000;"></div>
+            <span asp-validation-for="Input.GameTitle" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.Description" class="form-label"></label>
+            <textarea asp-for="Input.Description" class="form-control"></textarea>
+            <span asp-validation-for="Input.Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.ExpectedPrice" class="form-label"></label>
+            <input asp-for="Input.ExpectedPrice" class="form-control" />
+            <span asp-validation-for="Input.ExpectedPrice" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Request</button>
+        <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById("gameTitle").addEventListener("input", async function () {
+            const term = this.value;
+            const suggestionsDiv = document.getElementById("suggestions");
+
+            if (term.length < 2) {
+                suggestionsDiv.innerHTML = "";
+                return;
+            }
+
+            const res = await fetch(`?handler=SimilarGames&term=${encodeURIComponent(term)}`);
+            const data = await res.json();
+
+            suggestionsDiv.innerHTML = "";
+            data.forEach(name => {
+                const item = document.createElement("div");
+                item.className = "list-group-item list-group-item-action";
+                item.textContent = name;
+                item.style.cursor = "pointer";
+                item.addEventListener("click", () => {
+                    document.getElementById("gameTitle").value = name;
+                    suggestionsDiv.innerHTML = "";
+                });
+                suggestionsDiv.appendChild(item);
+            });
+        });
+    </script>
+}

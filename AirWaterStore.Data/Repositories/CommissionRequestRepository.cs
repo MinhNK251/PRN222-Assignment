@@ -50,12 +50,25 @@ namespace AirWaterStore.Data.Repositories
 
         public async Task DeleteAsync(int commissionRequestId)
         {
+            // Remove all upvotes related to this request first
+            var upvotes = await _context.CommissionRequestUpvotes
+                .Where(u => u.CommissionRequestId == commissionRequestId)
+                .ToListAsync();
+
+            if (upvotes.Any())
+            {
+                _context.CommissionRequestUpvotes.RemoveRange(upvotes);
+            }
+
+            // Now remove the commission request
             var commissionRequest = await _context.CommissionRequests.FindAsync(commissionRequestId);
             if (commissionRequest != null)
             {
                 _context.CommissionRequests.Remove(commissionRequest);
-                await _context.SaveChangesAsync();
             }
+
+            await _context.SaveChangesAsync();
         }
+
     }
 }
