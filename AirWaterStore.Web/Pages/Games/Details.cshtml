@@ -144,13 +144,19 @@
 
                                         <div class="form-group">
                                             <label>Rating</label>
-                                            <select name="rating" class="form-control" style="width: 100px;">
-                                                <option value="5" @@(review.Rating==5 ? "selected" : "" )>5 Stars</option>
-                                                <option value="4" @@(review.Rating==4 ? "selected" : "" )>4 Stars</option>
-                                                <option value="3" @@(review.Rating==3 ? "selected" : "" )>3 Stars</option>
-                                                <option value="2" @@(review.Rating==2 ? "selected" : "" )>2 Stars</option>
-                                                <option value="1" @@(review.Rating==1 ? "selected" : "" )>1 Star</option>
-                                            </select>
+                                                <select name="rating" class="form-control" style="width: 100px;">
+@*                                                      <option value="5" @@(review.Rating==5 ? "selected" : "" )>5 Stars</option>
+                                                     <option value="4" @@(review.Rating==4 ? "selected" : "" )>4 Stars</option>
+                                                     <option value="3" @@(review.Rating==3 ? "selected" : "" )>3 Stars</option>
+                                                     <option value="2" @@(review.Rating==2 ? "selected" : "" )>2 Stars</option>
+                                                     <option value="1" @@(review.Rating==1 ? "selected" : "" )>1 Star</option> *@
+                                                <option value="5" selected="@(review.Rating == 5)">5 Stars</option>
+                                                <option value="4" selected="@(review.Rating == 4)">4 Stars</option>
+                                                <option value="3" selected="@(review.Rating == 3)">3 Stars</option>
+                                                <option value="2" selected="@(review.Rating == 2)">2 Stars</option>
+                                                <option value="1" selected="@(review.Rating == 1)">1 Star</option>
+
+                                                </select>
                                         </div>
 
                                         <div class="form-group">

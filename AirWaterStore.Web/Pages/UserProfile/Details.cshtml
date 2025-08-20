@@ -1,0 +1,43 @@
+﻿@page 
+@using AirWaterStore.Web.Helper;
+@model AirWaterStore.Web.Pages.UserProfile.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">👤 User Profile</h4>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-sm-4 fw-bold">User ID</div>
+                <div class="col-sm-8">@Model.UserProfile.UserId</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-4 fw-bold">Username</div>
+                <div class="col-sm-8">@Model.UserProfile.Username</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-4 fw-bold">Email</div>
+                <div class="col-sm-8">@Model.UserProfile.Email</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-4 fw-bold">Password</div>
+                <div class="col-sm-8 text-muted">********</div> <!-- Ẩn password -->
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <a asp-page="/UserProfile/Edit" asp-route-userid="@Model.UserProfile.UserId" class="btn btn-warning me-2">
+                ✏️ Edit
+            </a>
+            <a asp-page="/" class="btn btn-secondary">⬅ Back</a>
+        </div>
+    </div>
+</div>
+
+@* <div>
+    <a asp-page="./Edit" asp-route-id="@Model.UserProfile.UserId" class="btn btn-warning" id="editBtn">Edit</a>
+    <a asp-page="./" class="btn btn-light">Back to Home</a>
+</div> *@

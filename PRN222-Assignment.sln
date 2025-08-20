@@ -5,9 +5,9 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirWaterStore.Web", "AirWaterStore.Web\AirWaterStore.Web.csproj", "{231E43D1-13CF-46FF-B8CC-F6689D39DD59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirWaterStore.Business", "AirWaterStore.Business\AirWaterStore.Business.csproj", "{19073282-6F35-43D1-A5D2-97CE67952F5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirWaterStore.Business", "AirWaterStore.Business\AirWaterStore.Business.csproj", "{19073282-6F35-43D1-A5D2-97CE67952F5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirWaterStore.Data", "AirWaterStore.Data\AirWaterStore.Data.csproj", "{0B0E4349-A5FF-4675-BAA5-2380E414C598}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirWaterStore.Data", "AirWaterStore.Data\AirWaterStore.Data.csproj", "{0B0E4349-A5FF-4675-BAA5-2380E414C598}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

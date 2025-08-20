@@ -9,6 +9,8 @@ namespace AirWaterStore.Business.Interfaces
         Task<int> GetTotalCountAsync();
         Task<User?> LoginAsync(string email, string password);
         Task AddAsync(User user);
-        Task UpdateAsync(User user);
+        //Task UpdateAsync(User user);
+
+        public Task UpdateAsync(User userProfile);
     }
 }

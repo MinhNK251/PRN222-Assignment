@@ -1,0 +1,51 @@
+﻿@page "{userid:int}"
+@model AirWaterStore.Web.Pages.UserProfile.EditModel
+@{
+    ViewData["Title"] = "Edit User Profile";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-warning text-dark">
+            <h4 class="mb-0">✏️ Edit User Profile</h4>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <input type="hidden" asp-for="UserProfile.UserId" />
+
+                <div class="mb-3">
+                    <label asp-for="UserProfile.Username" class="form-label"></label>
+                    <input asp-for="UserProfile.Username" class="form-control" />
+                    <span asp-validation-for="UserProfile.Username" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="UserProfile.Email" class="form-label"></label>
+                    <input asp-for="UserProfile.Email" class="form-control" type="email" />
+                    <span asp-validation-for="UserProfile.Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="UserProfile.Password" class="form-label"></label>
+                    <input asp-for="UserProfile.Password" class="form-control" type="password" />
+                    <span asp-validation-for="UserProfile.Password" class="text-danger"></span>
+                </div>
+
+
+                <button type="submit" class="btn btn-success">💾 Save</button>
+                <a asp-page="/UserProfile/Details" asp-route-userid="@Model.UserProfile.UserId" class="btn btn-secondary ms-2">⬅ Back</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success mt-3">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

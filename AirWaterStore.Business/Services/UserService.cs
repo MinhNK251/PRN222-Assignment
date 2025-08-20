@@ -1,5 +1,7 @@
 ﻿using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 
 namespace AirWaterStore.Data.Repositories
 {
@@ -35,9 +37,6 @@ namespace AirWaterStore.Data.Repositories
             await _repository.AddAsync(user);
         }
 
-        public async Task UpdateAsync(User user)
-        {
-            await _repository.UpdateAsync(user);
-        }
+        public async Task UpdateAsync(User userProfile) => await _repository.UpdateAsync(userProfile);
     }
 }

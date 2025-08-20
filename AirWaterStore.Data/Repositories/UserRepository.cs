@@ -45,8 +45,18 @@ namespace AirWaterStore.Data.Repositories
 
         public async Task UpdateAsync(User user)
         {
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
+            var existingUser = await _context.Users.FindAsync(user.UserId);
+            if (existingUser != null)
+            {
+                existingUser.Username = user.Username;
+                existingUser.Email = user.Email;
+                existingUser.Password = user.Password; 
+
+
+                await _context.SaveChangesAsync();
+            }
         }
+
+
     }
 }
