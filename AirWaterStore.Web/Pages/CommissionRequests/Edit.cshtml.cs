@@ -29,8 +29,8 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
             [Required, StringLength(200)]
             public string GameTitle { get; set; } = string.Empty;
 
-            [Required, Range(0, 1000)]
-            public decimal ExpectedPrice { get; set; }
+            [Required]
+            public decimal ExpectedPrice { get; set; } = 1;
 
             [StringLength(1000)]
             public string? Description { get; set; }

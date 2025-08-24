@@ -12,7 +12,6 @@
 <div class="container mt-4">
     <h2>Game Request: @Model.Request.GameTitle</h2>
     <p><strong>Requested By:</strong> @Model.CreatorUsername</p>
-    <p><strong>Expected Price:</strong> @Model.Request.ExpectedPrice.ToString("C")</p>
     <p><strong>Description:</strong> @(Model.Request.Description ?? "No description")</p>
     <p><strong>Status:</strong> @Model.Request.Status</p>
     <p><strong>Upvotes:</strong> @(Model.Request.Upvotes ?? 0)</p>

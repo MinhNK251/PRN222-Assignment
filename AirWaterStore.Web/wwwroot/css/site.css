@@ -165,7 +165,7 @@ h1 {
     display: grid;
     grid-template-columns: 1fr 350px;
     gap: 2rem;
-    height: calc(100vh - 300px);
+    height: calc(100vh - 80px);
 }
 
 .chat-content {

@@ -88,7 +88,7 @@
             </div>
 
             <!-- Message Input Area -->
-            <div class="chat-input-area">
+            @* <div class="chat-input-area">
                 <div class="input-container">
                     <div class="input-wrapper">
                         <input type="text" id="messageInput" class="message-input" placeholder="Type your message here..." />
@@ -96,20 +96,23 @@
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
-                    <div class="input-actions">
-                        <button type="button" class="action-btn" title="Attach file">
-                            <i class="fas fa-paperclip"></i>
-                        </button>
-                        <button type="button" class="action-btn" title="Emoji">
-                            <i class="fas fa-smile"></i>
-                        </button>
+                </div>
+            </div> *@
+            <div class="card-footer">
+                <div id="typingIndicator" class="text-muted small mb-2" style="display: none;">
+                    <span id="typingText"></span> is typing...
+                </div>
+                <div class="input-group">
+                    <input type="text" id="messageInput" class="form-control" placeholder="Type your response..." />
+                    <div class="input-group-append">
+                        <button type="button" id="sendButton" class="btn btn-primary">Send</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Sidebar Information -->
-        <div class="chat-sidebar">
+        <div class="chat-sidebar d-none d-lg-block">
             <div class="sidebar-card">
                 <div class="card-header">
                     <h5><i class="fas fa-info-circle"></i> Chat Information</h5>
@@ -176,6 +179,7 @@
                 </div>
             </div>
         </div>
+    
     </div>
 </div>
 
@@ -254,7 +258,7 @@
         connection.on("UserTyping", function (data) {
             if (data.userId !== currentUserId) {
                 if (data.isTyping) {
-                    typingText.textContent = data.username;
+                    typingText.textContent = 'Staff';
                     typingIndicator.style.display = 'block';
                 } else {
                     typingIndicator.style.display = 'none';

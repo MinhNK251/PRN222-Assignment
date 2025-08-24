@@ -26,7 +26,6 @@
             <tr>
                 <th>Game Title</th>
                 <th>Requested By</th>
-                <th>Expected Price</th>
                 <th>Upvotes</th>
                 <th>Created</th>
                 <th></th>
@@ -42,7 +41,6 @@
                         </a>
                     </td>
                     <td>@Model.GetUsername(req.UserId)</td>
-                    <td>@req.ExpectedPrice.ToString("C")</td>
                     <td>@Model.UpvoteCounts[req.CommissionRequestId]</td>
                     <td>@req.CreatedAt?.ToString("yyyy-MM-dd")</td>
 

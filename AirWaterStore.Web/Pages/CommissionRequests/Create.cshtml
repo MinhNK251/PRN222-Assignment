@@ -20,12 +20,6 @@
             <span asp-validation-for="Input.Description" class="text-danger"></span>
         </div>
 
-        <div class="mb-3">
-            <label asp-for="Input.ExpectedPrice" class="form-label"></label>
-            <input asp-for="Input.ExpectedPrice" class="form-control" />
-            <span asp-validation-for="Input.ExpectedPrice" class="text-danger"></span>
-        </div>
-
         <button type="submit" class="btn btn-primary">Submit Request</button>
         <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
     </form>

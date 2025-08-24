@@ -13,6 +13,7 @@
 
     <form method="post">
         <input type="hidden" asp-for="EditRequest.CommissionRequestId" />
+        <input type="hidden" asp-for="EditRequest.ExpectedPrice" value="1" />
 
         <div class="mb-3">
             <label asp-for="EditRequest.GameTitle" class="form-label"></label>
@@ -20,11 +21,11 @@
             <span asp-validation-for="EditRequest.GameTitle" class="text-danger"></span>
         </div>
 
-        <div class="mb-3">
+        @* <div class="mb-3">
             <label asp-for="EditRequest.ExpectedPrice" class="form-label"></label>
             <input asp-for="EditRequest.ExpectedPrice" class="form-control" />
             <span asp-validation-for="EditRequest.ExpectedPrice" class="text-danger"></span>
-        </div>
+        </div> *@
 
         <div class="mb-3">
             <label asp-for="EditRequest.Description" class="form-label"></label>

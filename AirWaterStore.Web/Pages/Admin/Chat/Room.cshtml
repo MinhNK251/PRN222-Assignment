@@ -16,15 +16,15 @@
             <div class="card-body" style="height: 400px; overflow-y: auto;" id="chatMessages">
                 @foreach (var message in Model.Messages)
                 {
-                    <div class="message-item mb-3 @(message.UserId == Model.GetCurrentUserId() ? "text-right" : "text-left")"
-                        data-message-id="@message.MessageId">
-                        <div
-                            class="d-inline-block p-2 rounded @(message.UserId == Model.GetCurrentUserId() ? "bg-primary text-white" : "bg-light")">
-                            <small
-                                class="d-block @(message.UserId == Model.GetCurrentUserId() ? "text-white-50" : "text-muted")">
-                                @Model.GetUsername(message.UserId) - @message.SentAt?.ToString("HH:mm")
-                            </small>
-                            @message.Content
+                    <div class="message-item @(message.UserId == Model.GetCurrentUserId() ? "message-outgoing" : "message-incoming")" data-message-id="@message.MessageId">
+                        <div class="message-bubble">
+                            <div class="message-header">
+                                <span class="message-username">@Model.GetUsername(message.UserId)</span>
+                                <span class="message-time">@message.SentAt?.ToString("HH:mm")</span>
+                            </div>
+                            <div class="message-content">
+                                @message.Content
+                            </div>
                         </div>
                     </div>
                 }
@@ -56,7 +56,7 @@
                     <dd class="col-sm-7">
                         @if (Model.ChatRoom.StaffId.HasValue)
                         {
-                            @Model.GetUsername(Model.ChatRoom.StaffId.Value)
+                            <span class="text-success">Staff Assigned</span>
                         }
                         else
                         {
@@ -64,8 +64,8 @@
                         }
                     </dd>
 
-                    <dt class="col-sm-5">Messages:</dt>
-                    <dd class="col-sm-7">@Model.Messages.Count</dd>
+                    @* <dt class="col-sm-5">Messages:</dt>
+                    <dd class="col-sm-7">@Model.Messages.Count</dd> *@
 
                     <dt class="col-sm-5">Connection:</dt>
                     <dd class="col-sm-7">
