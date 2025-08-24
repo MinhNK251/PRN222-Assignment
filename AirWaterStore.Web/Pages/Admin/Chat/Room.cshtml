@@ -54,14 +54,17 @@
 
                     <dt class="col-sm-5">Assigned Staff:</dt>
                     <dd class="col-sm-7">
-                        @if (Model.ChatRoom.StaffId.HasValue)
+                        @* @if (Model.ChatRoom.StaffId.HasValue)
                         {
                             <span class="text-success">Staff Assigned</span>
                         }
                         else
                         {
                             <span class="text-warning">Unassigned</span>
-                        }
+                        } *@
+                        <span id="staffStatus" class="@(Model.ChatRoom.StaffId.HasValue ? "text-success" : "text-warning")">
+                            @(Model.ChatRoom.StaffId.HasValue ? "Staff Assigned" : "Unassigned")
+                        </span>
                     </dd>
 
                     @* <dt class="col-sm-5">Messages:</dt>
@@ -144,6 +147,11 @@
                 });
                 messageInput.value = '';
                 connection.invoke("NotifyTyping", chatRoomId, false);
+                const staffStatus = document.querySelector("#staffStatus");
+                if (staffStatus) {
+                    staffStatus.className = "text-success";
+                    staffStatus.textContent = "Staff Assigned";
+                }
             }
         }
 

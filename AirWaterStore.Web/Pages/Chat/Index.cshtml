@@ -120,20 +120,22 @@
                 <div class="card-body">
                     <div class="info-section">
                         <h6>Chat Status</h6>
-                        @if (Model.ChatRoom.StaffId.HasValue)
-                        {
-                            <div class="status-badge status-connected">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Connected with Support</span>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="status-badge status-waiting">
-                                <i class="fas fa-clock"></i>
-                                <span>Waiting for Staff</span>
-                            </div>
-                        }
+                        <div id="chatStatus">
+                            @if (Model.ChatRoom.StaffId.HasValue)
+                            {
+                                <div class="status-badge status-connected">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Connected with Support</span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="status-badge status-waiting">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Waiting for Staff</span>
+                                </div>
+                            }
+                        </div>
                     </div>
 
                     <div class="info-section">
@@ -252,6 +254,18 @@
             }, 100);
 
             chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            if (!isCurrentUser) {
+                const chatStatus = document.getElementById("chatStatus");
+                if (chatStatus && chatStatus.querySelector(".status-waiting")) {
+                    chatStatus.innerHTML = `
+                        <div class="status-badge status-connected">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Connected with Support</span>
+                        </div>
+                    `;
+                }
+            }
         });
 
         // Handle typing indicator
