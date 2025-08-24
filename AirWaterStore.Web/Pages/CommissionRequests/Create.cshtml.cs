@@ -1,3 +1,4 @@
+using AirWaterStore.Business.Interfaces;
 using AirWaterStore.Data.Models;
 using AirWaterStore.Data.Repositories;
 using AirWaterStore.Web.Helper;
@@ -9,11 +10,11 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
 {
     public class CreateModel : PageModel
     {
-        private readonly ICommissionRequestRepository _repository;
+        private readonly ICommissionRequestService _service;
 
-        public CreateModel(ICommissionRequestRepository repository)
+        public CreateModel(ICommissionRequestService service)
         {
-            _repository = repository;
+            _service = service;
         }
 
         [BindProperty]
@@ -28,9 +29,6 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
             [Required]
             [StringLength(1000)]
             public string Description { get; set; }
-
-            [Range(0, 9999)]
-            public decimal ExpectedPrice { get; set; }
         }
 
         public IActionResult OnGet()
@@ -60,14 +58,14 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
             {
                 GameTitle = Input.GameTitle,
                 Description = Input.Description,
-                ExpectedPrice = Input.ExpectedPrice,
+                ExpectedPrice = 1,
                 UserId = userId.Value,
                 Status = "Open",
                 Upvotes = 0,
                 CreatedAt = DateTime.UtcNow
             };
 
-            await _repository.AddAsync(request);
+            await _service.AddAsync(request);
 
             return RedirectToPage("./Index");
         }
@@ -78,7 +76,7 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
             if (string.IsNullOrWhiteSpace(term))
                 return new JsonResult(new string[0]);
 
-            var matches = await _repository.GetAllAsync(); // ideally, add a dedicated GetGameTitlesContainingAsync
+            var matches = await _service.GetAllAsync(); // ideally, add a dedicated GetGameTitlesContainingAsync
             var results = matches
                 .Where(c => c.GameTitle.Contains(term, StringComparison.OrdinalIgnoreCase))
                 .Select(c => c.GameTitle)

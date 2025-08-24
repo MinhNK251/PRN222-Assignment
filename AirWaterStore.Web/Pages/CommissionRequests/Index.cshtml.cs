@@ -11,17 +11,17 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
     {
         private readonly ICommissionRequestService _commissionRequestService;
         private readonly IUserService _userService;
-        private readonly IRequestUpvoteRepository _upvoteRepository;
+        private readonly IRequestUpvoteService _upvoteService;
         private const int PageSize = 10;
 
         public IndexModel(
             ICommissionRequestService commissionRequestService,
             IUserService userService,
-            IRequestUpvoteRepository upvoteRepository)
+            IRequestUpvoteService upvoteService)
         {
             _commissionRequestService = commissionRequestService;
             _userService = userService;
-            _upvoteRepository = upvoteRepository;
+            _upvoteService = upvoteService;
         }
 
         public List<CommissionRequest> Requests { get; set; } = new();
@@ -68,7 +68,7 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
 
                 // Fetch upvote count for each request
                 UpvoteCounts[req.CommissionRequestId] =
-                    await _upvoteRepository.GetUpvoteCountAsync(req.CommissionRequestId);
+                    await _upvoteService.GetUpvoteCountAsync(req.CommissionRequestId);
             }
 
             // Get current user ID from simple login
@@ -77,7 +77,7 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
             {
                 foreach (var req in Requests)
                 {
-                    if (await _upvoteRepository.HasUserUpvotedAsync(req.CommissionRequestId, currentUserId))
+                    if (await _upvoteService.HasUserUpvotedAsync(req.CommissionRequestId, currentUserId))
                     {
                         UserUpvotedRequests.Add(req.CommissionRequestId);
                     }
@@ -94,7 +94,7 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
                 return RedirectToPage("/Login");
 
             var userId = this.GetCurrentUserId();
-            await _upvoteRepository.UpvoteRequestAsync(requestId, userId);
+            await _upvoteService.UpvoteRequestAsync(requestId, userId);
 
             return RedirectToPage(new { currentPage = CurrentPage, search = Search });
         }

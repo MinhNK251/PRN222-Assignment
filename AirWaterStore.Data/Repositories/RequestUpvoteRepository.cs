@@ -20,10 +20,14 @@ namespace AirWaterStore.Data.Repositories
         {
             var existingUpvote = await _context.CommissionRequestUpvotes
                 .FirstOrDefaultAsync(u => u.CommissionRequestId == commissionRequestId && u.UserId == userId);
-
+            var commissionRequest = await _context.CommissionRequests
+                .FirstOrDefaultAsync(c => c.CommissionRequestId == commissionRequestId);
             if (existingUpvote != null)
             {
                 _context.CommissionRequestUpvotes.Remove(existingUpvote);
+                await _context.SaveChangesAsync();
+                commissionRequest.Upvotes = commissionRequest.Upvotes - 1;
+                _context.CommissionRequests.Update(commissionRequest);
                 await _context.SaveChangesAsync();
                 return false; // removed
             }
@@ -36,6 +40,9 @@ namespace AirWaterStore.Data.Repositories
                     UpvotedAt = DateTime.UtcNow
                 };
                 _context.CommissionRequestUpvotes.Add(newUpvote);
+                await _context.SaveChangesAsync();
+                commissionRequest.Upvotes = commissionRequest.Upvotes + 1;
+                _context.CommissionRequests.Update(commissionRequest);
                 await _context.SaveChangesAsync();
                 return true; // added
             }

@@ -12,16 +12,16 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
     {
         private readonly ICommissionRequestService _commissionRequestService;
         private readonly IUserService _userService;
-        private readonly IRequestUpvoteRepository _upvoteRepository;
+        private readonly IRequestUpvoteService _upvoteService;
 
         public DetailsModel(
             ICommissionRequestService commissionRequestService,
             IUserService userService,
-            IRequestUpvoteRepository upvoteRepository)
+            IRequestUpvoteService upvoteService)
         {
             _commissionRequestService = commissionRequestService;
             _userService = userService;
-            _upvoteRepository = upvoteRepository;
+            _upvoteService = upvoteService;
         }
 
         public CommissionRequest Request { get; set; } = default!;
@@ -55,7 +55,7 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
 
             if (this.IsAuthenticated())
             {
-                AlreadyUpvoted = await _upvoteRepository.HasUserUpvotedAsync(id, this.GetCurrentUserId());
+                AlreadyUpvoted = await _upvoteService.HasUserUpvotedAsync(id, this.GetCurrentUserId());
             }
 
             return Page();
@@ -89,7 +89,7 @@ namespace AirWaterStore.Web.Pages.CommissionRequests
             if (!this.IsAuthenticated() || !this.IsCustomer())
                 return RedirectToPage("/Login");
 
-            await _upvoteRepository.UpvoteRequestAsync(requestId, this.GetCurrentUserId());
+            await _upvoteService.UpvoteRequestAsync(requestId, this.GetCurrentUserId());
 
             return RedirectToPage(new { id = requestId });
         }
