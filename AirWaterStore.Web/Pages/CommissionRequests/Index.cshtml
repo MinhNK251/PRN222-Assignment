@@ -27,7 +27,8 @@
                 <th>Game Title</th>
                 <th>Requested By</th>
                 <th>Upvotes</th>
-                <th>Created</th>
+                <th>Created Date</th>
+                <th>Status</th>
                 <th></th>
             </tr>
         </thead>
@@ -43,6 +44,7 @@
                     <td>@Model.GetUsername(req.UserId)</td>
                     <td>@Model.UpvoteCounts[req.CommissionRequestId]</td>
                     <td>@req.CreatedAt?.ToString("yyyy-MM-dd")</td>
+                    <td>@req.Status</td>
 
                     <td>
                         <form method="post" asp-page-handler="Upvote">
